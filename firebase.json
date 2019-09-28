@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "public": "dist/app-movies",
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
