@@ -13,30 +13,30 @@ export class MoviesComponent implements OnInit {
   movies: any[] = [];
   pageNumber = 1;
 
-  constructor(private moviesService: MoviesService,private route: ActivatedRoute) { }
+  constructor(private moviesService: MoviesService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.loadParams();
   }
 
-  private async loadParams(){
+  private loadParams() {
     this.route.queryParamMap.subscribe(params => {
-        if(params.has('page')){
-          var num = Number(params.get('page'));
+      if (params.has('page')) {
+        var num = Number(params.get('page'));
 
-          if(!isNaN(num)){
-            this.pageNumber = num;
-          }
-          
-        }else{
-          this.pageNumber = 1;
+        if (!isNaN(num)) {
+          this.pageNumber = num;
         }
 
-        this.loadMovies();
-      });
+      } else {
+        this.pageNumber = 1;
+      }
+
+      this.loadMovies();
+    });
   }
 
-  private loadMovies() {
+  public loadMovies() {
     this.moviesService.getMovies(this.pageNumber).subscribe(data => {
       this.movies = data;
     });

@@ -1,7 +1,13 @@
 <!-- Page Content -->
 <div class="container">
+    
     <!-- Page Heading -->
     <h1 class="my-4">Películas</h1>
+
+    <!-- Pagination -->
+    <ngb-pagination [collectionSize]="10000" [(page)]="pageNumber" [maxSize]="10" 
+    [rotate]="true" [ellipses]="false" [pageSize]="20" [boundaryLinks]="true"
+     class="d-flex justify-content-center" (pageChange)="loadMovies()"></ngb-pagination>
 
     <div class="row">
         <div *ngFor="let movie of movies" class="col-lg-4 col-sm-6 mb-4">
@@ -19,48 +25,7 @@
     <!-- /.row -->
 
     <!-- Pagination -->
-    <ul class="pagination justify-content-center">
-        <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-                <span class="sr-only">Previous</span>
-            </a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" 
-            [routerLink]="['/movies']"
-            [queryParams]="{ page: '1' }">1</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" [routerLink]="['/movies']"
-            [queryParams]="{ page: '2' }">2</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" [routerLink]="['/movies']"
-            [queryParams]="{ page: '3' }">3</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" [routerLink]="['/movies']"
-            [queryParams]="{ page: '4' }">4</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" [routerLink]="['/movies']"
-            [queryParams]="{ page: '5' }">5</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link"[routerLink]="['/movies']"
-            [queryParams]="{ page: '6' }">6</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" [routerLink]="['/movies']"
-            [queryParams]="{ page: '7' }">7</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-                <span class="sr-only">Next</span>
-            </a>
-        </li>
-    </ul>
-
+    <ngb-pagination [collectionSize]="10000" [(page)]="pageNumber" [maxSize]="10" 
+    [rotate]="true" [ellipses]="false" [pageSize]="20" [boundaryLinks]="true"
+     class="d-flex justify-content-center" (pageChange)="loadMovies()"></ngb-pagination>
 </div>
