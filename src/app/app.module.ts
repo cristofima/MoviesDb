@@ -7,11 +7,13 @@ import { AppComponent } from './app.component';
 import { MoviesComponent } from './movies/movies.component';
 
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { PageNotFoundComponent } from './error-pages/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MoviesComponent
+    MoviesComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
