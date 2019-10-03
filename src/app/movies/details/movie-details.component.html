@@ -13,6 +13,7 @@
         <div class="col-md-8">
             <h3>{{movie.title}}</h3>
             <p>{{movie.overview}}</p>
+            <h5>Duración: {{movie.runtime | time}}</h5>
             <p class="card-text">
                 <span *ngFor="let genre of movie.genres"
                 class="badge badge-pill badge-primary"
