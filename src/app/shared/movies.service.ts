@@ -40,6 +40,8 @@ export class MoviesService {
   }
 
   getSimilarMovies(movieId: number) {
-    return this.getQuery(`movie/${movieId}/similar`);
+    return this.getQuery(`movie/${movieId}/similar`).pipe(
+      map(data => data['results'])
+    );
   }
 }

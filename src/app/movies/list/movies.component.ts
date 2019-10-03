@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MoviesService } from '../shared/movies.service';
+import { MoviesService } from '../../shared/movies.service';
 import { ActivatedRoute } from '@angular/router';
-import { isNumber } from 'util';
 
 @Component({
   selector: 'app-movies',

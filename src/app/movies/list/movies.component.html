@@ -12,10 +12,10 @@
     <div class="row">
         <div *ngFor="let movie of movies" class="col-lg-4 col-sm-6 mb-4">
             <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{movie.poster_path}}" alt=""></a>
+                <a [routerLink]="['/movies/',movie.id]"><img class="card-img-top" src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{movie.poster_path}}" alt=""></a>
                 <div class="card-body">
                     <h4 class="card-title">
-                        <a href="#">{{movie.title}}</a>
+                        <a [routerLink]="['/movies/',movie.id]">{{movie.title}}</a>
                     </h4>
                     <p class="card-text">{{movie.overview}}</p>
                 </div>

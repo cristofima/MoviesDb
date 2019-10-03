@@ -1,0 +1,32 @@
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Page Heading -->
+    <h1 class="my-4">Detalles</h1>
+
+    <div class="row" *ngIf="movie != null">
+        <div class="col-md-4">
+            <img class="img-fluid rounded mb-3 mb-md-0 img-principal" 
+                src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{movie.poster_path}}" 
+                [alt]="movie.title">
+        </div>
+        <div class="col-md-8">
+            <h3>{{movie.title}}</h3>
+            <p>{{movie.overview}}</p>
+            <p class="card-text">
+                <span *ngFor="let genre of movie.genres"
+                class="badge badge-pill badge-primary"
+                >{{ genre.name }}</span
+                >
+            </p>
+            <h4>Recomendaciones</h4>
+            <div class="col-md-12">
+                <a *ngFor="let movie of similarMovies" [routerLink]="['/movies/',movie.id]">
+                    <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{movie.poster_path}}" 
+                    class="img-thumbnail img-similar" [title]="movie.title" [alt]="movie.title">
+                 </a>
+            </div>    
+        </div>
+    </div>
+
+</div>
