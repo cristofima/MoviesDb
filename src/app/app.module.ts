@@ -1,10 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MoviesComponent } from './movies/list/movies.component';
+
+import {GlobalHttpInterceptor} from './services/global-http.interceptor';
 
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { PageNotFoundComponent } from './error-pages/page-not-found/page-not-found.component';
@@ -23,7 +25,11 @@ import { MovieDetailsComponent } from './movies/details/movie-details.component'
     HttpClientModule,
     NgbPaginationModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: GlobalHttpInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
