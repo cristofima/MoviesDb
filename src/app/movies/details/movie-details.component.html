@@ -1,17 +1,17 @@
 <!-- Page Content -->
-<div class="container">
+<div class="container" *ngIf="movie != null">
 
     <!-- Page Heading -->
     <h1 class="my-4">Detalles</h1>
 
-    <div class="row" *ngIf="movie != null">
+    <div class="row">
         <div class="col-md-4">
             <img class="img-fluid rounded mb-3 mb-md-0 img-principal" 
                 src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{movie.poster_path}}" 
                 [alt]="movie.title">
         </div>
         <div class="col-md-8">
-            <h3>{{movie.title}}</h3>
+            <h3>{{movie.title}} <span style="color:grey;">({{movie.release_date | date:'yyyy'}})</span></h3>
             <p>{{movie.overview}}</p>
             <h5>Duración: {{movie.runtime | time}}</h5>
             <p class="card-text">
@@ -27,6 +27,15 @@
                     class="img-thumbnail img-similar" [title]="movie.title" [alt]="movie.title">
                  </a>
             </div>    
+        </div>
+    </div>
+
+    <div class="row" *ngIf="videos.length > 0">
+        <div class="col-md-4" *ngFor="let video of videos">
+            <iframe width="100%" height="315"
+                [src]="getVideoUrl(video.key)" frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen></iframe>
         </div>
     </div>
 

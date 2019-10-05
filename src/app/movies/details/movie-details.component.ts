@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { MoviesService } from '../../shared/movies.service';
 import { ActivatedRoute } from '@angular/router';
+import { TouchSequence } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-movie-details',
@@ -10,15 +12,27 @@ import { ActivatedRoute } from '@angular/router';
 export class MovieDetailsComponent implements OnInit {
 
   movie: any;
-  similarMovies;
+  similarMovies: any[] = [];
+  videos: any[] = [];
 
-  constructor(private moviesService: MoviesService, private actRouter: ActivatedRoute) { }
+  constructor(private moviesService: MoviesService, private actRouter: ActivatedRoute, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     this.actRouter.params.subscribe(params => {
-      this.loadMovieDetails(params['id']);
-      this.loadSimilarMovies(params['id']);
+      this.resetData();
+      this.loadData(params['id']);
     });
+  }
+
+  private loadData(movieId: number) {
+    this.loadMovieDetails(movieId);
+    this.loadSimilarMovies(movieId);
+    this.loadMovieVideos(movieId);
+  }
+
+  private resetData() {
+    this.videos = [];
+    this.similarMovies = [];
   }
 
   private loadMovieDetails(movieId: number) {
@@ -31,6 +45,19 @@ export class MovieDetailsComponent implements OnInit {
     this.moviesService.getSimilarMovies(movieId).subscribe(data => {
       this.similarMovies = data;
     });
+  }
+
+  private loadMovieVideos(movieId: number) {
+    this.moviesService.getMovieVideos(movieId).subscribe(data => {
+      this.videos = data.filter(function (video) {
+        return video.type === "Trailer";
+      });
+    });
+  }
+
+  getVideoUrl(key: string) {
+    let url = 'https://www.youtube.com/embed/' + key;
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
 }
