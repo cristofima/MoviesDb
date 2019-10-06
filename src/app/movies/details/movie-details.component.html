@@ -9,6 +9,22 @@
             <img class="img-fluid rounded mb-3 mb-md-0 img-principal" 
                 src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{movie.poster_path}}" 
                 [alt]="movie.title">
+
+            <br/>
+            <h5>Puntuación del usuario</h5>
+
+            <div class="text-center">
+                <circle-progress *ngIf="movie.vote_average != 0; else elseBlock"
+                    [percent]="movie.vote_average * 10"
+                    [outerStrokeColor]="movie.vote_average | borderClass"
+                    ></circle-progress>
+                <ng-template #elseBlock>
+                    <circle-progress
+                    title="N/A"
+                    [showUnits]="false"
+                    ></circle-progress>
+                </ng-template>
+            </div>
         </div>
         <div class="col-md-8">
             <h3>{{movie.title}} <span style="color:grey;">({{movie.release_date | date:'yyyy'}})</span></h3>

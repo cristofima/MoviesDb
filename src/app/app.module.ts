@@ -6,12 +6,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MoviesComponent } from './movies/list/movies.component';
 
-import {GlobalHttpInterceptor} from './services/global-http.interceptor';
+import { GlobalHttpInterceptor } from './services/global-http.interceptor';
 
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { PageNotFoundComponent } from './error-pages/page-not-found/page-not-found.component';
 import { MovieDetailsComponent } from './movies/details/movie-details.component';
 import { TimePipe } from './pipes/time.pipe';
+import { BorderClassPipe } from './pipes/border-class.pipe';
+
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 @NgModule({
   declarations: [
@@ -19,13 +22,27 @@ import { TimePipe } from './pipes/time.pipe';
     MoviesComponent,
     PageNotFoundComponent,
     MovieDetailsComponent,
-    TimePipe
+    TimePipe,
+    BorderClassPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgbPaginationModule
+    NgbPaginationModule,
+    NgCircleProgressModule.forRoot({
+      radius: 100,
+      outerStrokeWidth: 16,
+      innerStrokeWidth: 8,
+      outerStrokeColor: "#D8CFCD",
+      innerStrokeColor: "#D8CFCD",
+      animationDuration: 300,
+      animation: true,
+      showSubtitle: false,
+      unitsFontSize: '30',
+      titleFontSize: '30',
+      showZeroOuterStroke: false
+    })
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

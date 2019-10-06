@@ -8,7 +8,7 @@
     <ngb-pagination [collectionSize]="10000" [(page)]="pageNumber" [maxSize]="10" 
     [rotate]="true" [ellipses]="false" [pageSize]="20" [boundaryLinks]="true"
      class="d-flex justify-content-center" (pageChange)="loadMovies()"></ngb-pagination>
-
+     
     <div class="row">
         <div *ngFor="let movie of movies" class="col-lg-4 col-sm-6 mb-4">
             <div class="card h-100">
