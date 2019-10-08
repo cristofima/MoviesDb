@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,7 @@ import { TimePipe } from './pipes/time.pipe';
 import { BorderClassPipe } from './pipes/border-class.pipe';
 
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { MovieCreateComponent } from './movies/create/movie-create.component';
 
 @NgModule({
   declarations: [
@@ -22,11 +24,13 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
     MoviesComponent,
     PageNotFoundComponent,
     MovieDetailsComponent,
+    MovieCreateComponent,
     TimePipe,
     BorderClassPipe
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
     NgbPaginationModule,
