@@ -14,7 +14,7 @@ export class MoviesService {
 
     const apiKey = '00d7fb865750066f0bee922febb0d108';
 
-    params = `?${params}&api_key=${apiKey}`;
+    params = `?${params}&language=es&api_key=${apiKey}`;
 
     return this.http.get(`${url}${params}`);
   }
