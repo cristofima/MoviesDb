@@ -5,10 +5,10 @@
     <h1 class="my-4">Películas</h1>
 
     <!-- Pagination -->
-    <div class="pagination-scroll">
+    <div class="overflow-auto d-flex flex-sm-row flex-column justify-content-center">
         <ngb-pagination [collectionSize]="10000" [(page)]="pageNumber" [maxSize]="10" 
         [rotate]="true" [ellipses]="false" [pageSize]="20" [boundaryLinks]="true"
-        class="d-flex justify-content-center" (pageChange)="loadMovies()"></ngb-pagination>
+        (pageChange)="loadMovies()"></ngb-pagination>
     </div>
      
     <div class="row">
@@ -27,9 +27,9 @@
     <!-- /.row -->
 
     <!-- Pagination -->
-    <div class="pagination-scroll">
+    <div class="overflow-auto overflow-auto d-flex flex-sm-row flex-column justify-content-center">
         <ngb-pagination [collectionSize]="10000" [(page)]="pageNumber" [maxSize]="10" 
         [rotate]="true" [ellipses]="false" [pageSize]="20" [boundaryLinks]="true"
-        class="d-flex justify-content-center" (pageChange)="loadMovies()"></ngb-pagination>
+        (pageChange)="loadMovies()"></ngb-pagination>
     </div>
 </div>
