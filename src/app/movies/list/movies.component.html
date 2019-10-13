@@ -4,6 +4,41 @@
     <!-- Page Heading -->
     <h1 class="my-4">Películas</h1>
 
+    <div id="accordion">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Filtros de búsqueda
+                    </button>
+                </h5>
+            </div>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                    <form [formGroup]="formGroup" (ngSubmit)="filterMovies()">
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label for="inputLanguage">Idioma</label>
+                                <select id="inputLanguage" class="form-control" formControlName="language">
+                                    <option value="es">Español</option>
+                                    <option value="en">Inglés</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="inputYear">Año</label>
+                                <input type="number" id="inputYear" class="form-control" formControlName="year" />
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" [disabled]="!formGroup.valid">Buscar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br/>
+
     <!-- Pagination -->
     <div class="overflow-auto d-flex flex-sm-row flex-column justify-content-center">
         <ngb-pagination [collectionSize]="10000" [(page)]="pageNumber" [maxSize]="10" 

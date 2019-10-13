@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MoviesService } from '../../shared/movies.service';
 import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MovieFilter } from '../../models/movie-filter';
 
 @Component({
   selector: 'app-movies',
@@ -12,7 +14,20 @@ export class MoviesComponent implements OnInit {
   movies: any[] = [];
   pageNumber = 1;
 
-  constructor(private moviesService: MoviesService, private route: ActivatedRoute) { }
+  formGroup: FormGroup;
+
+  moviesFilter: MovieFilter
+
+  constructor(private moviesService: MoviesService, private route: ActivatedRoute, private formBuilder: FormBuilder) {
+    let today = new Date();
+
+    this.formGroup = this.formBuilder.group({
+      language: ['', []],
+      year: ['', [
+        Validators.min(1960), Validators.max(today.getFullYear())
+      ]]
+    });
+  }
 
   ngOnInit() {
     this.loadParams();
@@ -36,9 +51,18 @@ export class MoviesComponent implements OnInit {
   }
 
   public loadMovies() {
-    this.moviesService.getMovies(this.pageNumber).subscribe(data => {
+    this.moviesService.getMovies(this.pageNumber, this.moviesFilter).subscribe(data => {
       this.movies = data;
     });
+  }
+
+  public filterMovies() {
+    this.moviesFilter = {
+      language: this.formGroup.controls.language.value,
+      year: this.formGroup.controls.year.value
+    };
+
+    this.loadMovies();
   }
 
 }

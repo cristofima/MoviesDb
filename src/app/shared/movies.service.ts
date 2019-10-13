@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { MovieFilter } from '../models/movie-filter';
 
 @Injectable({
   providedIn: 'root'
@@ -14,19 +15,24 @@ export class MoviesService {
 
     const apiKey = '00d7fb865750066f0bee922febb0d108';
 
-    params = `?${params}&language=es&api_key=${apiKey}`;
+    params = `?${params}&api_key=${apiKey}`;
 
     return this.http.get(`${url}${params}`);
   }
 
-  getMovies(pageNumber = 1) {
+  getMovies(pageNumber = 1, filter?: MovieFilter) {
     if (pageNumber < 1) {
       pageNumber = 1;
     } else if (pageNumber > 500) {
       pageNumber = 500;
     }
 
-    return this.getQuery('discover/movie', `page=${pageNumber}`).pipe(
+    let queryString = `page=${pageNumber}`;
+    if (filter) {
+      queryString += `&language=${filter.language}&primary_release_year=${filter.year}`;
+    }
+
+    return this.getQuery('discover/movie', queryString).pipe(
       map(data => data['results'])
     );
   }
