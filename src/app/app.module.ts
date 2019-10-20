@@ -9,14 +9,16 @@ import { MoviesComponent } from './movies/list/movies.component';
 
 import { GlobalHttpInterceptor } from './services/global-http.interceptor';
 
-import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
-import { PageNotFoundComponent } from './error-pages/page-not-found/page-not-found.component';
-import { MovieDetailsComponent } from './movies/details/movie-details.component';
 import { TimePipe } from './pipes/time.pipe';
 import { BorderClassPipe } from './pipes/border-class.pipe';
 
+import { NotifierModule } from "angular-notifier";
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { MovieCreateComponent } from './movies/create/movie-create.component';
+import { MovieDetailsComponent } from './movies/details/movie-details.component';
+import { PageNotFoundComponent } from './error-pages/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,19 @@ import { MovieCreateComponent } from './movies/create/movie-create.component';
     AppRoutingModule,
     HttpClientModule,
     NgbPaginationModule,
+    NotifierModule.withConfig({
+      position: {
+        horizontal: {
+          position: 'right'
+        },
+        vertical: {
+          position: 'top'
+        }
+      },
+      behaviour: {
+        autoHide: 3000
+      }
+    }),
     NgCircleProgressModule.forRoot({
       radius: 100,
       outerStrokeWidth: 16,

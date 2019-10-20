@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "^8.2.11",
     "@angular/router": "^8.2.11",
     "@ng-bootstrap/ng-bootstrap": "^5.1.1",
+    "angular-notifier": "^6.0.1",
     "ng-circle-progress": "^1.5.1",
     "rxjs": "^6.5.3",
     "tslib": "^1.10.0",

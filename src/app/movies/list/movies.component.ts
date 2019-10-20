@@ -3,6 +3,7 @@ import { MoviesService } from '../../shared/movies.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MovieFilter } from '../../models/movie-filter';
+import { NotifierService } from "angular-notifier";
 
 @Component({
   selector: 'app-movies',
@@ -18,9 +19,13 @@ export class MoviesComponent implements OnInit {
 
   moviesFilter: MovieFilter
 
-  constructor(private moviesService: MoviesService, private route: ActivatedRoute, private formBuilder: FormBuilder) {
+  private readonly notifierService: NotifierService;
+
+  constructor(private moviesService: MoviesService, private route: ActivatedRoute,
+    private formBuilder: FormBuilder, notifierService: NotifierService) {
     let today = new Date();
 
+    this.notifierService = notifierService;
     this.formGroup = this.formBuilder.group({
       language: ['', []],
       year: ['', [
@@ -50,9 +55,12 @@ export class MoviesComponent implements OnInit {
     });
   }
 
-  public loadMovies() {
+  public loadMovies(hasFilter?: boolean) {
     this.moviesService.getMovies(this.pageNumber, this.moviesFilter).subscribe(data => {
       this.movies = data;
+      if (hasFilter) {
+        this.notifierService.notify('success', 'Filtros aplicados');
+      }
     });
   }
 
@@ -62,7 +70,7 @@ export class MoviesComponent implements OnInit {
       year: this.formGroup.controls.year.value
     };
 
-    this.loadMovies();
+    this.loadMovies(true);
   }
 
 }
