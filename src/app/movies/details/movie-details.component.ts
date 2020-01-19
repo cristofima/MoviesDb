@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MoviesService } from '../../shared/movies.service';
 import { ActivatedRoute } from '@angular/router';
-import { TouchSequence } from 'selenium-webdriver';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-movie-details',
@@ -15,9 +15,11 @@ export class MovieDetailsComponent implements OnInit {
   similarMovies: any[] = [];
   videos: any[] = [];
 
-  constructor(private moviesService: MoviesService, private actRouter: ActivatedRoute, private sanitizer: DomSanitizer) { }
+  constructor(private moviesService: MoviesService, private actRouter: ActivatedRoute,
+    private sanitizer: DomSanitizer, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
+    this.spinner.show();
     this.actRouter.params.subscribe(params => {
       this.resetData();
       this.loadData(params['id']);
@@ -28,6 +30,7 @@ export class MovieDetailsComponent implements OnInit {
     this.loadMovieDetails(movieId);
     this.loadSimilarMovies(movieId);
     this.loadMovieVideos(movieId);
+    this.spinner.hide();
   }
 
   private resetData() {

@@ -15,6 +15,7 @@ import { BorderClassPipe } from './pipes/border-class.pipe';
 import { NotifierModule } from "angular-notifier";
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 import { MovieCreateComponent } from './movies/create/movie-create.component';
 import { MovieDetailsComponent } from './movies/details/movie-details.component';
@@ -36,6 +37,7 @@ import { PageNotFoundComponent } from './error-pages/page-not-found/page-not-fou
     AppRoutingModule,
     HttpClientModule,
     NgbPaginationModule,
+    NgxSpinnerModule,
     NotifierModule.withConfig({
       position: {
         horizontal: {

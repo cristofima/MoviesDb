@@ -29,7 +29,7 @@
         <div class="col-md-8">
             <h3>{{movie.title}} <span style="color:grey;">({{movie.release_date | date:'yyyy'}})</span></h3>
             <p>{{movie.overview}}</p>
-            <h5>Duración: {{movie.runtime | time}}</h5>
+            <h5>Duración: <span style="color:grey;">{{movie.runtime | time}}</span></h5>
             <p class="card-text">
                 <span *ngFor="let genre of movie.genres"
                 class="badge badge-pill badge-primary"
