@@ -14,6 +14,7 @@ export class MoviesComponent implements OnInit {
 
   movies: any[] = [];
   pageNumber = 1;
+  genres: any[] = [];
 
   formGroup: FormGroup;
 
@@ -28,6 +29,10 @@ export class MoviesComponent implements OnInit {
     this.notifierService = notifierService;
     this.formGroup = this.formBuilder.group({
       language: ['', []],
+      genreId: ['', []],
+      voteAverageGte: ['', [
+        Validators.min(0), Validators.max(100)
+      ]],
       year: ['', [
         Validators.min(1960), Validators.max(today.getFullYear())
       ]]
@@ -39,6 +44,10 @@ export class MoviesComponent implements OnInit {
   }
 
   private loadParams() {
+    this.moviesService.getGenres().subscribe((res: any[])=>{
+      this.genres = res;
+    });
+
     this.route.queryParamMap.subscribe(params => {
       if (params.has('page')) {
         var num = Number(params.get('page'));
@@ -65,9 +74,12 @@ export class MoviesComponent implements OnInit {
   }
 
   public filterMovies() {
+    this.pageNumber = 1;
     this.moviesFilter = {
       language: this.formGroup.controls.language.value,
-      year: this.formGroup.controls.year.value
+      year: this.formGroup.controls.year.value,
+      genreId: this.formGroup.controls.genreId.value,
+      voteAverageGte: this.formGroup.controls.voteAverageGte.value
     };
 
     this.loadMovies(true);

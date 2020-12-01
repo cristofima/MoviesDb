@@ -29,20 +29,24 @@
         <div class="col-md-8">
             <h3>{{movie.title}} <span style="color:grey;">({{movie.release_date | date:'yyyy'}})</span></h3>
             <p>{{movie.overview}}</p>
-            <h5>Duración: <span style="color:grey;">{{movie.runtime | time}}</span></h5>
+            <h5 *ngIf="movie.runtime">Duración: <span style="color:grey;">{{movie.runtime | time}}</span></h5>
+            <h5 *ngIf="movie.budget">Presupuesto: <span style="color:grey;">{{movie.budget | currency}}</span></h5>
+            <h5 *ngIf="movie.revenue">Ingresos: <span style="color:grey;">{{movie.revenue | currency}}</span></h5>
             <p class="card-text">
                 <span *ngFor="let genre of movie.genres"
                 class="badge badge-pill badge-primary"
                 >{{ genre.name }}</span
                 >
             </p>
-            <h4>Recomendaciones</h4>
-            <div class="col-md-12">
-                <a *ngFor="let movie of similarMovies" [routerLink]="['/movies/',movie.id]">
-                    <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{movie.poster_path}}" 
-                    class="img-thumbnail img-similar" [title]="movie.title" [alt]="movie.title">
-                 </a>
-            </div>    
+            <ng-container *ngIf="similarMovies && similarMovies.length">
+                <h4>Recomendaciones</h4>
+                <div class="col-md-12">
+                    <a *ngFor="let movie of similarMovies" [routerLink]="['/movies/',movie.id]">
+                        <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{movie.poster_path}}" 
+                        class="img-thumbnail img-similar" [title]="movie.title" [alt]="movie.title">
+                     </a>
+                </div> 
+            </ng-container>
         </div>
     </div>
 

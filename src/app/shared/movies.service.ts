@@ -20,6 +20,12 @@ export class MoviesService {
     return this.http.get(`${url}${params}`);
   }
 
+  getGenres(){
+    return this.getQuery('genre/movie/list').pipe(
+      map(data => data['genres'])
+    );
+  }
+
   getMovies(pageNumber = 1, filter?: MovieFilter) {
     if (pageNumber < 1) {
       pageNumber = 1;
@@ -29,7 +35,21 @@ export class MoviesService {
 
     let queryString = `page=${pageNumber}`;
     if (filter) {
-      queryString += `&language=${filter.language}&primary_release_year=${filter.year}`;
+      if(filter.language){
+        queryString += `&language=${filter.language}`;
+      }
+
+      if(filter.year){
+        queryString += `&primary_release_year=${filter.year}`;
+      }
+
+      if(filter.genreId){
+        queryString += `&with_genres=${filter.genreId}`;
+      }
+      
+      if(filter.voteAverageGte){
+        queryString += `&vote_average.gte=${filter.voteAverageGte / 10}`;
+      }
     }
 
     return this.getQuery('discover/movie', queryString).pipe(
