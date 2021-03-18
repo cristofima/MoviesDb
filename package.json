@@ -26,7 +26,7 @@
     "ng-circle-progress": "^1.6.0",
     "ngx-spinner": "^9.0.2",
     "rxjs": "^6.6.6",
-    "tslib": "^2.1.0",
+    "tslib": "^1.10.0",
     "zone.js": "^0.11.4"
   },
   "devDependencies": {
