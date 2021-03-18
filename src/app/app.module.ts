@@ -17,7 +17,6 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule } from "ngx-spinner";
 
-import { MovieCreateComponent } from './movies/create/movie-create.component';
 import { MovieDetailsComponent } from './movies/details/movie-details.component';
 import { PageNotFoundComponent } from './error-pages/page-not-found/page-not-found.component';
 
@@ -27,7 +26,6 @@ import { PageNotFoundComponent } from './error-pages/page-not-found/page-not-fou
     MoviesComponent,
     PageNotFoundComponent,
     MovieDetailsComponent,
-    MovieCreateComponent,
     TimePipe,
     BorderClassPipe
   ],
