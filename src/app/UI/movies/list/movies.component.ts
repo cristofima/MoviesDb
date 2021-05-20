@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MoviesService } from '../../shared/movies.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MovieFilter } from '../../models/movie-filter';
 import { NotifierService } from "angular-notifier";
+import { MovieFilter } from 'src/app/shared/models/movie-filter';
+import { MoviesService } from 'src/app/core/services/movies.service';
 
 @Component({
   selector: 'app-movies',

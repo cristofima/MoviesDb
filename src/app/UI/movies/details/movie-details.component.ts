@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { MoviesService } from '../../shared/movies.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from "ngx-spinner";
+import { MoviesService } from 'src/app/core/services/movies.service';
 
 @Component({
   selector: 'app-movie-details',

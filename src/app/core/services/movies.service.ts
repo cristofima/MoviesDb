@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { MovieFilter } from '../models/movie-filter';
+import { MovieFilter } from '../../shared/models/movie-filter';
 
 @Injectable({
   providedIn: 'root'
@@ -46,7 +46,7 @@ export class MoviesService {
       if(filter.genreId){
         queryString += `&with_genres=${filter.genreId}`;
       }
-      
+
       if(filter.voteAverageGte){
         queryString += `&vote_average.gte=${filter.voteAverageGte / 10}`;
       }
