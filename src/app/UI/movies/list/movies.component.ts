@@ -22,7 +22,7 @@ export class MoviesComponent implements OnInit {
 
   private readonly notifierService: NotifierService;
 
-  constructor(private moviesService: MoviesService, private route: ActivatedRoute,
+  constructor(private moviesService: MoviesService, private actRoute: ActivatedRoute,
     private formBuilder: FormBuilder, notifierService: NotifierService) {
     let today = new Date();
 
@@ -48,19 +48,47 @@ export class MoviesComponent implements OnInit {
       this.genres = res;
     });
 
-    this.route.queryParamMap.subscribe(params => {
+    this.actRoute.queryParamMap.subscribe(params => {
       if (params.has('page')) {
-        var num = Number(params.get('page'));
-
+        let num = Number(params.get('page'));
         if (!isNaN(num)) {
           this.pageNumber = num;
         }
-
       } else {
         this.pageNumber = 1;
       }
 
-      this.loadMovies();
+      let hasFilter = false;
+
+      if(params.has('genreId')){
+        let genreId = Number(params.get('genreId'));
+        if (!isNaN(genreId) && genreId > 0) {
+          this.formGroup.controls['genreId'].setValue(genreId);
+          hasFilter = true;
+        }
+      }
+
+      if(params.has('year')){
+        let year = Number(params.get('year'));
+        if (!isNaN(year) && year > 0) {
+          this.formGroup.controls['year'].setValue(year);
+          hasFilter = true;
+        }
+      }
+
+      if(params.has('language')){
+        let language = params.get('language');
+        if (language == 'es' || language == 'en') {
+          this.formGroup.controls['language'].setValue(language);
+          hasFilter = true;
+        }
+      }
+
+      if(hasFilter){
+        this.filterMovies();
+      }else{
+        this.loadMovies();
+      }
     });
   }
 
