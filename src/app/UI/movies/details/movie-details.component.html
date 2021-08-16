@@ -46,7 +46,7 @@
 
   <div class="row" *ngIf="videos.length > 0">
     <div class="col-md-4" *ngFor="let video of videos">
-      <iframe width="100%" height="315" [src]="getVideoUrl(video.key)" frameborder="0"
+      <iframe width="100%" title="YouTube video" height="315" [src]="getVideoUrl(video.key)" frameborder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
   </div>
