@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { NotifierService } from "angular-notifier";
 import { MovieFilter } from 'src/app/shared/models/movie-filter';
 import { MoviesService } from 'src/app/core/services/movies.service';
@@ -17,14 +17,14 @@ export class MoviesComponent implements OnInit {
   pageNumber = 1;
   genres: any[] = [];
 
-  formGroup: FormGroup;
+  formGroup: UntypedFormGroup;
 
   moviesFilter: MovieFilter
 
   private readonly notifierService: NotifierService;
 
   constructor(private moviesService: MoviesService, private actRoute: ActivatedRoute,
-    private formBuilder: FormBuilder, notifierService: NotifierService, private titleService: Title) {
+    private formBuilder: UntypedFormBuilder, notifierService: NotifierService, private titleService: Title) {
     this.notifierService = notifierService;
     this.titleService.setTitle("Movies Db");
     this.initForm();
