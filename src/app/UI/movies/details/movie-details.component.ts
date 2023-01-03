@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from "ngx-spinner";
 import { MoviesService } from 'src/app/core/services/movies.service';
@@ -16,7 +16,7 @@ export class MovieDetailsComponent implements OnInit {
   videos: any[] = [];
 
   constructor(private moviesService: MoviesService, private actRouter: ActivatedRoute,
-    private sanitizer: DomSanitizer, private spinner: NgxSpinnerService) { }
+    private sanitizer: DomSanitizer, private spinner: NgxSpinnerService, private titleService: Title) { }
 
   ngOnInit() {
     this.spinner.show();
@@ -41,6 +41,7 @@ export class MovieDetailsComponent implements OnInit {
   private loadMovieDetails(movieId: number) {
     this.moviesService.getMovieDetails(movieId).subscribe(data => {
       this.movie = data;
+      this.titleService.setTitle(`${this.movie.title} | Movies Db`);
     });
   }
 

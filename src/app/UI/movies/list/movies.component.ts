@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotifierService } from "angular-notifier";
 import { MovieFilter } from 'src/app/shared/models/movie-filter';
 import { MoviesService } from 'src/app/core/services/movies.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-movies',
@@ -23,10 +24,15 @@ export class MoviesComponent implements OnInit {
   private readonly notifierService: NotifierService;
 
   constructor(private moviesService: MoviesService, private actRoute: ActivatedRoute,
-    private formBuilder: FormBuilder, notifierService: NotifierService) {
+    private formBuilder: FormBuilder, notifierService: NotifierService, private titleService: Title) {
+    this.notifierService = notifierService;
+    this.titleService.setTitle("Movies Db");
+    this.initForm();
+  }
+
+  private initForm() {
     let today = new Date();
 
-    this.notifierService = notifierService;
     this.formGroup = this.formBuilder.group({
       language: ['', []],
       genreId: ['', []],
@@ -44,7 +50,7 @@ export class MoviesComponent implements OnInit {
   }
 
   private loadParams() {
-    this.moviesService.getGenres().subscribe((res: any[])=>{
+    this.moviesService.getGenres().subscribe((res: any[]) => {
       this.genres = res;
     });
 
@@ -60,7 +66,7 @@ export class MoviesComponent implements OnInit {
 
       let hasFilter = false;
 
-      if(params.has('genreId')){
+      if (params.has('genreId')) {
         let genreId = Number(params.get('genreId'));
         if (!isNaN(genreId) && genreId > 0) {
           this.formGroup.controls['genreId'].setValue(genreId);
@@ -68,7 +74,7 @@ export class MoviesComponent implements OnInit {
         }
       }
 
-      if(params.has('year')){
+      if (params.has('year')) {
         let year = Number(params.get('year'));
         if (!isNaN(year) && year > 0) {
           this.formGroup.controls['year'].setValue(year);
@@ -76,7 +82,7 @@ export class MoviesComponent implements OnInit {
         }
       }
 
-      if(params.has('language')){
+      if (params.has('language')) {
         let language = params.get('language');
         if (language == 'es' || language == 'en') {
           this.formGroup.controls['language'].setValue(language);
@@ -84,9 +90,9 @@ export class MoviesComponent implements OnInit {
         }
       }
 
-      if(hasFilter){
+      if (hasFilter) {
         this.filterMovies();
-      }else{
+      } else {
         this.loadMovies();
       }
     });
