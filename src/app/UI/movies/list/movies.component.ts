@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { NotifierService } from "angular-notifier";
+import { ToastrService } from 'ngx-toastr';
 import { MovieFilter } from 'src/app/shared/models/movie-filter';
 import { MoviesService } from 'src/app/core/services/movies.service';
 import { Title } from '@angular/platform-browser';
@@ -21,11 +21,8 @@ export class MoviesComponent implements OnInit {
 
   moviesFilter: MovieFilter
 
-  private readonly notifierService: NotifierService;
-
   constructor(private moviesService: MoviesService, private actRoute: ActivatedRoute,
-    private formBuilder: UntypedFormBuilder, notifierService: NotifierService, private titleService: Title) {
-    this.notifierService = notifierService;
+    private formBuilder: UntypedFormBuilder, private toastrService: ToastrService, private titleService: Title) {
     this.titleService.setTitle("Movies Db");
     this.initForm();
   }
@@ -102,7 +99,7 @@ export class MoviesComponent implements OnInit {
     this.moviesService.getMovies(this.pageNumber, this.moviesFilter).subscribe(data => {
       this.movies = data;
       if (hasFilter) {
-        this.notifierService.notify('success', 'Filtros aplicados');
+        this.toastrService.success('Filtros aplicados');
       }
     });
   }

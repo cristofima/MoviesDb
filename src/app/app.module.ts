@@ -12,7 +12,7 @@ import { GlobalHttpInterceptor } from "./core/interceptors/global-http.intercept
 import { TimePipe } from "./shared/pipes/time.pipe";
 import { BorderClassPipe } from "./shared/pipes/border-class.pipe";
 
-import { NotifierModule } from "angular-notifier";
+import { ToastrModule } from 'ngx-toastr';
 import { NgCircleProgressModule } from "ng-circle-progress";
 import { NgbPaginationModule } from "@ng-bootstrap/ng-bootstrap";
 import { NgxSpinnerModule } from "ngx-spinner";
@@ -38,19 +38,7 @@ import { PageNotFoundComponent } from "./shared/components/error-pages/page-not-
     HttpClientModule,
     NgbPaginationModule,
     NgxSpinnerModule,
-    NotifierModule.withConfig({
-      position: {
-        horizontal: {
-          position: "right",
-        },
-        vertical: {
-          position: "top",
-        },
-      },
-      behaviour: {
-        autoHide: 3000,
-      },
-    }),
+    ToastrModule.forRoot(),
     NgCircleProgressModule.forRoot({
       radius: 100,
       outerStrokeWidth: 16,
@@ -74,4 +62,4 @@ import { PageNotFoundComponent } from "./shared/components/error-pages/page-not-
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
