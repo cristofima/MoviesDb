@@ -2,25 +2,26 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { MovieFilter } from '../../shared/models/movie-filter';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MoviesService {
 
+  private apiKey = environment.apiKey
+
   constructor(private http: HttpClient) { }
 
   private getQuery(query: string, params: string = '') {
     const url = `https://api.themoviedb.org/3/${query}`;
 
-    const apiKey = '00d7fb865750066f0bee922febb0d108';
-
-    params = `?${params}&api_key=${apiKey}`;
+    params = `?${params}&api_key=${this.apiKey}`;
 
     return this.http.get(`${url}${params}`);
   }
 
-  getGenres(){
+  getGenres() {
     return this.getQuery('genre/movie/list').pipe(
       map(data => data['genres'])
     );
@@ -35,19 +36,19 @@ export class MoviesService {
 
     let queryString = `page=${pageNumber}`;
     if (filter) {
-      if(filter.language){
+      if (filter.language) {
         queryString += `&language=${filter.language}`;
       }
 
-      if(filter.year){
+      if (filter.year) {
         queryString += `&primary_release_year=${filter.year}`;
       }
 
-      if(filter.genreId){
+      if (filter.genreId) {
         queryString += `&with_genres=${filter.genreId}`;
       }
 
-      if(filter.voteAverageGte){
+      if (filter.voteAverageGte) {
         queryString += `&vote_average.gte=${filter.voteAverageGte / 10}`;
       }
     }
