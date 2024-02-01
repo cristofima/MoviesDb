@@ -38,7 +38,10 @@ import { PageNotFoundComponent } from "./shared/components/error-pages/page-not-
     HttpClientModule,
     NgbPaginationModule,
     NgxSpinnerModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      preventDuplicates: true
+    }),
     NgCircleProgressModule.forRoot({
       radius: 100,
       outerStrokeWidth: 16,

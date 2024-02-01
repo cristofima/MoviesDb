@@ -2,7 +2,7 @@
 <div class="container" *ngIf="movie">
 
   <!-- Page Heading -->
-  <h1 class="my-4">Detalles</h1>
+  <h1 class="my-4">Details</h1>
 
   <div class="row">
     <div class="col-md-4">
@@ -10,7 +10,7 @@
         src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{movie.poster_path}}" [alt]="movie.title">
 
       <br />
-      <h5>Puntuación del usuario</h5>
+      <h5>User score</h5>
 
       <div class="text-center">
         <circle-progress *ngIf="movie.vote_average != 0; else elseBlock" [percent]="movie.vote_average * 10"
@@ -25,15 +25,15 @@
           style="color:grey;" [routerLink]="['/movies']"
           [queryParams]="{year: movie.release_date | date:'yyyy'}">({{movie.release_date | date:'yyyy'}})</span></h3>
       <p>{{movie.overview}}</p>
-      <h5 *ngIf="movie.runtime">Duración: <span style="color:grey;">{{movie.runtime | time}}</span></h5>
-      <h5 *ngIf="movie.budget">Presupuesto: <span style="color:grey;">{{movie.budget | currency}}</span></h5>
-      <h5 *ngIf="movie.revenue">Ingresos: <span style="color:grey;">{{movie.revenue | currency}}</span></h5>
+      <h5 *ngIf="movie.runtime">Duration: <span style="color:grey;">{{movie.runtime | time}}</span></h5>
+      <h5 *ngIf="movie.budget">Budget: <span style="color:grey;">{{movie.budget | currency}}</span></h5>
+      <h5 *ngIf="movie.revenue">Revenue: <span style="color:grey;">{{movie.revenue | currency}}</span></h5>
       <p class="card-text">
         <span *ngFor="let genre of movie.genres" [routerLink]="['/movies']" [queryParams]="{genreId: genre.id}"
           class="badge badge-pill badge-primary genre-badge">{{ genre.name }}</span>
       </p>
       <ng-container *ngIf="similarMovies && similarMovies.length">
-        <h4>Recomendaciones</h4>
+        <h4>Recommendations</h4>
         <div class="col-md-12">
           <a *ngFor="let movie of similarMovies" [routerLink]="['/movies/',movie.id]">
             <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{movie.poster_path}}"

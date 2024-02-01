@@ -11,13 +11,13 @@ export class TimePipe implements PipeTransform {
     let hoursText = "";
     let minutesText = "";
 
-    if(hours){
-      hoursText = hours === 1 ? 'hora' : 'horas';
+    if (hours) {
+      hoursText = hours === 1 ? 'hour' : 'hours';
       hoursText = `${hours} ${hoursText}`;
     }
 
-    if(minutes){
-      minutesText = minutes === 1 ? 'minuto' : 'minutos';
+    if (minutes) {
+      minutesText = minutes === 1 ? 'minute' : 'minutes';
       minutesText = `${minutes} ${minutesText}`;
     }
 

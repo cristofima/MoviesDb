@@ -1,100 +1,94 @@
 <!-- Page Content -->
 <div class="container">
-    
-    <!-- Page Heading -->
-    <h1 class="my-4">Películas</h1>
 
-    <div id="accordion">
-        <div class="card">
-            <div class="card-header" id="headingOne">
-                <h5 class="mb-0">
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Filtros de búsqueda
-                    </button>
-                </h5>
-            </div>
+  <!-- Page Heading -->
+  <h1 class="my-4">Movies</h1>
 
-            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                <div class="card-body">
-                    <form [formGroup]="formGroup" (ngSubmit)="filterMovies()">
-                        <div class="form-row">
-                            <div class="form-group col-md-3">
-                                <label for="inputLanguage">Idioma</label>
-                                <select id="inputLanguage" class="form-control" formControlName="language">
-                                    <option value="es">Español</option>
-                                    <option value="en">Inglés</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="inputGenre">Género</label>
-                                <select id="inputGenre" class="form-control" formControlName="genreId">
-                                    <option *ngFor="let g of genres" [value]="g.id">{{g.name}}</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="inputYear">Año</label>
-                                <input type="number" id="inputYear" class="form-control" formControlName="year" />
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="inputVoteAverageGte">Puntuación de usuario mínima</label>
-                                <input type="number" min="0" max="100" id="inputVoteAverageGte" class="form-control" formControlName="voteAverageGte" />
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary" [disabled]="!formGroup.valid">Buscar</button>
-                    </form>
-                </div>
+  <div id="accordion">
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+            aria-controls="collapseOne">
+            Search filters
+          </button>
+        </h5>
+      </div>
+
+      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body">
+          <form [formGroup]="formGroup" (ngSubmit)="filterMovies()">
+            <div class="form-row">
+              <div class="form-group col-md-3">
+                <label for="inputLanguage">Language</label>
+                <select id="inputLanguage" class="form-control" formControlName="language">
+                  <option value="es">Spanish</option>
+                  <option value="en">English</option>
+                </select>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="inputGenre">Gender</label>
+                <select id="inputGenre" class="form-control" formControlName="genreId">
+                  <option *ngFor="let g of genres" [value]="g.id">{{g.name}}</option>
+                </select>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="inputYear">Year</label>
+                <input type="number" id="inputYear" class="form-control" formControlName="year" />
+              </div>
+              <div class="form-group col-md-3">
+                <label for="inputVoteAverageGte">Minimum user score</label>
+                <input type="number" min="0" max="100" id="inputVoteAverageGte" class="form-control"
+                  formControlName="voteAverageGte" />
+              </div>
             </div>
+            <button type="submit" class="btn btn-primary" [disabled]="!formGroup.valid">Search</button>
+          </form>
         </div>
+      </div>
     </div>
+  </div>
 
-    <br/>
+  <br />
 
-    <!-- Pagination -->
-    <div class="overflow-auto d-flex flex-sm-row flex-column justify-content-center">
-        <ngb-pagination [collectionSize]="10000" [(page)]="pageNumber" [maxSize]="10" 
-        [rotate]="true" [ellipses]="false" [pageSize]="20" [boundaryLinks]="true"
-        (pageChange)="loadMovies()"></ngb-pagination>
-    </div>
-     
-    <div class="row">
-        <div *ngFor="let movie of movies" class="col-lg-4 col-sm-6 mb-4">
-            <div class="card h-100">
-                <a [routerLink]="['/movies/',movie.id]"><img class="card-img-top" src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{movie.poster_path}}" alt=""></a>
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <a [routerLink]="['/movies/',movie.id]">{{movie.title}}</a>
-                            </div>
-                            <div class="col-md-4">
-                                <circle-progress *ngIf="movie.vote_average != 0; else elseBlock"
-                                    [percent]="movie.vote_average * 10"
-                                    [unitsFontSize]="10" [titleFontSize]="10"
-                                    [radius]="25" [outerStrokeWidth]="6" [innerStrokeWidth]="5"
-                                    [outerStrokeColor]="movie.vote_average | borderClass"
-                                    ></circle-progress>
-                                <ng-template #elseBlock>
-                                    <circle-progress
-                                    [unitsFontSize]="10" [titleFontSize]="10"
-                                    title="N/A" [innerStrokeWidth]="5"
-                                    [radius]="25" [outerStrokeWidth]="6"
-                                    [showUnits]="false"
-                                    ></circle-progress>
-                                </ng-template>
-                            </div>
-                        </div>
-                    </h4>
-                    <p class="card-text">{{movie.overview}}</p>
-                </div>
+  <!-- Pagination -->
+  <div class="overflow-auto d-flex flex-sm-row flex-column justify-content-center">
+    <ngb-pagination [collectionSize]="10000" [(page)]="pageNumber" [maxSize]="10" [rotate]="true" [ellipses]="false"
+      [pageSize]="20" [boundaryLinks]="true" (pageChange)="loadMovies()"></ngb-pagination>
+  </div>
+
+  <div class="row">
+    <div *ngFor="let movie of movies" class="col-lg-4 col-sm-6 mb-4">
+      <div class="card h-100">
+        <a [routerLink]="['/movies/',movie.id]"><img class="card-img-top"
+            src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{movie.poster_path}}" alt=""></a>
+        <div class="card-body">
+          <h4 class="card-title">
+            <div class="row">
+              <div class="col-md-8">
+                <a [routerLink]="['/movies/',movie.id]">{{movie.title}}</a>
+              </div>
+              <div class="col-md-4">
+                <circle-progress *ngIf="movie.vote_average != 0; else elseBlock" [percent]="movie.vote_average * 10"
+                  [unitsFontSize]="10" [titleFontSize]="10" [radius]="25" [outerStrokeWidth]="6" [innerStrokeWidth]="5"
+                  [outerStrokeColor]="movie.vote_average | borderClass"></circle-progress>
+                <ng-template #elseBlock>
+                  <circle-progress [unitsFontSize]="10" [titleFontSize]="10" title="N/A" [innerStrokeWidth]="5"
+                    [radius]="25" [outerStrokeWidth]="6" [showUnits]="false"></circle-progress>
+                </ng-template>
+              </div>
             </div>
+          </h4>
+          <p class="card-text">{{movie.overview}}</p>
         </div>
+      </div>
     </div>
-    <!-- /.row -->
+  </div>
+  <!-- /.row -->
 
-    <!-- Pagination -->
-    <div class="overflow-auto overflow-auto d-flex flex-sm-row flex-column justify-content-center">
-        <ngb-pagination [collectionSize]="10000" [(page)]="pageNumber" [maxSize]="10" 
-        [rotate]="true" [ellipses]="false" [pageSize]="20" [boundaryLinks]="true"
-        (pageChange)="loadMovies()"></ngb-pagination>
-    </div>
+  <!-- Pagination -->
+  <div class="overflow-auto overflow-auto d-flex flex-sm-row flex-column justify-content-center">
+    <ngb-pagination [collectionSize]="10000" [(page)]="pageNumber" [maxSize]="10" [rotate]="true" [ellipses]="false"
+      [pageSize]="20" [boundaryLinks]="true" (pageChange)="loadMovies()"></ngb-pagination>
+  </div>
 </div>

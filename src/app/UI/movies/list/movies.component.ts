@@ -99,7 +99,7 @@ export class MoviesComponent implements OnInit {
     this.moviesService.getMovies(this.pageNumber, this.moviesFilter).subscribe(data => {
       this.movies = data;
       if (hasFilter) {
-        this.toastrService.success('Filtros aplicados');
+        this.toastrService.success('Filters applied');
       }
     });
   }
