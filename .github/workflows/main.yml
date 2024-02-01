@@ -19,6 +19,8 @@ jobs:
         run: npm install
       - name: Config env variables
         run: npm run config
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
       - name: Build prod
         run: npm run build:prod
       - uses: w9jds/firebase-action@master
@@ -26,4 +28,3 @@ jobs:
           args: deploy --only hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          API_KEY: ${{ secrets.API_KEY }}
