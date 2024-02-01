@@ -1,8 +1,15 @@
+const API_KEY = process.env.API_KEY;
+if (!API_KEY) {
+  console.log('API_KEY is missing');
+  return
+}
+
 const fs = require('node:fs');
-const targetPath = "./src/environments/environment.prod.ts";
+const targetPath = "./src/environments/environment.ts";
+
 const envConfigFile = `export const environment = {
-   production: true,
-   apiKey: '${process.env.API_KEY}'
+   production: false,
+   apiKey: '${API_KEY}'
 };
 `;
 
