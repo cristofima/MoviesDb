@@ -16,10 +16,15 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgCircleProgressModule } from "ng-circle-progress";
 import { NgbPaginationModule } from "@ng-bootstrap/ng-bootstrap";
 import { NgxSpinnerModule } from "ngx-spinner";
+import { NgHttpCachingConfig, NgHttpCachingLocalStorage, NgHttpCachingModule } from "ng-http-caching";
 
 import { MoviesComponent } from "./UI/movies/list/movies.component";
 import { MovieDetailsComponent } from "./UI/movies/details/movie-details.component";
 import { PageNotFoundComponent } from "./shared/components/error-pages/page-not-found/page-not-found.component";
+
+const ngHttpCachingConfig: NgHttpCachingConfig = {
+  store: new NgHttpCachingLocalStorage()
+};
 
 @NgModule({
   declarations: [
@@ -36,6 +41,7 @@ import { PageNotFoundComponent } from "./shared/components/error-pages/page-not-
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
+    NgHttpCachingModule.forRoot(ngHttpCachingConfig),
     NgbPaginationModule,
     NgxSpinnerModule,
     ToastrModule.forRoot({
@@ -54,7 +60,7 @@ import { PageNotFoundComponent } from "./shared/components/error-pages/page-not-
       unitsFontSize: "30",
       titleFontSize: "30",
       showZeroOuterStroke: false,
-    }),
+    })
   ],
   providers: [
     {

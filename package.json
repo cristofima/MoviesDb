@@ -24,6 +24,7 @@
     "@angular/router": "^15.0.4",
     "@ng-bootstrap/ng-bootstrap": "^14.0.0",
     "ng-circle-progress": "^1.6.0",
+    "ng-http-caching": "^15.2.4",
     "ngx-spinner": "^15.0.1",
     "ngx-toastr": "^16.0.2",
     "rxjs": "^6.6.7",
