@@ -15,10 +15,15 @@ jobs:
       - uses: actions/setup-node@master
         with:
           node-version: "16.x"
-      - run: npm install
-      - run: npm run build:prod
+      - name: Install dependencies
+        run: npm install
+      - name: Config env variables
+        run: npm run config
+      - name: Build prod
+        run: npm run build:prod
       - uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          API_KEY: ${{ secrets.API_KEY }}
