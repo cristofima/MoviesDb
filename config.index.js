@@ -5,10 +5,10 @@ if (!API_KEY) {
 }
 
 const fs = require('node:fs');
-const targetPath = "./src/environments/environment.ts";
+const targetPath = "./src/environments/environment.prod.ts";
 
 const envConfigFile = `export const environment = {
-   production: false,
+   production: true,
    apiKey: '${API_KEY}'
 };
 `;
