@@ -11,6 +11,7 @@ import { GlobalHttpInterceptor } from "./core/interceptors/global-http.intercept
 
 import { TimePipe } from "./shared/pipes/time.pipe";
 import { BorderClassPipe } from "./shared/pipes/border-class.pipe";
+import { CertificationPipe } from './shared/pipes/certification.pipe';
 
 import { ToastrModule } from 'ngx-toastr';
 import { NgCircleProgressModule } from "ng-circle-progress";
@@ -21,6 +22,7 @@ import { NgHttpCachingConfig, NgHttpCachingLocalStorage, NgHttpCachingModule } f
 import { MoviesComponent } from "./UI/movies/list/movies.component";
 import { MovieDetailsComponent } from "./UI/movies/details/movie-details.component";
 import { PageNotFoundComponent } from "./shared/components/error-pages/page-not-found/page-not-found.component";
+import { VideoUrlPipe } from './shared/pipes/video-url.pipe';
 
 const ngHttpCachingConfig: NgHttpCachingConfig = {
   store: new NgHttpCachingLocalStorage()
@@ -34,6 +36,8 @@ const ngHttpCachingConfig: NgHttpCachingConfig = {
     MovieDetailsComponent,
     TimePipe,
     BorderClassPipe,
+    CertificationPipe,
+    VideoUrlPipe
   ],
   imports: [
     BrowserModule,
@@ -49,17 +53,17 @@ const ngHttpCachingConfig: NgHttpCachingConfig = {
       preventDuplicates: true
     }),
     NgCircleProgressModule.forRoot({
-      radius: 100,
-      outerStrokeWidth: 16,
+      radius: 90,
+      outerStrokeWidth: 12,
       innerStrokeWidth: 8,
       outerStrokeColor: "#D8CFCD",
       innerStrokeColor: "#D8CFCD",
       animationDuration: 300,
       animation: true,
       showSubtitle: false,
-      unitsFontSize: "30",
-      titleFontSize: "30",
-      showZeroOuterStroke: false,
+      unitsFontSize: "40",
+      titleFontSize: "40",
+      showZeroOuterStroke: false
     })
   ],
   providers: [

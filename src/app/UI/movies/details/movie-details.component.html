@@ -7,23 +7,30 @@
   <div class="row">
     <div class="col-md-4">
       <img class="img-fluid rounded mb-3 mb-md-0 img-principal"
-        src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{movie.poster_path}}" [alt]="movie.title">
+        src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{movie.posterPath}}" [alt]="movie.title">
 
       <br />
       <h5>User score</h5>
 
       <div class="text-center">
-        <circle-progress *ngIf="movie.vote_average != 0; else elseBlock" [percent]="movie.vote_average * 10"
-          [outerStrokeColor]="movie.vote_average | borderClass"></circle-progress>
+        <circle-progress *ngIf="movie.voteAverage != 0; else elseBlock" [percent]="movie.voteAverage * 10"
+          [outerStrokeColor]="movie.voteAverage | borderClass"></circle-progress>
         <ng-template #elseBlock>
           <circle-progress title="N/A" [showUnits]="false"></circle-progress>
         </ng-template>
       </div>
     </div>
     <div class="col-md-8">
-      <h3>{{movie.title}} <span title="Buscar películas del año {{movie.release_date | date:'yyyy'}}" class="movie-year"
+      <h3>{{movie.title}} <span title="Search movies of the year {{movie.releaseDate | date:'yyyy'}}" class="movie-year"
           style="color:grey;" [routerLink]="['/movies']"
-          [queryParams]="{year: movie.release_date | date:'yyyy'}">({{movie.release_date | date:'yyyy'}})</span></h3>
+          [queryParams]="{year: movie.releaseDate | date:'yyyy'}">({{movie.releaseDate |
+          date:'yyyy'}})</span>
+      </h3>
+      <h6>
+        <span class="certification-box" *ngIf="movie.certification"
+          [title]="movie.certification | certification">{{movie.certification}}</span> {{movie.releaseDate |
+        date:'MM/dd/yyyy'}}
+      </h6>
       <p>{{movie.overview}}</p>
       <h5 *ngIf="movie.runtime">Duration: <span style="color:grey;">{{movie.runtime | time}}</span></h5>
       <h5 *ngIf="movie.budget">Budget: <span style="color:grey;">{{movie.budget | currency}}</span></h5>
@@ -32,21 +39,21 @@
         <span *ngFor="let genre of movie.genres" [routerLink]="['/movies']" [queryParams]="{genreId: genre.id}"
           class="badge badge-pill badge-primary genre-badge">{{ genre.name }}</span>
       </p>
-      <ng-container *ngIf="similarMovies && similarMovies.length">
+      <ng-container *ngIf="movie.similarMovies.length">
         <h4>Recommendations</h4>
         <div class="col-md-12">
-          <a *ngFor="let movie of similarMovies" [routerLink]="['/movies/',movie.id]">
-            <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{movie.poster_path}}"
-              class="img-thumbnail img-similar" [title]="movie.title" [alt]="movie.title">
+          <a *ngFor="let similar of movie.similarMovies" [routerLink]="['/movies/',similar.id]">
+            <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{similar.posterPath}}"
+              class="img-thumbnail img-similar" [title]="similar.title" [alt]="similar.title">
           </a>
         </div>
       </ng-container>
     </div>
   </div>
 
-  <div class="row" *ngIf="videos.length > 0">
-    <div class="col-md-4" *ngFor="let video of videos">
-      <iframe width="100%" title="YouTube video" height="315" [src]="getVideoUrl(video.key)" frameborder="0"
+  <div class="row" *ngIf="movie.videos.length">
+    <div class="col-md-4" *ngFor="let key of movie.videos">
+      <iframe width="100%" title="YouTube video" height="315" [src]="key | videoUrl" frameborder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
   </div>

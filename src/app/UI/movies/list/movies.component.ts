@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MovieFilter } from 'src/app/shared/models/movie-filter';
 import { MoviesService } from 'src/app/core/services/movies.service';
 import { Title } from '@angular/platform-browser';
+import { Genre, Movie } from 'src/app/shared/models/movie.model';
 
 @Component({
   selector: 'app-movies',
@@ -13,9 +14,9 @@ import { Title } from '@angular/platform-browser';
 })
 export class MoviesComponent implements OnInit {
 
-  movies: any[] = [];
+  movies: Movie[] = [];
   pageNumber = 1;
-  genres: any[] = [];
+  genres: Genre[] = [];
 
   formGroup: UntypedFormGroup;
 

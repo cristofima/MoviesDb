@@ -61,7 +61,7 @@
     <div *ngFor="let movie of movies" class="col-lg-4 col-sm-6 mb-4">
       <div class="card h-100">
         <a [routerLink]="['/movies/',movie.id]"><img class="card-img-top"
-            src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{movie.poster_path}}" alt=""></a>
+            src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{movie.posterPath}}" alt=""></a>
         <div class="card-body">
           <h4 class="card-title">
             <div class="row">
@@ -69,9 +69,9 @@
                 <a [routerLink]="['/movies/',movie.id]">{{movie.title}}</a>
               </div>
               <div class="col-md-4">
-                <circle-progress *ngIf="movie.vote_average != 0; else elseBlock" [percent]="movie.vote_average * 10"
-                  [unitsFontSize]="10" [titleFontSize]="10" [radius]="25" [outerStrokeWidth]="6" [innerStrokeWidth]="5"
-                  [outerStrokeColor]="movie.vote_average | borderClass"></circle-progress>
+                <circle-progress *ngIf="movie.voteAverage != 0; else elseBlock" [percent]="movie.voteAverage * 10"
+                  [unitsFontSize]="10" [titleFontSize]="10" [radius]="25" [outerStrokeWidth]="5" [innerStrokeWidth]="5"
+                  [outerStrokeColor]="movie.voteAverage | borderClass"></circle-progress>
                 <ng-template #elseBlock>
                   <circle-progress [unitsFontSize]="10" [titleFontSize]="10" title="N/A" [innerStrokeWidth]="5"
                     [radius]="25" [outerStrokeWidth]="6" [showUnits]="false"></circle-progress>
