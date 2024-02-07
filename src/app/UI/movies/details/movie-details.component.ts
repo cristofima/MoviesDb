@@ -20,19 +20,17 @@ export class MovieDetailsComponent implements OnInit {
   ngOnInit() {
     this.spinner.show();
     this.actRouter.params.subscribe(params => {
-      this.loadData(params['id']);
+      this.loadMovieDetails(params['id']);
     });
-  }
-
-  private loadData(movieId: number) {
-    this.loadMovieDetails(movieId);
-    this.spinner.hide();
   }
 
   private loadMovieDetails(movieId: number) {
     this.moviesService.getMovieDetails(movieId).subscribe(data => {
+      this.spinner.hide();
       this.movie = data;
       this.titleService.setTitle(`${this.movie.title} | Movies Db`);
+    }, () => {
+      this.spinner.hide();
     });
   }
 

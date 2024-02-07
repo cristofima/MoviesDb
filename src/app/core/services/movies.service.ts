@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { MovieFilter } from '../../shared/models/movie-filter';
 import { environment } from 'src/environments/environment';
-import { Genre, Movie, SimilarMovie } from 'src/app/shared/models/movie.model';
+import { Genre, MinimalCollection, Movie, SimilarMovie } from 'src/app/shared/models/movie.model';
 
 @Injectable({
   providedIn: 'root'
@@ -105,6 +105,16 @@ export class MoviesService {
             });
           }
 
+          let collection: MinimalCollection;
+          if (data.belongs_to_collection) {
+            collection = {
+              backdropPath: data.belongs_to_collection.backdrop_path,
+              id: data.belongs_to_collection.id,
+              name: data.belongs_to_collection.name,
+              posterPath: data.belongs_to_collection.poster_path
+            };
+          }
+
           return {
             id: data.id,
             title: data.title,
@@ -119,7 +129,8 @@ export class MoviesService {
             certification: certification,
             genres: data.genres,
             similarMovies: similarMovies,
-            trailerKey: trailerKey
+            trailerKey: trailerKey,
+            collection: collection
           }
         })
       );

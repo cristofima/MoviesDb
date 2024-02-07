@@ -61,7 +61,7 @@
     <div *ngFor="let movie of movies" class="col-lg-4 col-sm-6 mb-4">
       <div class="card h-100">
         <a [routerLink]="['/movies/',movie.id]"><img class="card-img-top"
-            src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{movie.posterPath}}" alt=""></a>
+            src="https://image.tmdb.org/t/p/original{{movie.posterPath}}" alt=""></a>
         <div class="card-body">
           <h4 class="card-title">
             <div class="row">
