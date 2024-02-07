@@ -89,9 +89,9 @@ export class MoviesService {
             });
           }
 
-          let videos: string[] = [];
+          let trailerKey: string;
           if (data.videos && data.videos.results) {
-            videos = data.videos.results.filter((video: any) => video.type === 'Trailer').map((video: any) => video.key);
+            trailerKey = data.videos.results.filter((video: any) => video.type === 'Trailer')[0]?.key;
           }
 
           let similarMovies: SimilarMovie[] = [];
@@ -110,7 +110,6 @@ export class MoviesService {
             title: data.title,
             overview: data.overview,
             posterPath: data.poster_path,
-            backdropPath: data.backdrop_path,
             releaseDate: data.release_date,
             voteAverage: data.vote_average,
             voteCount: data.vote_count,
@@ -120,7 +119,7 @@ export class MoviesService {
             certification: certification,
             genres: data.genres,
             similarMovies: similarMovies,
-            videos: videos
+            trailerKey: trailerKey
           }
         })
       );

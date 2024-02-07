@@ -11,7 +11,7 @@ export interface Movie {
   certification: string;
   genres: Genre[];
   similarMovies: SimilarMovie[];
-  videos: string[];
+  trailerKey: string;
 }
 
 export interface Genre {

@@ -1,3 +1,14 @@
+.container {
+  margin-top: 20px;
+
+  .user-score-container {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 10px;
+  }
+}
+
 .img-principal {
   max-height: 500px;
 }
