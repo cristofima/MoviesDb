@@ -6,7 +6,6 @@ import { DominantColorService } from 'src/app/core/services/dominant-color.servi
 import { MoviesService } from 'src/app/core/services/movies.service';
 import { Movie } from 'src/app/shared/models/movie.model';
 import { ColorUtil } from 'src/app/shared/utils/color.util';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-movie-details',
@@ -42,8 +41,7 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   private async getDominantColor() {
-    let baseUrl = environment.production ? "https://image.tmdb.org" : "image";
-    let imgUrl = `${baseUrl}/t/p/original${this.movie.posterPath}`;
+    let imgUrl = `image/t/p/original${this.movie.posterPath}`;
     this.posterImgDominantColor = await this.dominantColorService.getDominantColor(imgUrl);
     this.firstBackgroundImg = `url(https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces${this.movie.backdropPath})`;
 
