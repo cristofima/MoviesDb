@@ -84,39 +84,50 @@ export class MoviesService {
     return this.getQuery(`collection/${collectionId}`)
       .pipe(
         map((data: any) => {
+          let voteAverage = 0;
+          data.parts.forEach((el: any) => {
+            voteAverage += el.vote_average;
+          });
+
+          voteAverage /= data.parts.length;
+
           return {
             id: data.id,
             name: data.name,
             overview: data.overview,
             posterPath: data.poster_path,
             backdropPath: data.backdrop_path,
-            movies: data.parts.map(p => this.getFullMovieData(p)),
-            voteAverage: data.parts.reduce((a, b) => a.vote_average + b.vote_average) / data.parts.length
+            movies: data.parts.map(p => this.getFullMovieData(p, false)),
+            voteAverage: voteAverage
           };
         })
       )
   }
 
-  private getFullMovieData(data: any) {
-    const { certification, collection, similarMovies, trailerKey } = this.getExtraMovieData(data);
-
-    return {
+  private getFullMovieData(data: any, extractExtraData = true) {
+    let movie: Movie = {
       id: data.id,
       title: data.title,
       overview: data.overview,
       posterPath: data.poster_path,
+      backdropPath: data.backdrop_path,
       releaseDate: data.release_date,
       voteAverage: data.vote_average,
-      voteCount: data.vote_count,
       runtime: data.runtime,
       budget: data.budget,
       revenue: data.revenue,
-      certification: certification,
-      genres: data.genres,
-      similarMovies: similarMovies,
-      trailerKey: trailerKey,
-      collection: collection
+      genres: data.genres
+    };
+
+    if (extractExtraData) {
+      const { certification, collection, similarMovies, trailerKey } = this.getExtraMovieData(data);
+      movie.certification = certification;
+      movie.collection = collection;
+      movie.similarMovies = similarMovies;
+      movie.trailerKey = trailerKey;
     }
+
+    return movie;
   }
 
   private getExtraMovieData(data: any) {

@@ -1,23 +1,26 @@
 <div class="container" *ngIf="collection">
-  <div class="row">
-    <div class="col-md-4">
-      <img class="img-fluid rounded mb-3 mb-md-0 img-principal"
-        src="https://image.tmdb.org/t/p/original{{collection.posterPath}}" [alt]="collection.name">
-    </div>
-
-    <div class="col-md-8">
-      <h3>{{collection.name}}</h3>
-
-      <div class="user-score-container">
-        <circle-progress *ngIf="collection.voteAverage != 0" [percent]="collection.voteAverage * 10"
-          [outerStrokeColor]="collection.voteAverage | borderClass" [titleFontSize]="15" [unitsFontSize]="15"
-          [radius]="30" [innerStrokeWidth]="3" [outerStrokeWidth]="5"></circle-progress>
-        <h6>User<br />Score</h6>
+  <div class="large-container" [style.background-image]="firstBackgroundImg">
+    <div class="row main-info-container" [style.background-image]="secondBackgroundImg">
+      <div class="col-md-4">
+        <img class="img-fluid rounded mb-3 mb-md-0 img-principal"
+          src="https://image.tmdb.org/t/p/original{{collection.posterPath}}" [alt]="collection.name">
       </div>
 
-      <h5>Overview</h5>
-      <p>{{collection.overview}}</p>
-      <p><b>Number of Movies:</b> {{collection.movies.length}}</p>
+      <div class="col-md-8">
+        <h3>{{collection.name}}</h3>
+
+        <div class="user-score-container">
+          <circle-progress *ngIf="collection.voteAverage != 0" [percent]="collection.voteAverage * 10"
+            [outerStrokeColor]="collection.voteAverage | borderClass" [titleFontSize]="15" [unitsFontSize]="15"
+            [radius]="30" [innerStrokeWidth]="3" [outerStrokeWidth]="5" titleColor="white"
+            unitsColor="white"></circle-progress>
+          <h6>User<br />Score</h6>
+        </div>
+
+        <h5>Overview</h5>
+        <p>{{collection.overview}}</p>
+        <p><b>Number of Movies:</b> {{collection.movies.length}}</p>
+      </div>
     </div>
   </div>
 

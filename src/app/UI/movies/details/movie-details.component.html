@@ -1,52 +1,56 @@
 <!-- Page Content -->
 <div class="container" *ngIf="movie">
-  <div class="row">
-    <div class="col-md-4">
-      <img class="img-fluid rounded mb-3 mb-md-0 img-principal"
-        src="https://image.tmdb.org/t/p/original{{movie.posterPath}}" [alt]="movie.title">
-    </div>
-
-    <div class="col-md-8">
-      <h3>{{movie.title}} <span title="Search movies of the year {{movie.releaseDate | date:'yyyy'}}" class="movie-year"
-          style="color:grey;" [routerLink]="['/movies']"
-          [queryParams]="{year: movie.releaseDate | date:'yyyy'}">({{movie.releaseDate |
-          date:'yyyy'}})</span>
-      </h3>
-      <h6>
-        <span class="certification-box" *ngIf="movie.certification"
-          [title]="movie.certification | certification">{{movie.certification}}</span> {{movie.releaseDate |
-        date:'MM/dd/yyyy'}}
-      </h6>
-
-      <p class="card-text">
-        <a *ngFor="let genre of movie.genres" [routerLink]="['/movies']" [queryParams]="{genreId: genre.id}"
-          class="badge badge-pill badge-primary genre-badge">{{ genre.name }}</a>
-      </p>
-
-      <div class="user-score-container">
-        <circle-progress *ngIf="movie.voteAverage != 0" [percent]="movie.voteAverage * 10"
-          [outerStrokeColor]="movie.voteAverage | borderClass" [titleFontSize]="15" [unitsFontSize]="15" [radius]="30"
-          [innerStrokeWidth]="3" [outerStrokeWidth]="5"></circle-progress>
-        <h6>User<br />Score</h6>
-        <a *ngIf="movie.trailerKey" class="btn btn-secondary"
-          href="https://www.youtube.com/watch?v={{movie.trailerKey}}" target="_blank">Play
-          Trailer</a>
+  <div class="large-container" [style.background-image]="firstBackgroundImg">
+    <div class="row main-info-container" [style.background-image]="secondBackgroundImg">
+      <div class="col-md-4">
+        <img class="img-fluid rounded mb-3 mb-md-0 img-principal"
+          src="https://image.tmdb.org/t/p/original{{movie.posterPath}}" [alt]="movie.title">
       </div>
 
-      <h5>Overview</h5>
-      <p>{{movie.overview}}</p>
-      <h5 *ngIf="movie.runtime">Duration: <span style="color:grey;">{{movie.runtime | time}}</span></h5>
-      <h5 *ngIf="movie.budget">Budget: <span style="color:grey;">{{movie.budget | currency}}</span></h5>
-      <h5 *ngIf="movie.revenue">Revenue: <span style="color:grey;">{{movie.revenue | currency}}</span></h5>
+      <div class="col-md-8">
+        <h3>{{movie.title}} <span title="Search movies of the year {{movie.releaseDate | date:'yyyy'}}"
+            class="movie-year" [routerLink]="['/movies']"
+            [queryParams]="{year: movie.releaseDate | date:'yyyy'}">({{movie.releaseDate |
+            date:'yyyy'}})</span>
+        </h3>
+        <h6>
+          <span class="certification-box" *ngIf="movie.certification"
+            [title]="movie.certification | certification">{{movie.certification}}</span> {{movie.releaseDate |
+          date:'MM/dd/yyyy'}}
+        </h6>
+
+        <p class="card-text">
+          <a *ngFor="let genre of movie.genres" [routerLink]="['/movies']" [queryParams]="{genreId: genre.id}"
+            class="badge badge-pill badge-primary genre-badge">{{ genre.name }}</a>
+        </p>
+
+        <div class="user-score-container">
+          <circle-progress *ngIf="movie.voteAverage != 0" [percent]="movie.voteAverage * 10"
+            [outerStrokeColor]="movie.voteAverage | borderClass" [titleFontSize]="15" [unitsFontSize]="15" [radius]="30"
+            [innerStrokeWidth]="3" [outerStrokeWidth]="5" titleColor="white" unitsColor="white"></circle-progress>
+          <h6>User<br />Score</h6>
+          <a *ngIf="movie.trailerKey" class="btn btn-secondary"
+            href="https://www.youtube.com/watch?v={{movie.trailerKey}}" target="_blank">Play
+            Trailer</a>
+        </div>
+
+        <h5>Overview</h5>
+        <p>{{movie.overview}}</p>
+        <p *ngIf="movie.runtime"><b>Duration:</b> {{movie.runtime | time}}</p>
+        <p *ngIf="movie.budget"><b>Budget:</b> {{movie.budget | currency}}</p>
+        <p *ngIf="movie.revenue"><b>Revenue:</b> {{movie.revenue | currency}}</p>
+      </div>
     </div>
   </div>
+
 
   <ng-container *ngIf="movie.collection">
     <hr />
     <div class="row collection-container"
       style="background-image: linear-gradient(to right, rgba(3, 37, 65, 1) 0%, rgba(3, 37, 65, 0.6) 100%), url(https://media.themoviedb.org/t/p/w1440_and_h320_multi_faces{{movie.collection.backdropPath}})">
       <h2>Part of the {{movie.collection.name}}</h2>
-      <a class="btn btn-secondary rounded-pill" href="/collections/{{movie.collection.id}}">VIEW THE COLLECTION</a>
+      <a class="btn rounded-pill" [style.background-color]="posterImgDominantColor"
+        href="/collections/{{movie.collection.id}}">VIEW THE COLLECTION</a>
     </div>
   </ng-container>
 
