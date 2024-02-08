@@ -3,10 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { MoviesComponent } from './UI/movies/list/movies.component';
 import { MovieDetailsComponent } from './UI/movies/details/movie-details.component';
 import { PageNotFoundComponent } from './shared/components/error-pages/page-not-found/page-not-found.component';
+import { CollectionDetailsComponent } from './UI/collection-details/collection-details.component';
 
 const routes: Routes = [
   { path: 'movies', component: MoviesComponent },
   { path: 'movies/:id', component: MovieDetailsComponent },
+  { path: 'collections/:id', component: CollectionDetailsComponent },
   { path: 'error-404', component: PageNotFoundComponent },
   { path: '', pathMatch: 'full', redirectTo: 'movies' },
   { path: '**', component: PageNotFoundComponent }
