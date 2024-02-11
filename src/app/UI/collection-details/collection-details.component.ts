@@ -18,6 +18,7 @@ export class CollectionDetailsComponent implements OnInit {
   posterImgDominantColor: string;
   firstBackgroundImg: string;
   secondBackgroundImg: string;
+  contrastColor = 'white';
 
   constructor(private actRouter: ActivatedRoute, private moviesService: MoviesService,
     private spinner: NgxSpinnerService, private titleService: Title, private dominantColorService: DominantColorService) { }
@@ -43,6 +44,7 @@ export class CollectionDetailsComponent implements OnInit {
   private async getDominantColor() {
     let imgUrl = `image/t/p/original${this.collection.posterPath}`;
     this.posterImgDominantColor = await this.dominantColorService.getDominantColor(imgUrl);
+    this.contrastColor = ColorUtil.getContrastColor(this.posterImgDominantColor);
     this.firstBackgroundImg = `url(https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces${this.collection.backdropPath})`;
 
     let rgbColor = ColorUtil.hexToRgb(this.posterImgDominantColor);

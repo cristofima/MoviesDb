@@ -48,7 +48,7 @@ export class MoviesComponent implements OnInit {
   }
 
   private loadParams() {
-    this.moviesService.getGenres().subscribe((res: any[]) => {
+    this.moviesService.getGenres().subscribe(res => {
       this.genres = res;
     });
 

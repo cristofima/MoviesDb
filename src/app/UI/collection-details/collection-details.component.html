@@ -1,6 +1,6 @@
 <div class="container" *ngIf="collection">
   <div class="large-container" [style.background-image]="firstBackgroundImg">
-    <div class="row main-info-container" [style.background-image]="secondBackgroundImg">
+    <div class="row main-info-container" [ngStyle]="{color: contrastColor, 'background-image': secondBackgroundImg}">
       <div class="col-md-4">
         <img class="img-fluid rounded mb-3 mb-md-0 img-principal"
           src="https://image.tmdb.org/t/p/original{{collection.posterPath}}" [alt]="collection.name">
@@ -12,8 +12,8 @@
         <div class="user-score-container">
           <circle-progress *ngIf="collection.voteAverage != 0" [percent]="collection.voteAverage * 10"
             [outerStrokeColor]="collection.voteAverage | borderClass" [titleFontSize]="15" [unitsFontSize]="15"
-            [radius]="30" [innerStrokeWidth]="3" [outerStrokeWidth]="5" titleColor="white"
-            unitsColor="white"></circle-progress>
+            [radius]="30" [innerStrokeWidth]="3" [outerStrokeWidth]="5" [titleColor]="contrastColor"
+            [unitsColor]="contrastColor"></circle-progress>
           <h6>User<br />Score</h6>
         </div>
 

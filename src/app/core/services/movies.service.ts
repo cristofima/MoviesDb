@@ -16,21 +16,21 @@ export class MoviesService {
 
   constructor(private http: HttpClient) { }
 
-  private getQuery<T>(query: string, params: string = '') {
+  private getQuery(query: string, params: string = '') {
     const url = `https://api.themoviedb.org/3/${query}`;
 
     params = `?api_key=${this.apiKey}&${params}`;
 
-    return this.http.get<T>(`${url}${params}`);
+    return this.http.get(`${url}${params}`);
   }
 
-  getGenres() {
-    return this.getQuery<Genre>('genre/movie/list').pipe(
+  getGenres(): Observable<Genre[]> {
+    return this.getQuery('genre/movie/list').pipe(
       map(data => data['genres'])
     );
   }
 
-  getMovies(pageNumber = 1, filter?: MovieFilter) {
+  getMovies(pageNumber = 1, filter?: MovieFilter): Observable<Movie[]> {
     if (pageNumber < 1) {
       pageNumber = 1;
     } else if (pageNumber > 500) {
@@ -56,7 +56,7 @@ export class MoviesService {
       }
     }
 
-    return this.getQuery<Movie[]>('discover/movie', queryString).pipe(
+    return this.getQuery('discover/movie', queryString).pipe(
       map(data => {
         return data['results'].map((movie: any) => {
           return {
