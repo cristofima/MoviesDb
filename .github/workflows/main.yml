@@ -5,6 +5,9 @@ on:
     branches:
       - master
       - release/*
+    paths:
+      - "src/**"
+      - "package.json"
 
 jobs:
   firebase-deploy:
