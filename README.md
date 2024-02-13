@@ -1,27 +1,65 @@
-# AppMovies
+# Movies Db App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.2.
+Welcome to the Movies Db App! This project allows users to browse movies and view their details, including whether they are part of a collection of movies. The app fetches movie data from [The Movie Database (TMDb)](https://themoviedb.org/) API using an API key.
 
-## Development server
+## Overview
+The Movies Db App is developed using Angular 15 and styled with Bootstrap. It provides a user-friendly interface for browsing movies and accessing detailed information about each movie, including its title, release date, overview, poster image, and whether it belongs to a collection.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Tech Stack
+- Angular 15
+- Bootstrap 5
 
-## Code scaffolding
+## Requirements
+To run the Movies Db App locally, you'll need the following:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Node.js and npm installed on your machine
+- API key from [The Movie Database (TMDb)](https://developer.themoviedb.org/) (you can sign up for a free account to obtain your API key)
 
-## Build
+## Getting Started
+Follow these steps to get the Movies Db App up and running on your local machine:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. Clone this repository to your local machine:
 
-## Running unit tests
+```bash
+git clone https://github.com/cristofima/MoviesDb.git
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+2. Navigate to the project directory:
 
-## Running end-to-end tests
+```bash
+cd MoviesDb
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+3. Install the project dependencies using npm:
 
-## Further help
+```bash
+npm install
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+4. Obtain an API key from [The Movie Database (TMDb)](https://developer.themoviedb.org/). Once you have your API key, export your API key as follows:
+
+```typescript
+// src/environments/environment.ts
+export const environment = {
+  production: false,
+  apiKey: 'YOUR_API_KEY'
+};
+```
+
+5. Build and serve the application:
+
+```bash
+ng serve
+```
+
+6. Open your web browser and navigate to http://localhost:4200 to view the Movies Db App.
+
+## Contributing
+Contributions are welcome! If you find any issues or have suggestions for improvements, please feel free to open an issue or submit a pull request.
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/cristofima/MoviesDb/blob/master/LICENSE) file for details.
+
+## Acknowledgements
+- [The Movie Database (TMDb)](https://developer.themoviedb.org/) for providing the API used in this project
+- [Bootstrap](https://getbootstrap.com/) for the responsive styling of the application
