@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
-import { MovieFilter } from 'src/app/shared/models/movie-filter';
 import { MoviesService } from 'src/app/core/services/movies.service';
 import { Title } from '@angular/platform-browser';
-import { Genre, Movie } from 'src/app/shared/models/movie.model';
+import { Movie } from 'src/app/shared/models/movie.model';
+import { PaginationModel } from 'src/app/shared/models/pagination.model';
 
 @Component({
   selector: 'app-movies',
@@ -16,31 +14,12 @@ export class MoviesComponent implements OnInit {
 
   movies: Movie[] = [];
   pageNumber = 1;
-  genres: Genre[] = [];
 
-  formGroup: UntypedFormGroup;
+  search = '';
+  maxResults = 0;
 
-  moviesFilter: MovieFilter
-
-  constructor(private moviesService: MoviesService, private actRoute: ActivatedRoute,
-    private formBuilder: UntypedFormBuilder, private toastrService: ToastrService, private titleService: Title) {
+  constructor(private moviesService: MoviesService, private actRoute: ActivatedRoute, private titleService: Title) {
     this.titleService.setTitle("Movies Db");
-    this.initForm();
-  }
-
-  private initForm() {
-    let today = new Date();
-
-    this.formGroup = this.formBuilder.group({
-      language: ['', []],
-      genreId: ['', []],
-      voteAverageGte: ['', [
-        Validators.min(0), Validators.max(100)
-      ]],
-      year: ['', [
-        Validators.min(1960), Validators.max(today.getFullYear())
-      ]]
-    });
   }
 
   ngOnInit() {
@@ -48,10 +27,6 @@ export class MoviesComponent implements OnInit {
   }
 
   private loadParams() {
-    this.moviesService.getGenres().subscribe(res => {
-      this.genres = res;
-    });
-
     this.actRoute.queryParamMap.subscribe(params => {
       if (params.has('page')) {
         let num = Number(params.get('page'));
@@ -62,59 +37,35 @@ export class MoviesComponent implements OnInit {
         this.pageNumber = 1;
       }
 
-      let hasFilter = false;
-
-      if (params.has('genreId')) {
-        let genreId = Number(params.get('genreId'));
-        if (!isNaN(genreId) && genreId > 0) {
-          this.formGroup.controls['genreId'].setValue(genreId);
-          hasFilter = true;
-        }
-      }
-
-      if (params.has('year')) {
-        let year = Number(params.get('year'));
-        if (!isNaN(year) && year > 0) {
-          this.formGroup.controls['year'].setValue(year);
-          hasFilter = true;
-        }
-      }
-
-      if (params.has('language')) {
-        let language = params.get('language');
-        if (language == 'es' || language == 'en') {
-          this.formGroup.controls['language'].setValue(language);
-          hasFilter = true;
-        }
-      }
-
-      if (hasFilter) {
-        this.filterMovies();
-      } else {
-        this.loadMovies();
-      }
+      this.loadMovies();
     });
   }
 
-  public loadMovies(hasFilter?: boolean) {
-    this.moviesService.getMovies(this.pageNumber, this.moviesFilter).subscribe(data => {
-      this.movies = data;
-      if (hasFilter) {
-        this.toastrService.success('Filters applied');
-      }
-    });
+  public async paginateMovies() {
+    let pagination: PaginationModel;
+    if (!this.search || !this.search.trim()) {
+      pagination = await this.moviesService.discoverMovies(this.pageNumber).toPromise();
+    } else {
+      pagination = await this.moviesService.searchMovies(this.pageNumber, this.search).toPromise();
+    }
+
+    this.movies = pagination.results;
+    this.maxResults = pagination.totalResults;
   }
 
-  public filterMovies() {
+  public async searchMovies() {
     this.pageNumber = 1;
-    this.moviesFilter = {
-      language: this.formGroup.controls.language.value,
-      year: this.formGroup.controls.year.value,
-      genreId: this.formGroup.controls.genreId.value,
-      voteAverageGte: this.formGroup.controls.voteAverageGte.value
-    };
+    if (!this.search || !this.search.trim()) return;
 
-    this.loadMovies(true);
+    let pagination = await this.moviesService.searchMovies(this.pageNumber, this.search).toPromise();
+    this.movies = pagination.results;
+    this.maxResults = pagination.totalResults;
+  }
+
+  public async loadMovies() {
+    let pagination = await this.moviesService.discoverMovies(this.pageNumber).toPromise();
+    this.movies = pagination.results;
+    this.maxResults = pagination.totalResults;
   }
 
 }

@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Genre, MinimalCollection, Movie, SimilarMovie } from 'src/app/shared/models/movie.model';
 import { Collection } from 'src/app/shared/models/collection.model';
 import { Observable } from 'rxjs';
+import { PaginationModel } from 'src/app/shared/models/pagination.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,19 +31,27 @@ export class MoviesService {
     );
   }
 
-  getMovies(pageNumber = 1, filter?: MovieFilter): Observable<Movie[]> {
+  searchMovies(pageNumber = 1, text: string): Observable<PaginationModel> {
     if (pageNumber < 1) {
       pageNumber = 1;
-    } else if (pageNumber > 500) {
-      pageNumber = 500;
+    }
+
+    let queryString = `query=${text}&page=${pageNumber}`;
+
+    return this.getQuery('search/movie', queryString).pipe(
+      map(data => {
+        return this.getPaginationMovies(data);
+      })
+    );
+  }
+
+  discoverMovies(pageNumber = 1, filter?: MovieFilter): Observable<PaginationModel> {
+    if (pageNumber < 1) {
+      pageNumber = 1;
     }
 
     let queryString = `page=${pageNumber}`;
     if (filter) {
-      if (filter.language) {
-        queryString += `&language=${filter.language}`;
-      }
-
       if (filter.year) {
         queryString += `&primary_release_year=${filter.year}`;
       }
@@ -58,17 +67,28 @@ export class MoviesService {
 
     return this.getQuery('discover/movie', queryString).pipe(
       map(data => {
-        return data['results'].map((movie: any) => {
-          return {
-            id: movie.id,
-            title: movie.title,
-            overview: movie.overview,
-            posterPath: movie.poster_path,
-            voteAverage: movie.vote_average
-          };
-        });
+        return this.getPaginationMovies(data);
       })
     );
+  }
+
+  private getPaginationMovies(data: any): PaginationModel {
+    let movies = data['results'].map((movie: any) => {
+      return {
+        id: movie.id,
+        title: movie.title,
+        overview: movie.overview,
+        posterPath: movie.poster_path,
+        voteAverage: movie.vote_average
+      };
+    });
+
+    return {
+      page: data['page'],
+      results: movies,
+      totalPages: data['total_pages'],
+      totalResults: data['total_results']
+    };
   }
 
   getMovieDetails(movieId: number): Observable<Movie> {
