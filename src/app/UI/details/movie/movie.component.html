@@ -1,9 +1,6 @@
 <app-generic-details type="Movie">
   <ng-template #mainInfo let-movie="data" let-contrastColor="contrastColor">
-    <h3>{{movie.title}} <span *ngIf="movie.releaseDate"
-        title="Search movies of the year {{movie.releaseDate | date:'yyyy'}}" class="movie-year"
-        [routerLink]="['/movies']" [queryParams]="{year: movie.releaseDate | date:'yyyy'}">({{movie.releaseDate |
-        date:'yyyy'}})</span>
+    <h3>{{movie.title}} <span *ngIf="movie.releaseDate" class="movie-year">({{movie.releaseDate | date:'yyyy'}})</span>
     </h3>
     <h6>
       <span class="certification-box" *ngIf="movie.certification"
@@ -12,7 +9,7 @@
     </h6>
 
     <p class="card-text">
-      <a *ngFor="let genre of movie.genres" [routerLink]="['/movies']" [queryParams]="{genreId: genre.id}"
+      <a *ngFor="let genre of movie.genres" [routerLink]="['/home']" [queryParams]="{genreId: genre.id}"
         class="badge badge-pill badge-primary genre-badge">{{ genre.name }}</a>
     </p>
 

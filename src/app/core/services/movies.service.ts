@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { MovieFilter } from '../../shared/models/movie-filter';
+import { MovieFilter } from '../models/movie-filter';
 import { environment } from 'src/environments/environment';
-import { Genre, MinimalCollection, Movie, SimilarMovie } from 'src/app/shared/models/movie.model';
-import { Collection } from 'src/app/shared/models/collection.model';
+import { Genre, MinimalCollection, Movie, SimilarMovie } from 'src/app/core/models/movie.model';
+import { Collection } from 'src/app/core/models/collection.model';
 import { Observable } from 'rxjs';
-import { PaginationModel } from 'src/app/shared/models/pagination.model';
+import { PaginationModel } from 'src/app/core/models/pagination.model';
 
 @Injectable({
   providedIn: 'root'
@@ -45,23 +45,25 @@ export class MoviesService {
     );
   }
 
-  discoverMovies(pageNumber = 1, filter?: MovieFilter): Observable<PaginationModel> {
+  discoverMovies(pageNumber = 1, filters?: MovieFilter): Observable<PaginationModel> {
     if (pageNumber < 1) {
       pageNumber = 1;
+    } else if (pageNumber > 500) {
+      pageNumber = 500;
     }
 
     let queryString = `page=${pageNumber}`;
-    if (filter) {
-      if (filter.year) {
-        queryString += `&primary_release_year=${filter.year}`;
+    if (filters) {
+      if (filters.year) {
+        queryString += `&primary_release_year=${filters.year}`;
       }
 
-      if (filter.genreId) {
-        queryString += `&with_genres=${filter.genreId}`;
+      if (filters.genreId) {
+        queryString += `&with_genres=${filters.genreId}`;
       }
 
-      if (filter.voteAverageGte) {
-        queryString += `&vote_average.gte=${filter.voteAverageGte / 10}`;
+      if (filters.voteAverageGte) {
+        queryString += `&vote_average.gte=${filters.voteAverageGte / 10}`;
       }
     }
 

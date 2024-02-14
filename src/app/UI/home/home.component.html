@@ -15,7 +15,7 @@
   <!-- Pagination -->
   <div class="overflow-auto d-flex flex-sm-row flex-column justify-content-center">
     <ngb-pagination *ngIf="maxResults" [collectionSize]="maxResults" [(page)]="pageNumber" [maxSize]="15"
-      [pageSize]="20" (pageChange)="paginateMovies()" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+      [pageSize]="pageSize" (pageChange)="paginateMovies()" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
   </div>
 
   <div class="row">
@@ -31,7 +31,7 @@
                   <a [routerLink]="['/movie/',movie.id]">{{movie.title}}</a>
                 </div>
                 <div class="col-md-4">
-                  <circle-progress *ngIf="movie.voteAverage != 0; else elseBlock" [percent]="movie.voteAverage * 10"
+                  <circle-progress *ngIf="movie.voteAverage > 0; else elseBlock" [percent]="movie.voteAverage * 10"
                     [unitsFontSize]="10" [titleFontSize]="10" [radius]="25" [outerStrokeWidth]="5"
                     [innerStrokeWidth]="5" [outerStrokeColor]="movie.voteAverage | borderClass"></circle-progress>
                   <ng-template #elseBlock>
@@ -59,6 +59,6 @@
   <!-- Pagination -->
   <div class="overflow-auto overflow-auto d-flex flex-sm-row flex-column justify-content-center">
     <ngb-pagination *ngIf="maxResults" [collectionSize]="maxResults" [(page)]="pageNumber" [maxSize]="15"
-      [pageSize]="20" (pageChange)="paginateMovies()" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+      [pageSize]="pageSize" (pageChange)="paginateMovies()" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
   </div>
 </div>

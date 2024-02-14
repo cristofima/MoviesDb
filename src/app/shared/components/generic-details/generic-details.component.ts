@@ -1,6 +1,6 @@
 import { Component, ContentChild, Input, OnInit, TemplateRef } from '@angular/core';
-import { Collection } from '../../models/collection.model';
-import { Movie } from '../../models/movie.model';
+import { Collection } from '../../../core/models/collection.model';
+import { Movie } from '../../../core/models/movie.model';
 import { DominantColorService } from 'src/app/core/services/dominant-color.service';
 import { ActivatedRoute } from '@angular/router';
 import { MoviesService } from 'src/app/core/services/movies.service';
