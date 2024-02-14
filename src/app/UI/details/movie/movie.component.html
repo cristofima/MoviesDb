@@ -1,0 +1,62 @@
+<app-generic-details type="Movie">
+  <ng-template #mainInfo let-movie="data" let-contrastColor="contrastColor">
+    <h3>{{movie.title}} <span *ngIf="movie.releaseDate"
+        title="Search movies of the year {{movie.releaseDate | date:'yyyy'}}" class="movie-year"
+        [routerLink]="['/movies']" [queryParams]="{year: movie.releaseDate | date:'yyyy'}">({{movie.releaseDate |
+        date:'yyyy'}})</span>
+    </h3>
+    <h6>
+      <span class="certification-box" *ngIf="movie.certification"
+        [title]="movie.certification | certification">{{movie.certification}}</span> {{movie.releaseDate |
+      date:'MM/dd/yyyy'}}
+    </h6>
+
+    <p class="card-text">
+      <a *ngFor="let genre of movie.genres" [routerLink]="['/movies']" [queryParams]="{genreId: genre.id}"
+        class="badge badge-pill badge-primary genre-badge">{{ genre.name }}</a>
+    </p>
+
+    <div class="user-score-container">
+      <ng-container *ngIf="movie.voteAverage > 0">
+        <circle-progress [percent]="movie.voteAverage * 10" [outerStrokeColor]="movie.voteAverage | borderClass"
+          [titleFontSize]="15" [unitsFontSize]="15" [radius]="30" [innerStrokeWidth]="3" [outerStrokeWidth]="5"
+          [titleColor]="contrastColor" [unitsColor]="contrastColor"></circle-progress>
+        <h6>User<br />Score</h6>
+      </ng-container>
+
+      <a *ngIf="movie.trailerKey" class="btn btn-secondary" href="https://www.youtube.com/watch?v={{movie.trailerKey}}"
+        target="_blank">Play
+        Trailer</a>
+    </div>
+
+    <h5>Overview</h5>
+    <p>{{movie.overview}}</p>
+    <p *ngIf="movie.runtime"><b>Duration:</b> {{movie.runtime | time}}</p>
+    <p *ngIf="movie.budget"><b>Budget:</b> {{movie.budget | currency}}</p>
+    <p *ngIf="movie.revenue"><b>Revenue:</b> {{movie.revenue | currency}}</p>
+  </ng-template>
+
+  <ng-template #aditionalInfo let-movie="data" let-posterImgDominantColor="posterImgDominantColor">
+    <ng-container *ngIf="movie.collection">
+      <hr />
+      <div class="row collection-container"
+        style="background-image: linear-gradient(to right, rgba(3, 37, 65, 1) 0%, rgba(3, 37, 65, 0.6) 100%), url(https://media.themoviedb.org/t/p/w1440_and_h320_multi_faces{{movie.collection.backdropPath}})">
+        <h2>Part of the {{movie.collection.name}}</h2>
+        <a class="btn rounded-pill" [style.background-color]="posterImgDominantColor"
+          href="/collection/{{movie.collection.id}}">VIEW THE COLLECTION</a>
+      </div>
+    </ng-container>
+
+    <hr />
+
+    <div class="row" *ngIf="movie.similarMovies.length">
+      <h4>Recommendations</h4>
+      <div class="col-md-12">
+        <a *ngFor="let similar of movie.similarMovies" [routerLink]="['/movie/',similar.id]">
+          <img src="https://image.tmdb.org/t/p/original{{similar.posterPath}}" class="img-thumbnail img-similar"
+            [title]="similar.title" [alt]="similar.title">
+        </a>
+      </div>
+    </div>
+  </ng-template>
+</app-generic-details>

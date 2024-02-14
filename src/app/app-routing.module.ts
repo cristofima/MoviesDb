@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MoviesComponent } from './UI/movies/list/movies.component';
-import { MovieDetailsComponent } from './UI/movies/details/movie-details.component';
+import { HomeComponent } from './UI/home/home.component';
+import { MovieDetailsComponent } from './UI/details/movie/movie.component';
+import { CollectionDetailsComponent } from './UI/details/collection/collection.component';
 import { PageNotFoundComponent } from './shared/components/error-pages/page-not-found/page-not-found.component';
-import { CollectionDetailsComponent } from './UI/collection-details/collection-details.component';
 
 const routes: Routes = [
-  { path: 'movies', component: MoviesComponent },
-  { path: 'movies/:id', component: MovieDetailsComponent },
-  { path: 'collections/:id', component: CollectionDetailsComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'movie/:id', component: MovieDetailsComponent },
+  { path: 'collection/:id', component: CollectionDetailsComponent },
   { path: 'error-404', component: PageNotFoundComponent },
-  { path: '', pathMatch: 'full', redirectTo: 'movies' },
+  { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: '**', component: PageNotFoundComponent }
 ];
 

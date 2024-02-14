@@ -6,16 +6,17 @@ import { Movie } from 'src/app/shared/models/movie.model';
 import { PaginationModel } from 'src/app/shared/models/pagination.model';
 
 @Component({
-  selector: 'app-movies',
-  templateUrl: './movies.component.html',
-  styleUrls: ['./movies.component.scss']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
-export class MoviesComponent implements OnInit {
+export class HomeComponent implements OnInit {
 
   movies: Movie[] = [];
   pageNumber = 1;
 
   search = '';
+  private prevSearch = '';
   maxResults = 0;
 
   constructor(private moviesService: MoviesService, private actRoute: ActivatedRoute, private titleService: Title) {
@@ -55,7 +56,9 @@ export class MoviesComponent implements OnInit {
 
   public async searchMovies() {
     this.pageNumber = 1;
-    if (!this.search || !this.search.trim()) return;
+    if (!this.search || !this.search.trim() || this.prevSearch == this.search.trim()) return;
+
+    this.prevSearch = this.search.trim();
 
     let pagination = await this.moviesService.searchMovies(this.pageNumber, this.search).toPromise();
     this.movies = pagination.results;
@@ -63,6 +66,7 @@ export class MoviesComponent implements OnInit {
   }
 
   public async loadMovies() {
+    this.pageNumber = 1;
     let pagination = await this.moviesService.discoverMovies(this.pageNumber).toPromise();
     this.movies = pagination.results;
     this.maxResults = pagination.totalResults;

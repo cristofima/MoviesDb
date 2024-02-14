@@ -12,6 +12,7 @@ import { GlobalHttpInterceptor } from "./core/interceptors/global-http.intercept
 import { TimePipe } from "./shared/pipes/time.pipe";
 import { BorderClassPipe } from "./shared/pipes/border-class.pipe";
 import { CertificationPipe } from './shared/pipes/certification.pipe';
+import { VideoUrlPipe } from './shared/pipes/video-url.pipe';
 
 import { ToastrModule } from 'ngx-toastr';
 import { NgCircleProgressModule } from "ng-circle-progress";
@@ -19,11 +20,11 @@ import { NgbPaginationModule } from "@ng-bootstrap/ng-bootstrap";
 import { NgxSpinnerModule } from "ngx-spinner";
 import { NgHttpCachingConfig, NgHttpCachingLocalStorage, NgHttpCachingModule } from "ng-http-caching";
 
-import { MoviesComponent } from "./UI/movies/list/movies.component";
-import { MovieDetailsComponent } from "./UI/movies/details/movie-details.component";
+import { HomeComponent } from "./UI/home/home.component";
+import { MovieDetailsComponent } from "./UI/details/movie/movie.component";
+import { CollectionDetailsComponent } from './UI/details/collection/collection.component';
 import { PageNotFoundComponent } from "./shared/components/error-pages/page-not-found/page-not-found.component";
-import { VideoUrlPipe } from './shared/pipes/video-url.pipe';
-import { CollectionDetailsComponent } from './UI/collection-details/collection-details.component';
+import { GenericDetailsComponent } from './shared/components/generic-details/generic-details.component';
 
 const ngHttpCachingConfig: NgHttpCachingConfig = {
   store: new NgHttpCachingLocalStorage()
@@ -32,14 +33,15 @@ const ngHttpCachingConfig: NgHttpCachingConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-    MoviesComponent,
+    HomeComponent,
     PageNotFoundComponent,
     MovieDetailsComponent,
     TimePipe,
     BorderClassPipe,
     CertificationPipe,
     VideoUrlPipe,
-    CollectionDetailsComponent
+    CollectionDetailsComponent,
+    GenericDetailsComponent
   ],
   imports: [
     BrowserModule,

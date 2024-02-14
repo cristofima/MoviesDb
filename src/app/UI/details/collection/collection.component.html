@@ -1,0 +1,49 @@
+<app-generic-details type="Collection">
+  <ng-template #mainInfo let-collection="data" let-contrastColor="contrastColor">
+    <h3>{{collection.name}}</h3>
+
+    <div class="user-score-container" *ngIf="collection.voteAverage > 0">
+      <circle-progress [percent]="collection.voteAverage * 10" [outerStrokeColor]="collection.voteAverage | borderClass"
+        [titleFontSize]="15" [unitsFontSize]="15" [radius]="30" [innerStrokeWidth]="3" [outerStrokeWidth]="5"
+        [titleColor]="contrastColor" [unitsColor]="contrastColor"></circle-progress>
+      <h6>User<br />Score</h6>
+    </div>
+
+    <h5>Overview</h5>
+    <p>{{collection.overview}}</p>
+    <p><b>Number of Movies:</b> {{collection.movies.length}}</p>
+  </ng-template>
+
+  <ng-template #aditionalInfo let-collection="data">
+    <hr />
+    <div class="row">
+      <h3 style="width: 100%;">Movies</h3>
+
+      <div *ngFor="let movie of collection.movies" class="col-lg-4 col-sm-6 mb-4">
+        <div class="card h-100">
+          <a [routerLink]="['/movie/',movie.id]"><img class="card-img-top"
+              src="https://image.tmdb.org/t/p/original{{movie.posterPath}}" alt=""></a>
+          <div class="card-body">
+            <h4 class="card-title">
+              <div class="row">
+                <div class="col-md-8">
+                  <a [routerLink]="['/movie/',movie.id]">{{movie.title}}</a>
+                </div>
+                <div class="col-md-4">
+                  <circle-progress *ngIf="movie.voteAverage != 0; else elseBlock" [percent]="movie.voteAverage * 10"
+                    [unitsFontSize]="10" [titleFontSize]="10" [radius]="25" [outerStrokeWidth]="5"
+                    [innerStrokeWidth]="5" [outerStrokeColor]="movie.voteAverage | borderClass"></circle-progress>
+                  <ng-template #elseBlock>
+                    <circle-progress [unitsFontSize]="10" [titleFontSize]="10" title="N/A" [innerStrokeWidth]="5"
+                      [radius]="25" [outerStrokeWidth]="6" [showUnits]="false"></circle-progress>
+                  </ng-template>
+                </div>
+              </div>
+            </h4>
+            <p class="card-text">{{movie.overview}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</app-generic-details>

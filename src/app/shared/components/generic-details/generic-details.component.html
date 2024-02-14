@@ -1,0 +1,19 @@
+<!-- Page Content -->
+<div class="container" *ngIf="data">
+  <div class="large-container" [style.background-image]="firstBackgroundImg">
+    <div class="row main-info-container" [ngStyle]="{color: contrastColor, 'background-image': secondBackgroundImg}">
+      <div class="col-md-4">
+        <img class="img-fluid rounded mb-3 mb-md-0 img-principal"
+          src="https://image.tmdb.org/t/p/original{{data.posterPath}}">
+      </div>
+
+      <div class="col-md-8">
+        <ng-container [ngTemplateOutlet]="mainInfo"
+          [ngTemplateOutletContext]="{ data: data, contrastColor: contrastColor }"></ng-container>
+      </div>
+    </div>
+  </div>
+
+  <ng-container [ngTemplateOutlet]="aditionalInfo"
+    [ngTemplateOutletContext]="{ data: data, posterImgDominantColor: posterImgDominantColor }"></ng-container>
+</div>
