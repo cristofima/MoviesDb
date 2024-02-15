@@ -25,6 +25,7 @@ import { MovieDetailsComponent } from "./UI/details/movie/movie.component";
 import { CollectionDetailsComponent } from './UI/details/collection/collection.component';
 import { PageNotFoundComponent } from "./shared/components/error-pages/page-not-found/page-not-found.component";
 import { GenericDetailsComponent } from './shared/components/generic-details/generic-details.component';
+import { MoviePosterComponent } from './shared/components/movie-poster/movie-poster.component';
 
 const ngHttpCachingConfig: NgHttpCachingConfig = {
   store: new NgHttpCachingLocalStorage()
@@ -41,7 +42,8 @@ const ngHttpCachingConfig: NgHttpCachingConfig = {
     CertificationPipe,
     VideoUrlPipe,
     CollectionDetailsComponent,
-    GenericDetailsComponent
+    GenericDetailsComponent,
+    MoviePosterComponent
   ],
   imports: [
     BrowserModule,

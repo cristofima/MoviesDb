@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { MovieFilter } from '../models/movie-filter';
 import { environment } from 'src/environments/environment';
-import { Genre, MinimalCollection, Movie, SimilarMovie } from 'src/app/core/models/movie.model';
+import { Genre, MinimalCollection, Movie, RecommendedMovie } from 'src/app/core/models/movie.model';
 import { Collection } from 'src/app/core/models/collection.model';
 import { Observable } from 'rxjs';
 import { PaginationModel } from 'src/app/core/models/pagination.model';
@@ -94,7 +94,7 @@ export class MoviesService {
   }
 
   getMovieDetails(movieId: number): Observable<Movie> {
-    return this.getQuery(`movie/${movieId}`, 'append_to_response=release_dates,similar_movies,videos')
+    return this.getQuery(`movie/${movieId}`, 'append_to_response=release_dates,recommendations,videos')
       .pipe(
         map((data: any) => {
           return this.getFullMovieData(data);
@@ -142,10 +142,10 @@ export class MoviesService {
     };
 
     if (extractExtraData) {
-      const { certification, collection, similarMovies, trailerKey } = this.getExtraMovieData(data);
+      const { certification, collection, recommendations, trailerKey } = this.getExtraMovieData(data);
       movie.certification = certification;
       movie.collection = collection;
-      movie.similarMovies = similarMovies;
+      movie.recommendations = recommendations;
       movie.trailerKey = trailerKey;
     }
 
@@ -174,13 +174,15 @@ export class MoviesService {
       trailerKey = data.videos.results.filter((video: any) => video.type === 'Trailer')[0]?.key;
     }
 
-    let similarMovies: SimilarMovie[] = [];
-    if (data.similar_movies && data.similar_movies.results) {
-      similarMovies = data.similar_movies.results.map((movie: any) => {
+    let recommendations: RecommendedMovie[] = [];
+    if (data.recommendations && data.recommendations.results) {
+      recommendations = data.recommendations.results.map((movie: any) => {
         return {
           id: movie.id,
           title: movie.title,
-          posterPath: movie.poster_path
+          posterPath: movie.poster_path,
+          releaseDate: movie.release_date,
+          voteAverage: movie.vote_average
         }
       });
     }
@@ -195,6 +197,6 @@ export class MoviesService {
       };
     }
 
-    return { certification, trailerKey, similarMovies, collection };
+    return { certification, trailerKey, recommendations, collection };
   }
 }

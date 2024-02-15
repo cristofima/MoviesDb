@@ -22,8 +22,7 @@
       </ng-container>
 
       <a *ngIf="movie.trailerKey" class="btn btn-secondary" href="https://www.youtube.com/watch?v={{movie.trailerKey}}"
-        target="_blank">Play
-        Trailer</a>
+        target="_blank">Play Trailer</a>
     </div>
 
     <h5>Overview</h5>
@@ -46,12 +45,12 @@
 
     <hr />
 
-    <div class="row" *ngIf="movie.similarMovies.length">
+    <div class="row" *ngIf="movie.recommendations.length">
       <h4>Recommendations</h4>
       <div class="col-md-12">
-        <a *ngFor="let similar of movie.similarMovies" [routerLink]="['/movie/',similar.id]">
-          <img src="https://image.tmdb.org/t/p/original{{similar.posterPath}}" class="img-thumbnail img-similar"
-            [title]="similar.title" [alt]="similar.title">
+        <a *ngFor="let r of movie.recommendations" [routerLink]="['/movie/', r.id]">
+          <img src="https://image.tmdb.org/t/p/original{{r.posterPath}}" class="img-thumbnail img-similar"
+            [title]="r.title" loading="lazy">
         </a>
       </div>
     </div>

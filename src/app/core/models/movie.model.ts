@@ -11,7 +11,7 @@ export interface Movie {
   revenue: number;
   genres: Genre[];
   certification?: string;
-  similarMovies?: SimilarMovie[];
+  recommendations?: RecommendedMovie[];
   trailerKey?: string;
   collection?: MinimalCollection;
 }
@@ -21,10 +21,12 @@ export interface Genre {
   name: string;
 }
 
-export interface SimilarMovie {
+export interface RecommendedMovie {
   id: number;
   title: string;
   posterPath: string;
+  releaseDate: Date;
+  voteAverage: number;
 }
 
 export interface MinimalCollection {

@@ -1,0 +1,21 @@
+<a [routerLink]="['/movie/',movie.id]"><img class="card-img-top" loading="lazy"
+    src="https://image.tmdb.org/t/p/original{{movie.posterPath}}" alt=""></a>
+<div class="card-body">
+  <div class="card-title">
+    <div class="row">
+      <div class="col-md-8">
+        <a [routerLink]="['/movie/',movie.id]">{{movie.title}}</a>
+        <p *ngIf="movie.releaseDate">{{movie.releaseDate | date}}</p>
+      </div>
+      <div class="col-md-4">
+        <circle-progress *ngIf="movie.voteAverage > 0; else elseBlock" [percent]="movie.voteAverage * 10"
+          [unitsFontSize]="10" [titleFontSize]="10" [radius]="25" [outerStrokeWidth]="5"
+          [innerStrokeWidth]="5" [outerStrokeColor]="movie.voteAverage | borderClass"></circle-progress>
+        <ng-template #elseBlock>
+          <circle-progress [unitsFontSize]="10" [titleFontSize]="10" title="N/A" [innerStrokeWidth]="5"
+            [radius]="25" [outerStrokeWidth]="6" [showUnits]="false"></circle-progress>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
