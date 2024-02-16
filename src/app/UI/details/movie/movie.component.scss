@@ -5,6 +5,59 @@
   margin-bottom: 5px;
 }
 
+.aditionalInfo-container {
+  display: flex;
+  gap: 20px;
+
+  .minor-data {
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 400px;
+    
+    div {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
+      span:first-child {
+        font-weight: bold;
+      }
+    }
+
+        
+  }
+}
+
+.top-billed-cast-container {
+  display: flex;
+  gap: 10px;
+
+  .card {
+    border-radius: 15px;
+
+    img {
+      border-radius: 15px 15px 0 0;
+    }
+  }
+
+  .cast-text{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px 10px 3px 10px;
+
+    .cast-name{
+      font-weight: bold;
+    }
+
+    span{
+      font-size: smaller;
+    }
+  }
+}
+
 .collection-container {
   display: flex;
   flex-direction: column;
@@ -40,8 +93,34 @@
 p.card-text {
   display: flex;
   gap: 5px;
+  padding-top: 10px;
 }
 
 h3>span {
   font-weight: normal;
+}
+
+.tagline {
+  font-style: italic;
+  opacity: .7;
+}
+
+h6 > .runtime {
+  font-weight: normal;
+}
+
+.people {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+
+  .profile {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+
+    span:first-child {
+      font-weight: bold;
+    }
+  }
 }

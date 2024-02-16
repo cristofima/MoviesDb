@@ -3,10 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { MovieFilter } from '../models/movie-filter';
 import { environment } from 'src/environments/environment';
-import { Genre, MinimalCollection, Movie, RecommendedMovie } from 'src/app/core/models/movie.model';
+import { Cast, Crew, Genre, MinimalCollection, Movie, RecommendedMovie } from 'src/app/core/models/movie.model';
 import { Collection } from 'src/app/core/models/collection.model';
 import { Observable } from 'rxjs';
 import { PaginationModel } from 'src/app/core/models/pagination.model';
+import { LanguageUtil } from 'src/app/shared/utils/language.util';
 
 @Injectable({
   providedIn: 'root'
@@ -94,7 +95,7 @@ export class MoviesService {
   }
 
   getMovieDetails(movieId: number): Observable<Movie> {
-    return this.getQuery(`movie/${movieId}`, 'append_to_response=release_dates,recommendations,videos')
+    return this.getQuery(`movie/${movieId}`, 'append_to_response=release_dates,recommendations,videos,credits')
       .pipe(
         map((data: any) => {
           return this.getFullMovieData(data);
@@ -131,9 +132,13 @@ export class MoviesService {
       id: data.id,
       title: data.title,
       overview: data.overview,
+      tagline: data.tagline,
       posterPath: data.poster_path,
       backdropPath: data.backdrop_path,
       releaseDate: data.release_date,
+      status: data.status,
+      productionCountry: data.production_countries && data.production_countries[0]?.iso_3166_1,
+      originalLanguage: LanguageUtil.getLanguage(data.original_language),
       voteAverage: data.vote_average,
       runtime: data.runtime,
       budget: data.budget,
@@ -142,11 +147,13 @@ export class MoviesService {
     };
 
     if (extractExtraData) {
-      const { certification, collection, recommendations, trailerKey } = this.getExtraMovieData(data);
+      const { certification, collection, recommendations, trailerKey, people, topBilledCast } = this.getExtraMovieData(data);
       movie.certification = certification;
       movie.collection = collection;
       movie.recommendations = recommendations;
       movie.trailerKey = trailerKey;
+      movie.people = people;
+      movie.topBilledCast = topBilledCast;
     }
 
     return movie;
@@ -197,6 +204,31 @@ export class MoviesService {
       };
     }
 
-    return { certification, trailerKey, recommendations, collection };
+    let people: Crew[] = [];
+    let topBilledCast: Cast[] = [];
+    if(data.credits && data.credits.cast) {
+      topBilledCast = data.credits.cast.filter(cast => cast.order <= 8 && cast.known_for_department === 'Acting')
+        .map((cast: any) => {
+          return {
+            id: cast.id,
+            name: cast.name,
+            character: cast.character,
+            profilePath: cast.profile_path
+          };
+        });
+    }
+
+    if(data.credits && data.credits.crew) {
+      people = data.credits.crew.filter(crew => ['Characters', 'Director', 'Screenplay'].includes(crew.job))
+      .map((crew: any) => {
+        return {
+          id: crew.id,
+          name: crew.name,
+          job: crew.job
+        };
+      }).sort((a: Crew, b: Crew) => a.job.localeCompare(b.job));
+    }
+
+    return { certification, trailerKey, recommendations, collection, people, topBilledCast };
   }
 }

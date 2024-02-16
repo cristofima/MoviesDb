@@ -5,7 +5,8 @@
     <h6>
       <span class="certification-box" *ngIf="movie.certification"
         [title]="movie.certification | certification">{{movie.certification}}</span> {{movie.releaseDate |
-      date:'MM/dd/yyyy'}}
+      date:'MM/dd/yyyy'}} <span *ngIf="movie.productionCountry">({{movie.productionCountry}})</span>
+      <span class="runtime" *ngIf="movie.runtime"> {{movie.runtime | time}}</span>
     </h6>
 
     <p class="card-text">
@@ -25,33 +26,68 @@
         target="_blank">Play Trailer</a>
     </div>
 
+    <p class="tagline">{{movie.tagline}}</p>
     <h5>Overview</h5>
     <p>{{movie.overview}}</p>
-    <p *ngIf="movie.runtime"><b>Duration:</b> {{movie.runtime | time}}</p>
-    <p *ngIf="movie.budget"><b>Budget:</b> {{movie.budget | currency}}</p>
-    <p *ngIf="movie.revenue"><b>Revenue:</b> {{movie.revenue | currency}}</p>
+
+    <div class="people" *ngIf="movie.people.length">
+      <div class="profile" *ngFor="let person of movie.people">
+        <span>{{person.name}}</span>
+        <span>{{person.job}}</span>
+      </div>
+    </div>
   </ng-template>
 
   <ng-template #aditionalInfo let-movie="data" let-posterImgDominantColor="posterImgDominantColor">
-    <ng-container *ngIf="movie.collection">
-      <hr />
-      <div class="row collection-container"
-        style="background-image: linear-gradient(to right, rgba(3, 37, 65, 1) 0%, rgba(3, 37, 65, 0.6) 100%), url(https://media.themoviedb.org/t/p/w1440_and_h320_multi_faces{{movie.collection.backdropPath}})">
-        <h2>Part of the {{movie.collection.name}}</h2>
-        <a class="btn rounded-pill" [style.background-color]="posterImgDominantColor"
-          href="/collection/{{movie.collection.id}}">VIEW THE COLLECTION</a>
+    <div class="aditionalInfo-container">
+      <div>
+        <ng-container *ngIf="movie.topBilledCast.length">
+          <hr />
+          <h4>Top Billed Cast</h4>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card-group top-billed-cast-container">
+                <div *ngFor="let cast of movie.topBilledCast" class="card">
+                  <img [src]="cast.profilePath ? 'https://image.tmdb.org/t/p/w185' + cast.profilePath : '/assets/images/no-image.png'"
+                    class="card-img-top" [title]="cast.name" loading="lazy">
+                  <div class="cast-text">
+                    <span class="cast-name">{{cast.name}}</span>
+                    <span>{{cast.character}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        
+        <ng-container *ngIf="movie.collection">
+          <hr />
+          <div class="row collection-container"
+            style="background-image: linear-gradient(to right, rgba(3, 37, 65, 1) 0%, rgba(3, 37, 65, 0.6) 100%), url(https://media.themoviedb.org/t/p/w1440_and_h320_multi_faces{{movie.collection.backdropPath}})">
+            <h2>Part of the {{movie.collection.name}}</h2>
+            <a class="btn rounded-pill" [style.background-color]="posterImgDominantColor"
+              href="/collection/{{movie.collection.id}}">VIEW THE COLLECTION</a>
+          </div>
+        </ng-container>
+    
+        <hr />
+    
+        <div class="row" *ngIf="movie.recommendations.length">
+          <h4>Recommendations</h4>
+          <div class="col-md-12">
+            <a *ngFor="let r of movie.recommendations" [routerLink]="['/movie/', r.id]">
+              <img src="https://image.tmdb.org/t/p/original{{r.posterPath}}" class="img-thumbnail img-similar"
+                [title]="r.title" loading="lazy">
+            </a>
+          </div>
+        </div>
       </div>
-    </ng-container>
 
-    <hr />
-
-    <div class="row" *ngIf="movie.recommendations.length">
-      <h4>Recommendations</h4>
-      <div class="col-md-12">
-        <a *ngFor="let r of movie.recommendations" [routerLink]="['/movie/', r.id]">
-          <img src="https://image.tmdb.org/t/p/original{{r.posterPath}}" class="img-thumbnail img-similar"
-            [title]="r.title" loading="lazy">
-        </a>
+      <div class="minor-data">
+        <div *ngIf="movie.status"><span>Status</span> <span>{{movie.status}}</span></div>
+        <div *ngIf="movie.originalLanguage"><span>Original Language</span> <span>{{movie.originalLanguage}}</span></div>
+        <div *ngIf="movie.budget"><span>Budget</span> <span>{{movie.budget | currency}}</span></div>
+        <div *ngIf="movie.revenue"><span>Revenue</span> <span>{{movie.revenue | currency}}</span></div>
       </div>
     </div>
   </ng-template>
