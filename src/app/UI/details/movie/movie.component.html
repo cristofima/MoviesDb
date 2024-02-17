@@ -5,7 +5,7 @@
     <h6>
       <span class="certification-box" *ngIf="movie.certification"
         [title]="movie.certification | certification">{{movie.certification}}</span> {{movie.releaseDate |
-      date:'MM/dd/yyyy'}} <span *ngIf="movie.productionCountry">({{movie.productionCountry}})</span>
+      date:'MM/dd/yyyy'}} <span *ngIf="movie.originCountry">({{movie.originCountry}})</span>
       <span class="runtime" *ngIf="movie.runtime"> {{movie.runtime | time}}</span>
     </h6>
 
@@ -26,7 +26,7 @@
         target="_blank">Play Trailer</a>
     </div>
 
-    <p class="tagline">{{movie.tagline}}</p>
+    <p *ngIf="movie.tagline" class="tagline">{{movie.tagline}}</p>
     <h5>Overview</h5>
     <p>{{movie.overview}}</p>
 
@@ -40,20 +40,18 @@
 
   <ng-template #aditionalInfo let-movie="data" let-posterImgDominantColor="posterImgDominantColor">
     <div class="aditionalInfo-container">
-      <div>
+      <div class="media-info">
         <ng-container *ngIf="movie.topBilledCast.length">
           <hr />
           <h4>Top Billed Cast</h4>
           <div class="row">
-            <div class="col-md-12">
-              <div class="card-group top-billed-cast-container">
-                <div *ngFor="let cast of movie.topBilledCast" class="card">
-                  <img [src]="cast.profilePath ? 'https://image.tmdb.org/t/p/w185' + cast.profilePath : '/assets/images/no-image.png'"
-                    class="card-img-top" [title]="cast.name" loading="lazy">
-                  <div class="cast-text">
-                    <span class="cast-name">{{cast.name}}</span>
-                    <span>{{cast.character}}</span>
-                  </div>
+            <div class="top-billed-cast-container">
+              <div *ngFor="let cast of movie.topBilledCast" class="card">
+                <img [src]="cast.profilePath ? 'https://image.tmdb.org/t/p/w185' + cast.profilePath : '/assets/images/no-image.png'"
+                  class="card-img-top" [title]="cast.name" loading="lazy">
+                <div class="cast-text">
+                  <span class="cast-name">{{cast.name}}</span>
+                  <span>{{cast.character}}</span>
                 </div>
               </div>
             </div>
@@ -72,22 +70,46 @@
     
         <hr />
     
-        <div class="row" *ngIf="movie.recommendations.length">
+        <div class="row">
           <h4>Recommendations</h4>
           <div class="col-md-12">
-            <a *ngFor="let r of movie.recommendations" [routerLink]="['/movie/', r.id]">
-              <img src="https://image.tmdb.org/t/p/original{{r.posterPath}}" class="img-thumbnail img-similar"
-                [title]="r.title" loading="lazy">
-            </a>
+            <ng-container *ngIf="movie.recommendations.length; else emptyRecommendations">
+              <a *ngFor="let r of movie.recommendations" [routerLink]="['/movie/', r.id]">
+                <img src="https://image.tmdb.org/t/p/original{{r.posterPath}}" class="img-thumbnail img-similar"
+                  [title]="r.title" loading="lazy">
+              </a>
+            </ng-container>
+            
+            <ng-template #emptyRecommendations>
+              <p>We don't have enough data to suggest any movies based on <i>{{movie.title}}</i>.</p>
+            </ng-template>
           </div>
         </div>
       </div>
 
       <div class="minor-data">
         <div *ngIf="movie.status"><span>Status</span> <span>{{movie.status}}</span></div>
+        <div>
+          <span>Production Companies</span>
+          <section class="production-companies" *ngIf="movie.productionCompanies.length; else emptyProductionCompanies">
+            <img *ngFor="let company of movie.productionCompanies" [src]="'https://image.tmdb.org/t/p/w92' + company.logoPath"
+              [title]="company.name" loading="lazy">
+          </section>
+
+          <ng-template #emptyProductionCompanies><span>No production companies have been added.</span></ng-template>
+        </div>
         <div *ngIf="movie.originalLanguage"><span>Original Language</span> <span>{{movie.originalLanguage}}</span></div>
-        <div *ngIf="movie.budget"><span>Budget</span> <span>{{movie.budget | currency}}</span></div>
-        <div *ngIf="movie.revenue"><span>Revenue</span> <span>{{movie.revenue | currency}}</span></div>
+        <div><span>Budget</span> <span>{{movie.budget ? (movie.budget | currency) : '-'}}</span></div>
+        <div><span>Revenue</span> <span>{{movie.revenue ? (movie.revenue | currency) : '-'}}</span></div>
+
+        <div>
+          <span>Keywords</span>
+          <section class="keywords" *ngIf="movie.keywords.length; else emptyKeyworks">
+            <span *ngFor="let keyword of movie.keywords" class="badge badge-pill badge-secondary">{{keyword}}</span>
+          </section>
+
+          <ng-template #emptyKeyworks><span>No keywords have been added.</span></ng-template>
+        </div>
       </div>
     </div>
   </ng-template>

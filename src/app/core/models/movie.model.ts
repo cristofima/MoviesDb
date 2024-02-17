@@ -7,7 +7,7 @@ export interface Movie {
   backdropPath: string;
   releaseDate: Date;
   status: string;
-  productionCountry: string;
+  originCountry: string;
   originalLanguage: string;
   voteAverage: number;
   runtime: number;
@@ -15,11 +15,13 @@ export interface Movie {
   revenue: number;
   genres: Genre[];
   certification?: string;
+  productionCompanies?: Company[];
   recommendations?: RecommendedMovie[];
   trailerKey?: string;
   collection?: MinimalCollection;
   people?: Crew[];
   topBilledCast?: Cast[];
+  keywords?: string[];
 }
 
 export interface Genre {
@@ -53,4 +55,10 @@ export interface Crew {
   id: number;
   name: string;
   job: string;
+}
+
+export interface Company {
+  id: number;
+  name: string;
+  logoPath: string;
 }

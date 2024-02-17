@@ -7,7 +7,11 @@
 
 .aditionalInfo-container {
   display: flex;
-  gap: 20px;
+  gap: 30px;
+
+  .media-info {
+    width: calc(100% - 200px);
+  }
 
   .minor-data {
     padding-top: 30px;
@@ -26,20 +30,40 @@
       }
     }
 
-        
+    .production-companies {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
+      img {
+        max-width: 200px;
+        max-height: 75px;
+      }
+    }
+
+    .keywords {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
   }
 }
 
 .top-billed-cast-container {
   display: flex;
   gap: 10px;
+  overflow-y: hidden;
+  overflow-x: auto;
+  padding-bottom: 10px;
 
   .card {
     border-radius: 15px;
-
-    img {
-      border-radius: 15px 15px 0 0;
-    }
+    border: 1px solid rgba(227, 227, 227, 1);
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
+    width: 138px;
+    min-width: 138px;
   }
 
   .cast-text{
@@ -96,7 +120,7 @@ p.card-text {
   padding-top: 10px;
 }
 
-h3>span {
+h3 > span {
   font-weight: normal;
 }
 

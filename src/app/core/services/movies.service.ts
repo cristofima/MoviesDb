@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { MovieFilter } from '../models/movie-filter';
 import { environment } from 'src/environments/environment';
-import { Cast, Crew, Genre, MinimalCollection, Movie, RecommendedMovie } from 'src/app/core/models/movie.model';
+import { Cast, Company, Crew, Genre, MinimalCollection, Movie, RecommendedMovie } from 'src/app/core/models/movie.model';
 import { Collection } from 'src/app/core/models/collection.model';
 import { Observable } from 'rxjs';
 import { PaginationModel } from 'src/app/core/models/pagination.model';
@@ -95,7 +95,7 @@ export class MoviesService {
   }
 
   getMovieDetails(movieId: number): Observable<Movie> {
-    return this.getQuery(`movie/${movieId}`, 'append_to_response=release_dates,recommendations,videos,credits')
+    return this.getQuery(`movie/${movieId}`, 'append_to_response=release_dates,recommendations,videos,credits,keywords')
       .pipe(
         map((data: any) => {
           return this.getFullMovieData(data);
@@ -137,7 +137,7 @@ export class MoviesService {
       backdropPath: data.backdrop_path,
       releaseDate: data.release_date,
       status: data.status,
-      productionCountry: data.production_countries && data.production_countries[0]?.iso_3166_1,
+      originCountry: data.production_companies && data.production_companies[0]?.origin_country,
       originalLanguage: LanguageUtil.getLanguage(data.original_language),
       voteAverage: data.vote_average,
       runtime: data.runtime,
@@ -146,34 +146,48 @@ export class MoviesService {
       genres: data.genres
     };
 
+    let productionCountryCode = data.production_countries && data.production_countries[0]?.iso_3166_1;
+
     if (extractExtraData) {
-      const { certification, collection, recommendations, trailerKey, people, topBilledCast } = this.getExtraMovieData(data);
+      const { certification, collection, recommendations, trailerKey, people, topBilledCast, keywords, productionCompanies } = this.getExtraMovieData(data, movie.originCountry, productionCountryCode);
       movie.certification = certification;
       movie.collection = collection;
       movie.recommendations = recommendations;
       movie.trailerKey = trailerKey;
       movie.people = people;
       movie.topBilledCast = topBilledCast;
+      movie.keywords = keywords;
+      movie.productionCompanies = productionCompanies;
     }
 
     return movie;
   }
 
-  private getExtraMovieData(data: any) {
+  private getMovieCertification(results: any[], countryCode: string) {
+    let certification: string;
+    results.find((release: any) => {
+      if (release.iso_3166_1 === countryCode) {
+        // Type 3 is for Theatrical certification and 4 for Digital
+        certification = release.release_dates.find((r: any) => r.type == 4)?.certification;
+        if (!certification) certification = release.release_dates.find((r: any) => r.type == 3)?.certification;
+        if (!certification) certification = release.release_dates.find((r: any) => r.certification)?.certification;
+
+        // NR means Not Rated
+        if (certification && certification === 'NR') certification = '';
+        return true;
+      }
+    });
+
+    return certification;
+  }
+
+  private getExtraMovieData(data: any, originCountryCode = 'US', productionCountryCode = 'US') {
     let certification: string;
     if (data.release_dates && data.release_dates.results) {
-      data.release_dates.results.find((release: any) => {
-        if (release.iso_3166_1 === 'US') {
-          // Type 3 is for Theatrical certification and 4 for Digital
-          certification = release.release_dates.find((r: any) => r.type == 4)?.certification;
-          if (!certification) certification = release.release_dates.find((r: any) => r.type == 3)?.certification;
-          if (!certification) certification = release.release_dates.find((r: any) => r.certification)?.certification;
-
-          // NR means Not Rated
-          if (certification && certification === 'NR') certification = '';
-          return true;
-        }
-      });
+      certification = this.getMovieCertification(data.release_dates.results, originCountryCode);
+      if (!certification && originCountryCode !== productionCountryCode) {
+        certification = this.getMovieCertification(data.release_dates.results, productionCountryCode);
+      }
     }
 
     let trailerKey: string;
@@ -229,6 +243,22 @@ export class MoviesService {
       }).sort((a: Crew, b: Crew) => a.job.localeCompare(b.job));
     }
 
-    return { certification, trailerKey, recommendations, collection, people, topBilledCast };
+    let keywords: string[] = [];
+    if(data.keywords && data.keywords.keywords) {
+      keywords = data.keywords.keywords.map((keyword: any) => keyword.name);
+    }
+
+    let productionCompanies: Company[] = [];
+    if(data.production_companies) {
+      productionCompanies = data.production_companies.filter((c: any) => c.logo_path).map((company: any) => {
+        return {
+          id: company.id,
+          name: company.name,
+          logoPath: company.logo_path
+        };
+      });
+    }
+
+    return { certification, trailerKey, recommendations, collection, people, topBilledCast, keywords, productionCompanies };
   }
 }
