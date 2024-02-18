@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MoviesService } from 'src/app/core/services/movies.service';
 import { Title } from '@angular/platform-browser';
 import { Movie } from 'src/app/core/models/movie.model';
 import { PaginationModel } from 'src/app/core/models/pagination.model';
 import { MovieFilter } from 'src/app/core/models/movie-filter';
+import { TMDbService } from 'src/app/core/services/tmdb.service';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
 
   private filters: MovieFilter;
 
-  constructor(private moviesService: MoviesService, private actRoute: ActivatedRoute, private titleService: Title) {
+  constructor(private moviesService: TMDbService, private actRoute: ActivatedRoute, private titleService: Title) {
     this.titleService.setTitle("Movies Db");
   }
 

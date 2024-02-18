@@ -3,7 +3,7 @@ import { Collection } from '../../../core/models/collection.model';
 import { Movie } from '../../../core/models/movie.model';
 import { DominantColorService } from 'src/app/core/services/dominant-color.service';
 import { ActivatedRoute } from '@angular/router';
-import { MoviesService } from 'src/app/core/services/movies.service';
+import { TMDbService } from 'src/app/core/services/tmdb.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Title } from '@angular/platform-browser';
 import { ColorUtil } from '../../utils/color.util';
@@ -26,7 +26,7 @@ export class GenericDetailsComponent implements OnInit {
   @ContentChild('mainInfo') mainInfo: TemplateRef<any>;
   @ContentChild('aditionalInfo') aditionalInfo: TemplateRef<any>;
 
-  constructor(private actRouter: ActivatedRoute, private moviesService: MoviesService,
+  constructor(private actRouter: ActivatedRoute, private moviesService: TMDbService,
     private spinner: NgxSpinnerService, private titleService: Title, private dominantColorService: DominantColorService) { }
 
   ngOnInit(): void {
