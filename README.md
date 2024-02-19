@@ -6,7 +6,7 @@ Welcome to the Movies Db App! This project allows users to browse movies and vie
 The Movies Db App is developed using Angular 15 and styled with Bootstrap. It provides a user-friendly interface for browsing movies and accessing detailed information about each movie, including its title, release date, overview, poster image, and whether it belongs to a collection.
 
 ## Tech Stack
-- Angular 15
+- Angular 16
 - Bootstrap 5
 
 ## Requirements
