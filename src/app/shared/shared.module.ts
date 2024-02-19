@@ -19,19 +19,7 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
   imports: [
     CommonModule,
     RouterModule,
-    NgCircleProgressModule.forRoot({
-      radius: 90,
-      outerStrokeWidth: 12,
-      innerStrokeWidth: 8,
-      outerStrokeColor: "#D8CFCD",
-      innerStrokeColor: "#D8CFCD",
-      animationDuration: 300,
-      animation: true,
-      showSubtitle: false,
-      unitsFontSize: "40",
-      titleFontSize: "40",
-      showZeroOuterStroke: false
-    })
+    NgCircleProgressModule
   ],
   exports: [
     GenericDetailsComponent,

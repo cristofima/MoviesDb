@@ -1,6 +1,7 @@
-import { Cast, Company, Crew, MinimalCollection, Movie, RecommendedMovie } from "src/app/core/models/movie.model";
+import { Movie, MinimalCollection } from "src/app/core/models/movie.model";
 import { LanguageUtil } from "./language.util";
 import { PaginationModel } from "src/app/core/models/pagination.model";
+import { BaseMediaUtil } from "./base-media.util";
 
 export class MovieUtil {
 
@@ -39,7 +40,8 @@ export class MovieUtil {
             runtime: data.runtime,
             budget: data.budget,
             revenue: data.revenue,
-            genres: data.genres
+            genres: data.genres,
+            mediaType: 'movie'
         };
 
         let productionCountryCode = data.production_countries && data.production_countries[0]?.iso_3166_1;
@@ -68,24 +70,6 @@ export class MovieUtil {
             }
         }
 
-        let trailerKey: string;
-        if (data.videos && data.videos.results) {
-            trailerKey = data.videos.results.filter((video: any) => video.type === 'Trailer')[0]?.key;
-        }
-
-        let recommendations: RecommendedMovie[] = [];
-        if (data.recommendations && data.recommendations.results) {
-            recommendations = data.recommendations.results.map((movie: any) => {
-                return {
-                    id: movie.id,
-                    title: movie.title,
-                    posterPath: movie.poster_path,
-                    releaseDate: movie.release_date,
-                    voteAverage: movie.vote_average
-                }
-            });
-        }
-
         let collection: MinimalCollection;
         if (data.belongs_to_collection) {
             collection = {
@@ -96,46 +80,7 @@ export class MovieUtil {
             };
         }
 
-        let people: Crew[] = [];
-        let topBilledCast: Cast[] = [];
-        if (data.credits && data.credits.cast) {
-            topBilledCast = data.credits.cast.filter(cast => cast.order <= 8 && cast.known_for_department === 'Acting')
-                .map((cast: any) => {
-                    return {
-                        id: cast.id,
-                        name: cast.name,
-                        character: cast.character,
-                        profilePath: cast.profile_path
-                    };
-                });
-        }
-
-        if (data.credits && data.credits.crew) {
-            people = data.credits.crew.filter(crew => ['Characters', 'Director', 'Screenplay'].includes(crew.job))
-                .map((crew: any) => {
-                    return {
-                        id: crew.id,
-                        name: crew.name,
-                        job: crew.job
-                    };
-                }).sort((a: Crew, b: Crew) => a.job.localeCompare(b.job));
-        }
-
-        let keywords: string[] = [];
-        if (data.keywords && data.keywords.keywords) {
-            keywords = data.keywords.keywords.map((keyword: any) => keyword.name);
-        }
-
-        let productionCompanies: Company[] = [];
-        if (data.production_companies) {
-            productionCompanies = data.production_companies.filter((c: any) => c.logo_path).map((company: any) => {
-                return {
-                    id: company.id,
-                    name: company.name,
-                    logoPath: company.logo_path
-                };
-            });
-        }
+        const { trailerKey, recommendations, people, topBilledCast, keywords, productionCompanies } = BaseMediaUtil.getCommonExtraData(data, 'Movie');
 
         return { certification, trailerKey, recommendations, collection, people, topBilledCast, keywords, productionCompanies };
     }

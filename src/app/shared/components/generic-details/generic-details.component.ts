@@ -7,6 +7,7 @@ import { TMDbService } from 'src/app/core/services/tmdb.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Title } from '@angular/platform-browser';
 import { ColorUtil } from '../../utils/color.util';
+import { TV } from 'src/app/core/models/tv.model';
 
 @Component({
   selector: 'app-generic-details',
@@ -15,8 +16,8 @@ import { ColorUtil } from '../../utils/color.util';
 })
 export class GenericDetailsComponent implements OnInit {
 
-  data: Movie | Collection;
-  @Input() type: 'Movie' | 'Collection';
+  data: Movie | TV | Collection;
+  @Input() type: 'Movie' | 'Collection' | 'TV';
 
   posterImgDominantColor: string;
   firstBackgroundImg: string;
@@ -44,6 +45,9 @@ export class GenericDetailsComponent implements OnInit {
     } else if (this.type == 'Collection') {
       this.data = await this.moviesService.getCollectionDetails(id).toPromise();
       title = (this.data as Collection).name;
+    } else if (this.type == 'TV') {
+      this.data = await this.moviesService.getTVDetails(id).toPromise();
+      title = (this.data as TV).title;
     }
 
     this.spinner.hide();

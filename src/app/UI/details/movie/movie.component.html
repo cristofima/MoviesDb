@@ -47,10 +47,15 @@
           <div class="row">
             <div class="top-billed-cast-container">
               <div *ngFor="let cast of movie.topBilledCast" class="card">
-                <img [src]="cast.profilePath ? 'https://image.tmdb.org/t/p/w185' + cast.profilePath : '/assets/images/no-image.png'"
+                <a [routerLink]="['/person/', cast.id]">
+                  <img [src]="cast.profilePath ? 'https://image.tmdb.org/t/p/w185' + cast.profilePath : '/assets/images/no-image.png'"
                   class="card-img-top" [title]="cast.name" loading="lazy">
+                </a>
+                
                 <div class="cast-text">
-                  <span class="cast-name">{{cast.name}}</span>
+                  <a [routerLink]="['/person/', cast.id]">
+                    <span class="cast-name">{{cast.name}}</span>
+                  </a>
                   <span>{{cast.character}}</span>
                 </div>
               </div>
@@ -64,7 +69,7 @@
             style="background-image: linear-gradient(to right, rgba(3, 37, 65, 1) 0%, rgba(3, 37, 65, 0.6) 100%), url(https://media.themoviedb.org/t/p/w1440_and_h320_multi_faces{{movie.collection.backdropPath}})">
             <h2>Part of the {{movie.collection.name}}</h2>
             <a class="btn rounded-pill" [style.background-color]="posterImgDominantColor"
-              href="/collection/{{movie.collection.id}}">VIEW THE COLLECTION</a>
+              [routerLink]="['/collection/', movie.collection.id]">VIEW THE COLLECTION</a>
           </div>
         </ng-container>
     
@@ -74,7 +79,7 @@
           <h4>Recommendations</h4>
           <div class="col-md-12">
             <ng-container *ngIf="movie.recommendations.length; else emptyRecommendations">
-              <a *ngFor="let r of movie.recommendations" [routerLink]="['/movie/', r.id]">
+              <a *ngFor="let r of movie.recommendations" [routerLink]="['/', r.mediaType, r.id]">
                 <img src="https://image.tmdb.org/t/p/original{{r.posterPath}}" class="img-thumbnail img-similar"
                   [title]="r.title" loading="lazy">
               </a>
@@ -92,7 +97,7 @@
         <div>
           <span>Production Companies</span>
           <section class="production-companies" *ngIf="movie.productionCompanies.length; else emptyProductionCompanies">
-            <img *ngFor="let company of movie.productionCompanies" [src]="'https://image.tmdb.org/t/p/w92' + company.logoPath"
+            <img *ngFor="let company of movie.productionCompanies" [src]="'https://image.tmdb.org/t/p/w200' + company.logoPath"
               [title]="company.name" loading="lazy">
           </section>
 

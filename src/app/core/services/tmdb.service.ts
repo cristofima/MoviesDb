@@ -8,6 +8,9 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { MovieFilter } from '../models/movie-filter';
 import { PaginationModel } from '../models/pagination.model';
+import { Person } from '../models/person.model';
+import { TV } from '../models/tv.model';
+import { TVUtil } from 'src/app/shared/utils/tv.util';
 
 @Injectable({
   providedIn: 'root'
@@ -100,5 +103,45 @@ export class TMDbService {
           };
         })
       )
+  }
+
+  getTVDetails(tvId: number): Observable<TV> {
+    return this.getQuery(`tv/${tvId}`, 'append_to_response=aggregate_credits,keywords,videos,recommendations,content_ratings')
+      .pipe(
+        map((data: any) => {
+          return TVUtil.getFullTVData(data);
+        })
+      );
+  }
+
+  getPersonDetails(personId: number): Observable<Person> {
+    return this.getQuery(`person/${personId}`, 'append_to_response=combined_credits,external_ids')
+      .pipe(
+        map((data: any) => {
+          let birthday = new Date(data.birthday);
+          return {
+            id: data.id,
+            name: data.name,
+            biography: data.biography,
+            birthday: birthday,
+            age: Math.floor((Math.abs(Date.now() - birthday.getTime()) / (1000 * 3600 * 24)) / 365.25),
+            deathday: data.deathday
+              ? new Date(data.deathday)
+              : null,
+            gender: data.gender === 1 ? 'Female' : (data.gender === 2 ? 'Male' : 'Not set / not specified'),
+            knownForDepartment: data.known_for_department,
+            placeOfBirth: data.place_of_birth,
+            profilePath: data.profile_path,
+            knownCredits: data.combined_credits.cast.length,
+            externalIds: {
+              facebookId: data.external_ids.facebook_id,
+              instagramId: data.external_ids.instagram_id,
+              twitterId: data.external_ids.twitter_id,
+              tiktokId: data.external_ids.tiktok_id,
+              youtubeId: data.external_ids.youtube_id
+            }
+          };
+        }
+      ));
   }
 }

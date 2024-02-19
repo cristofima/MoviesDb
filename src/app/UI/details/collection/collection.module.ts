@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CollectionDetailsComponent } from './collection.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 const routes: Routes = [
   {
@@ -16,7 +17,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    SharedModule
+    SharedModule,
+    NgCircleProgressModule
   ],
   exports: [CollectionDetailsComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

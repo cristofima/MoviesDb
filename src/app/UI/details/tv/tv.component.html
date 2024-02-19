@@ -1,0 +1,110 @@
+<app-generic-details type="TV">
+    <ng-template #mainInfo let-tv="data" let-contrastColor="contrastColor">
+        <h3>{{tv.title}} <span *ngIf="tv.firstAirDate" class="movie-year">({{tv.firstAirDate | date:'yyyy'}})</span>
+        </h3>
+        <h6>
+            <span class="certification-box" *ngIf="tv.certification"
+                [title]="tv.certification | certification">{{tv.certification}}</span> {{tv.firstAirDate |
+            date:'MM/dd/yyyy'}}
+        </h6>
+
+        <p class="card-text">
+            <a *ngFor="let genre of tv.genres" href="javascript:void(0);"
+                class="badge badge-pill badge-primary genre-badge">{{ genre.name }}</a>
+        </p>
+
+        <div class="user-score-container">
+            <ng-container *ngIf="tv.voteAverage > 0">
+                <circle-progress [percent]="tv.voteAverage * 10" [outerStrokeColor]="tv.voteAverage | borderClass"
+                    [titleFontSize]="15" [unitsFontSize]="15" [radius]="30" [innerStrokeWidth]="3"
+                    [outerStrokeWidth]="5" [titleColor]="contrastColor" [unitsColor]="contrastColor"></circle-progress>
+                <h6>User<br />Score</h6>
+            </ng-container>
+
+            <a *ngIf="tv.trailerKey" class="btn btn-secondary" href="https://www.youtube.com/watch?v={{tv.trailerKey}}"
+                target="_blank">Play Trailer</a>
+        </div>
+
+        <p *ngIf="tv.tagline" class="tagline">{{tv.tagline}}</p>
+        <h5>Overview</h5>
+        <p>{{tv.overview}}</p>
+
+        <div class="people" *ngIf="tv.people.length">
+            <div class="profile" *ngFor="let person of tv.people">
+                <span>{{person.name}}</span>
+                <span>{{person.job}}</span>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template #aditionalInfo let-tv="data">
+        <div class="aditionalInfo-container">
+            <div class="media-info">
+                <ng-container *ngIf="tv.topBilledCast.length">
+                    <hr />
+                    <h4>Series Cast</h4>
+                    <div class="row">
+                        <div class="top-billed-cast-container">
+                            <div *ngFor="let cast of tv.topBilledCast" class="card">
+                                <a [routerLink]="['/person/', cast.id]">
+                                    <img [src]="cast.profilePath ? 'https://image.tmdb.org/t/p/w185' + cast.profilePath : '/assets/images/no-image.png'"
+                                        class="card-img-top" [title]="cast.name" loading="lazy">
+                                </a>
+
+                                <div class="cast-text">
+                                    <a [routerLink]="['/person/', cast.id]">
+                                        <span class="cast-name">{{cast.name}}</span>
+                                    </a>
+                                    <span>{{cast.character}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+
+                <hr />
+
+                <div class="row">
+                    <h4>Recommendations</h4>
+                    <div class="col-md-12">
+                        <ng-container *ngIf="tv.recommendations.length; else emptyRecommendations">
+                            <a *ngFor="let r of tv.recommendations" [routerLink]="['/', r.mediaType, r.id]">
+                                <img src="https://image.tmdb.org/t/p/original{{r.posterPath}}"
+                                    class="img-thumbnail img-similar" [title]="r.title" loading="lazy">
+                            </a>
+                        </ng-container>
+
+                        <ng-template #emptyRecommendations>
+                            <p>We don't have enough data to suggest any movies/tv-shows based on <i>{{tv.title}}</i>.
+                            </p>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+
+            <div class="minor-data">
+                <div *ngIf="tv.status"><span>Status</span> <span>{{tv.status}}</span></div>
+                <div>
+                    <span>Networks</span>
+                    <section class="networks" *ngIf="tv.networks.length; else emptyNetworks">
+                      <img *ngFor="let network of tv.networks" [src]="'https://image.tmdb.org/t/p/w200' + network.logoPath"
+                        [title]="network.name" loading="lazy">
+                    </section>
+          
+                    <ng-template #emptyNetworks><span>No networks have been added.</span></ng-template>
+                  </div>
+                <div *ngIf="tv.type"><span>Type</span> <span>{{tv.type}}</span></div>
+                <div *ngIf="tv.originalLanguage"><span>Original Language</span> <span>{{tv.originalLanguage}}</span></div>
+                <div>
+                    <span>Keywords</span>
+                    <section class="keywords" *ngIf="tv.keywords.length; else emptyKeyworks">
+                        <span *ngFor="let keyword of tv.keywords"
+                            class="badge badge-pill badge-secondary">{{keyword}}</span>
+                    </section>
+
+                    <ng-template #emptyKeyworks><span>No keywords have been added.</span></ng-template>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</app-generic-details>
