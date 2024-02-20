@@ -1,26 +1,39 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MovieDetailsComponent } from './movie.component';
+import { MovieDetailsComponent } from './components/details/movie.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { CollectionDetailsComponent } from './components/collection/collection.component';
+import { TimePipe } from './pipes/time.pipe';
 
 const routes: Routes = [
   {
     path: ':id',
     component: MovieDetailsComponent
-   }
- ];
+  },
+  {
+    path: 'collection/:id',
+    component: CollectionDetailsComponent
+  }
+];
 
 @NgModule({
-  declarations: [MovieDetailsComponent],
+  declarations: [
+    MovieDetailsComponent, 
+    CollectionDetailsComponent,
+    TimePipe
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     SharedModule,
     NgCircleProgressModule
   ],
-  exports: [MovieDetailsComponent],
+  exports: [
+    MovieDetailsComponent, 
+    CollectionDetailsComponent
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class MovieModule { }

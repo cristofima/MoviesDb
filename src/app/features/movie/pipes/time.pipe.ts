@@ -5,9 +5,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TimePipe implements PipeTransform {
 
-  transform(value: any): string {
-    const hours = parseInt((value / 60).toString(), 0);
-    const minutes = Number(value) - hours * 60;
+  transform(runtime: number): string {
+    const hours = parseInt((runtime / 60).toString(), 0);
+    const minutes = runtime - hours * 60;
     let hoursText = "";
     let minutesText = "";
 
