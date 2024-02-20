@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>Movies Db</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Información de películas">
-  <meta name="keywords" content="Movie, Angular, Cine">
+  <meta name="description" content="Movies data from TMDB">
+  <meta name="keywords" content="Movie, TV Show, Angular, Cinema">
   <meta name="author" content="Cristopher Coronado">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,900" rel="stylesheet">
@@ -14,36 +14,5 @@
 </head>
 <body>
   <app-root></app-root>
-
-<script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-  <script type="text/javascript">
-    $(function() {
-      $(".progress").each(function() {
-        var value = $(this).attr('data-value');
-        var left = $(this).find('.progress-left .progress-bar');
-        var right = $(this).find('.progress-right .progress-bar');
-
-        if (value > 0) {
-          if (value <= 50) {
-            right.css('transform', 'rotate(' + percentageToDegrees(value) + 'deg)')
-          } else {
-            right.css('transform', 'rotate(180deg)')
-            left.css('transform', 'rotate(' +percentageToDegrees(value - 50) + 'deg)')
-          }
-        }
-
-      })
-
-      function percentageToDegrees(percentage) {
-        return percentage / 100 * 360
-      }
-    });
-  </script>
 </body>
 </html>
