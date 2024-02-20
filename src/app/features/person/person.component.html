@@ -1,0 +1,55 @@
+<div class="container" *ngIf="person">
+    <div class="first-column">
+        <img src="https://media.themoviedb.org/t/p/w300_and_h450_bestv2{{person.profilePath}}">
+        <h5>Personal Info</h5>
+
+        <div class="personal-info">
+            <div>
+                <span>Known For</span>
+                <span>{{person.knownForDepartment}}</span>
+            </div>
+            <div>
+                <span>Known Credits</span>
+                <span>{{person.knownCredits}}</span>
+            </div>
+            <div>
+                <span>Gender</span>
+                <span>{{person.gender}}</span>
+            </div>
+            <div>
+                <span>Birthday</span>
+                <span>{{person.birthday | date}} <ng-container *ngIf="!person.deathday">({{person.age}} years old)</ng-container></span>
+            </div>
+            <div *ngIf="person.deathday">
+                <span>Day of Death</span>
+                <span>{{person.deathday | date}} ({{person.age}} years old)</span>
+            </div>
+            <div>
+                <span>Place of Birth</span>
+                <span>{{person.placeOfBirth}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="second-column">
+        <h2>{{person.name}}</h2>
+        <h5>Biography</h5>
+        <p>{{person.biography}}</p>
+        <h5>Known For</h5>
+        <div class="row">
+            <div class="known-for-container">
+                <div *ngFor="let media of person.knownFor" class="card">
+                    <a [routerLink]="['/', media.mediaType, media.id]">
+                        <img [src]="'https://image.tmdb.org/t/p/w185' + media.posterPath" class="card-img-top"
+                            [title]="media.title" loading="lazy">
+                    </a>
+        
+                    <div class="media-text">
+                        <a [routerLink]="['/', media.mediaType, media.id]">
+                            <span class="media-name">{{media.title}}</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

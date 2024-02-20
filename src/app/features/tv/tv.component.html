@@ -86,7 +86,7 @@
                 <div *ngIf="tv.status"><span>Status</span> <span>{{tv.status}}</span></div>
                 <div>
                     <span>Networks</span>
-                    <section class="networks" *ngIf="tv.networks.length; else emptyNetworks">
+                    <section class="production-companies" *ngIf="tv.networks.length; else emptyNetworks">
                       <img *ngFor="let network of tv.networks" [src]="'https://image.tmdb.org/t/p/w200' + network.logoPath"
                         [title]="network.name" loading="lazy">
                     </section>

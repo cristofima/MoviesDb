@@ -1,14 +1,17 @@
-export interface BaseMedia {
+export interface MinimalMedia {
     id: number;
     title: string;
+    posterPath: string;
+    mediaType: 'movie' | 'tv';
+}
+
+export interface BaseMedia extends MinimalMedia {
     overview: string;
     tagline: string;
-    posterPath: string;
     backdropPath: string;
     status: string;
     voteAverage: number;
     genres: Genre[];
-    mediaType: 'movie' | 'tv';
     certification?: string;
     recommendations?: RecommendedMedia[];
     trailerKey?: string;

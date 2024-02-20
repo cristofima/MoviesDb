@@ -5,6 +5,13 @@
     margin-bottom: 5px;
 }
 
+.user-score-container {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 10px;
+}
+
 .aditionalInfo-container {
     display: flex;
     gap: 30px;
@@ -30,7 +37,7 @@
             }
         }
 
-        .networks {
+        .production-companies {
             display: flex;
             flex-direction: column;
             gap: 5px;
@@ -94,7 +101,7 @@
     max-height: 150px;
 }
 
-h3 > span {
+h3>span {
     font-weight: normal;
 }
 

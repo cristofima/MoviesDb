@@ -1,0 +1,78 @@
+.container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding-bottom: 20px;
+
+    .first-column {
+        max-width: 300px;
+
+        img {
+            border-radius: 20px;
+            padding-bottom: 10px;
+        }
+
+        .personal-info {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+
+            div {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+
+                span:first-child {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+
+    .second-column {
+        width: calc(100% - 300px);
+    }
+
+    .known-for-container {
+        display: flex;
+        gap: 10px;
+        overflow-y: hidden;
+        overflow-x: auto;
+        padding-bottom: 10px;
+
+        .card {
+            border-radius: 15px;
+            border: 1px solid rgba(227, 227, 227, 1);
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
+            width: 138px;
+            min-width: 138px;
+        }
+
+        .media-text {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            padding: 5px 10px 3px 10px;
+
+            a {
+                text-decoration: none;
+                color: black;
+            }
+
+            a:hover {
+                color: blue
+            }
+
+            .media-name {
+                font-weight: bold;
+            }
+
+            span {
+                font-size: smaller;
+            }
+        }
+    }
+}

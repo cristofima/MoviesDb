@@ -39,7 +39,12 @@
             "namedChunks": true,
             "allowedCommonJsDependencies": [
               "node-vibrant"
-            ]
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles"
+              ]
+            }
           },
           "configurations": {
             "production": {

@@ -11,6 +11,7 @@ import { PaginationModel } from '../models/pagination.model';
 import { Person } from '../models/person.model';
 import { TV } from '../models/tv.model';
 import { TVUtil } from 'src/app/shared/utils/tv.util';
+import { PersonUtil } from 'src/app/shared/utils/person.utll';
 
 @Injectable({
   providedIn: 'root'
@@ -119,20 +120,21 @@ export class TMDbService {
       .pipe(
         map((data: any) => {
           let birthday = new Date(data.birthday);
+          let deathday = data.deathday ? new Date(data.deathday) : null;
+
           return {
             id: data.id,
             name: data.name,
             biography: data.biography,
             birthday: birthday,
-            age: Math.floor((Math.abs(Date.now() - birthday.getTime()) / (1000 * 3600 * 24)) / 365.25),
-            deathday: data.deathday
-              ? new Date(data.deathday)
-              : null,
+            age: Math.floor((Math.abs((deathday && deathday.getTime() || Date.now()) - birthday.getTime()) / (1000 * 3600 * 24)) / 365.25),
+            deathday: deathday,
             gender: data.gender === 1 ? 'Female' : (data.gender === 2 ? 'Male' : 'Not set / not specified'),
             knownForDepartment: data.known_for_department,
             placeOfBirth: data.place_of_birth,
             profilePath: data.profile_path,
             knownCredits: data.combined_credits.cast.length,
+            knownFor: PersonUtil.getKnownForMedia(data),
             externalIds: {
               facebookId: data.external_ids.facebook_id,
               instagramId: data.external_ids.instagram_id,
