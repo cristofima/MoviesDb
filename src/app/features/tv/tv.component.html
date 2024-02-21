@@ -9,8 +9,9 @@
         </h6>
 
         <p class="card-text">
-            <a *ngFor="let genre of tv.genres" href="javascript:void(0);"
-                class="badge badge-pill badge-primary genre-badge">{{ genre.name }}</a>
+            <a *ngFor="let genre of tv.genres" href="javascript:void(0);">
+                <span class="badge text-bg-primary genre-badge">{{ genre.name }}</span>
+            </a>
         </p>
 
         <div class="user-score-container">
@@ -99,7 +100,7 @@
                     <span>Keywords</span>
                     <section class="keywords" *ngIf="tv.keywords.length; else emptyKeyworks">
                         <span *ngFor="let keyword of tv.keywords"
-                            class="badge badge-pill badge-secondary">{{keyword}}</span>
+                            class="badge text-bg-secondary">{{keyword}}</span>
                     </section>
 
                     <ng-template #emptyKeyworks><span>No keywords have been added.</span></ng-template>
