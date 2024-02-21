@@ -30,7 +30,7 @@ export class TVUtil {
             tv.people = extraData.people;
             tv.topBilledCast = extraData.topBilledCast;
             tv.keywords = extraData.keywords;
-            tv.networks = extraData.productionCompanies;
+            tv.network = extraData.productionCompany;
         }
 
         return tv;
@@ -45,9 +45,9 @@ export class TVUtil {
             }
         }
 
-        const { trailerKey, recommendations, people, topBilledCast, keywords, productionCompanies } = BaseMediaUtil.getCommonExtraData(data, 'TV');
+        const { trailerKey, recommendations, people, topBilledCast, keywords, productionCompany } = BaseMediaUtil.getCommonExtraData(data, 'TV');
 
-        return { certification, trailerKey, recommendations, people, topBilledCast, keywords, productionCompanies };
+        return { certification, trailerKey, recommendations, people, topBilledCast, keywords, productionCompany };
     }
 
     private static getTVCertification(results: any[], countryCode: string) {

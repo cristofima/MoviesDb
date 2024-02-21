@@ -96,13 +96,13 @@
       <div class="minor-data">
         <div *ngIf="movie.status"><span>Status</span> <span>{{movie.status}}</span></div>
         <div>
-          <span>Production Companies</span>
-          <section class="production-companies" *ngIf="movie.productionCompanies.length; else emptyProductionCompanies">
-            <img *ngFor="let company of movie.productionCompanies" [src]="'https://image.tmdb.org/t/p/w200' + company.logoPath"
-              [title]="company.name" loading="lazy">
+          <span>Production Company</span>
+          <section *ngIf="movie.productionCompany; else emptyProductionCompany">
+            <img [src]="'https://image.tmdb.org/t/p/h30' + movie.productionCompany.logoPath"
+              [title]="movie.productionCompany.name" loading="lazy">
           </section>
 
-          <ng-template #emptyProductionCompanies><span>No production companies have been added.</span></ng-template>
+          <ng-template #emptyProductionCompany><span>No production company has been added.</span></ng-template>
         </div>
         <div *ngIf="movie.originalLanguage"><span>Original Language</span> <span>{{movie.originalLanguage}}</span></div>
         <div><span>Budget</span> <span>{{movie.budget ? (movie.budget | currency) : '-'}}</span></div>

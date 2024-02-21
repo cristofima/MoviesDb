@@ -86,13 +86,13 @@
             <div class="minor-data">
                 <div *ngIf="tv.status"><span>Status</span> <span>{{tv.status}}</span></div>
                 <div>
-                    <span>Networks</span>
-                    <section class="production-companies" *ngIf="tv.networks.length; else emptyNetworks">
-                      <img *ngFor="let network of tv.networks" [src]="'https://image.tmdb.org/t/p/w200' + network.logoPath"
-                        [title]="network.name" loading="lazy">
+                    <span>Network</span>
+                    <section *ngIf="tv.network; else emptyNetwork">
+                      <img [src]="'https://image.tmdb.org/t/p/h30' + tv.network.logoPath"
+                        [title]="tv.network.name" loading="lazy">
                     </section>
           
-                    <ng-template #emptyNetworks><span>No networks have been added.</span></ng-template>
+                    <ng-template #emptyNetwork><span>No network has been added.</span></ng-template>
                   </div>
                 <div *ngIf="tv.type"><span>Type</span> <span>{{tv.type}}</span></div>
                 <div *ngIf="tv.originalLanguage"><span>Original Language</span> <span>{{tv.originalLanguage}}</span></div>

@@ -32,16 +32,6 @@
             }
         }
 
-        .production-companies {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-
-            img {
-                max-height: 75px;
-            }
-        }
-
         .keywords {
             display: flex;
             flex-wrap: wrap;
@@ -103,6 +93,10 @@ h3>span {
 .tagline {
     font-style: italic;
     opacity: .7;
+}
+
+span.badge {
+    font-weight: normal !important;
 }
 
 .genre-badge {

@@ -8,7 +8,7 @@ export interface Movie extends BaseMedia {
   budget: number;
   revenue: number;
   collection?: MinimalCollection;
-  productionCompanies?: Company[];
+  productionCompany?: Company;
 }
 
 export interface MinimalCollection {

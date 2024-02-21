@@ -55,7 +55,7 @@ export class MovieUtil {
             movie.people = extraData.people;
             movie.topBilledCast = extraData.topBilledCast;
             movie.keywords = extraData.keywords;
-            movie.productionCompanies = extraData.productionCompanies;
+            movie.productionCompany = extraData.productionCompany;
         }
 
         return movie;
@@ -80,9 +80,9 @@ export class MovieUtil {
             };
         }
 
-        const { trailerKey, recommendations, people, topBilledCast, keywords, productionCompanies } = BaseMediaUtil.getCommonExtraData(data, 'Movie');
+        const { trailerKey, recommendations, people, topBilledCast, keywords, productionCompany } = BaseMediaUtil.getCommonExtraData(data, 'Movie');
 
-        return { certification, trailerKey, recommendations, collection, people, topBilledCast, keywords, productionCompanies };
+        return { certification, trailerKey, recommendations, collection, people, topBilledCast, keywords, productionCompany };
     }
 
     private static getMovieCertification(results: any[], countryCode: string) {

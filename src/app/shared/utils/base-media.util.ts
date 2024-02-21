@@ -50,22 +50,23 @@ export class BaseMediaUtil {
         }
 
         let keywords: string[] = [];
-        if (data.keywords && data.keywords.keywords) {
-            keywords = data.keywords.keywords.map((keyword: any) => keyword.name);
+        let keywordsKey = mediaType === 'Movie' ? 'keywords' : 'results';
+        if (data.keywords && data.keywords[keywordsKey]) {
+            keywords = data.keywords[keywordsKey].map((keyword: any) => keyword.name);
         }
 
-        let productionCompanies: Company[] = [];
+        let productionCompany: Company;
         let companyKey = mediaType === 'Movie' ? 'production_companies' : 'networks';
         if (data[companyKey]) {
-            productionCompanies = data[companyKey].filter((c: any) => c.logo_path).map((company: any) => {
+            productionCompany = (data[companyKey] as any[]).filter((c: any) => c.logo_path).map((company: any) => {
                 return {
                     id: company.id,
                     name: company.name,
                     logoPath: company.logo_path
                 };
-            });
+            })[0];
         }
 
-        return { trailerKey, recommendations, people, topBilledCast, keywords, productionCompanies };
+        return { trailerKey, recommendations, people, topBilledCast, keywords, productionCompany };
     }
 }
