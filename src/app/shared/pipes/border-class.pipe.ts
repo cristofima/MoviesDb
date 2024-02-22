@@ -5,8 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class BorderClassPipe implements PipeTransform {
 
-  transform(value: any, ...args: any[]): any {
-    let percentage = Number(value) * 10;
+  transform(value: number, ...args: any[]): string {
+    let percentage = value * 10;
 
     if (percentage == null || percentage == 0) {
       return "#D8CFCD";

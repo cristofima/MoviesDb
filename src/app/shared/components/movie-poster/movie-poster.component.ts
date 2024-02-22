@@ -8,5 +8,5 @@ import { Movie } from 'src/app/core/models/movie.model';
 })
 export class MoviePosterComponent {
 
-  @Input() movie: Movie;
+  @Input({ required: true }) movie: Movie;
 }
