@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TvDetailsComponent } from './tv.component';
+import { TvDetailsComponent } from './components/tv.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { TvService } from './services/tv.service';
 
 const routes: Routes = [
   {
@@ -24,6 +25,7 @@ const routes: Routes = [
   ],
   exports: [
     TvDetailsComponent
-  ]
+  ],
+  providers: [TvService]
 })
 export class TvModule { }

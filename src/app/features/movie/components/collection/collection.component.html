@@ -1,4 +1,4 @@
-<app-generic-details type="Collection">
+<app-generic-details type="Collection" [callback]="collectionDetailsCallback">
   <ng-template #mainInfo let-collection="data" let-contrastColor="contrastColor">
     <h3>{{collection.name}}</h3>
 

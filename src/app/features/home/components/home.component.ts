@@ -4,7 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { Movie } from 'src/app/core/models/movie.model';
 import { PaginationModel } from 'src/app/core/models/pagination.model';
 import { MovieFilter } from 'src/app/core/models/movie-filter';
-import { TMDbService } from 'src/app/core/services/tmdb.service';
+import { HomeService } from '../services/home.service';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
 
   private filters: MovieFilter;
 
-  constructor(private moviesService: TMDbService, private actRoute: ActivatedRoute, private titleService: Title) {
+  constructor(private homeService: HomeService, private actRoute: ActivatedRoute, private titleService: Title) {
     this.titleService.setTitle("Movies Db");
   }
 
@@ -57,9 +57,9 @@ export class HomeComponent implements OnInit {
   public async paginateMovies() {
     let pagination: PaginationModel;
     if (!this.search || !this.search.trim()) {
-      pagination = await this.moviesService.discoverMovies(this.pageNumber, this.filters).toPromise();
+      pagination = await this.homeService.discoverMovies(this.pageNumber, this.filters).toPromise();
     } else {
-      pagination = await this.moviesService.searchMovies(this.pageNumber, this.search).toPromise();
+      pagination = await this.homeService.searchMovies(this.pageNumber, this.search).toPromise();
     }
 
     this.movies = pagination.results;
@@ -73,14 +73,14 @@ export class HomeComponent implements OnInit {
 
     this.prevSearch = this.search = this.search.trim();
 
-    let pagination = await this.moviesService.searchMovies(this.pageNumber, this.search).toPromise();
+    let pagination = await this.homeService.searchMovies(this.pageNumber, this.search).toPromise();
     this.movies = pagination.results;
     this.setMaxResults(pagination.totalPages);
   }
 
   public async loadMovies() {
     this.pageNumber = 1;
-    let pagination = await this.moviesService.discoverMovies(this.pageNumber, this.filters).toPromise();
+    let pagination = await this.homeService.discoverMovies(this.pageNumber, this.filters).toPromise();
     this.movies = pagination.results;
     this.setMaxResults(pagination.totalPages);
   }

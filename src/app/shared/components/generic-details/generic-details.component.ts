@@ -3,7 +3,6 @@ import { Collection } from '../../../core/models/collection.model';
 import { Movie } from '../../../core/models/movie.model';
 import { DominantColorService } from 'src/app/core/services/dominant-color.service';
 import { ActivatedRoute } from '@angular/router';
-import { TMDbService } from 'src/app/core/services/tmdb.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Title } from '@angular/platform-browser';
 import { ColorUtil } from '../../utils/color.util';
@@ -17,18 +16,19 @@ import { TV } from 'src/app/core/models/tv.model';
 export class GenericDetailsComponent implements OnInit {
 
   data: Movie | TV | Collection;
-  @Input() type: 'Movie' | 'Collection' | 'TV';
+  @Input({ required: true }) type: 'Movie' | 'Collection' | 'TV';
 
   posterImgDominantColor: string;
   firstBackgroundImg: string;
   secondBackgroundImg: string;
-  @Input() contrastColor = 'white';
+  contrastColor = 'white';
+
+  @Input({ required: true }) callback: Function;
 
   @ContentChild('mainInfo') mainInfo: TemplateRef<any>;
   @ContentChild('aditionalInfo') aditionalInfo: TemplateRef<any>;
 
-  constructor(private actRouter: ActivatedRoute, private moviesService: TMDbService,
-    private spinner: NgxSpinnerService, private titleService: Title, private dominantColorService: DominantColorService) { }
+  constructor(private actRouter: ActivatedRoute, private spinner: NgxSpinnerService, private titleService: Title, private dominantColorService: DominantColorService) { }
 
   ngOnInit(): void {
     this.spinner.show();
@@ -40,13 +40,13 @@ export class GenericDetailsComponent implements OnInit {
   private async loadDetails(id: number) {
     let title: string;
     if (this.type == 'Movie') {
-      this.data = await this.moviesService.getMovieDetails(id).toPromise();
+      this.data = await this.callback(id);
       title = (this.data as Movie).title;
     } else if (this.type == 'Collection') {
-      this.data = await this.moviesService.getCollectionDetails(id).toPromise();
+      this.data = await this.callback(id);
       title = (this.data as Collection).name;
     } else if (this.type == 'TV') {
-      this.data = await this.moviesService.getTVDetails(id).toPromise();
+      this.data = await this.callback(id);
       title = (this.data as TV).title;
     }
 

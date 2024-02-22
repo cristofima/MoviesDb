@@ -6,6 +6,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { CollectionDetailsComponent } from './components/collection/collection.component';
 import { TimePipe } from './pipes/time.pipe';
+import { MovieService } from './services/movie.service';
 
 const routes: Routes = [
   {
@@ -34,6 +35,7 @@ const routes: Routes = [
     MovieDetailsComponent, 
     CollectionDetailsComponent
   ],
+  providers: [MovieService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class MovieModule { }

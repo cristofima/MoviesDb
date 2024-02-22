@@ -1,4 +1,4 @@
-<app-generic-details type="TV">
+<app-generic-details type="TV" [callback]="tvDetailsCallback">
     <ng-template #mainInfo let-tv="data" let-contrastColor="contrastColor">
         <h3>{{tv.title}} <span *ngIf="tv.firstAirDate">({{tv.firstAirDate | date:'yyyy'}})</span></h3>
         <h6>

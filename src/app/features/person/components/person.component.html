@@ -33,7 +33,20 @@
     <div class="second-column">
         <h2>{{person.name}}</h2>
         <h5>Biography</h5>
-        <p>{{person.biography}}</p>
+        <ng-container *ngIf="person.biography; else emptyBiography">
+            <ng-container *ngIf="person.biography.length > 1000 && !showFullBiography; else fullBiography">
+                <p class="readmore">{{person.biography | slice:0:1000}}...</p>
+                <a href="javacript:void(0)" class="btn btn-link" (click)="showFullBiography = !showFullBiography">Show more</a>
+            </ng-container>
+            <ng-template #fullBiography>
+                <p>{{person.biography}}</p>
+            </ng-template>
+        </ng-container>
+        
+        <ng-template #emptyBiography>
+            <p>We don't have a biography for <i>{{person.name}}</i>.</p>
+        </ng-template>
+        
         <h5>Known For</h5>
         <div class="row">
             <div class="known-for-container">

@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Person } from 'src/app/core/models/person.model';
-import { TMDbService } from 'src/app/core/services/tmdb.service';
+import { PersonService } from '../services/person.service';
 
 @Component({
   selector: 'app-person',
@@ -14,9 +14,10 @@ import { TMDbService } from 'src/app/core/services/tmdb.service';
 export class PersonDetailsComponent implements OnInit {
 
   person: Person;
+  showFullBiography = false;
   @ViewChild('accordion', { static: false }) accordion: NgbAccordion;
 
-  constructor(private actRouter: ActivatedRoute, private tMDbService: TMDbService,
+  constructor(private actRouter: ActivatedRoute, private personService: PersonService,
     private spinner: NgxSpinnerService, private titleService: Title) { }
 
   ngOnInit(): void {
@@ -27,7 +28,7 @@ export class PersonDetailsComponent implements OnInit {
   }
 
   private async loadDetails(id: number) {
-    this.person = await this.tMDbService.getPersonDetails(id).toPromise();
+    this.person = await this.personService.getPersonDetails(id).toPromise();
     this.spinner.hide();
     this.titleService.setTitle(`${this.person.name} | Movies Db`);
     setTimeout(() => {

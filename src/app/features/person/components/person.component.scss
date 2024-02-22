@@ -33,6 +33,14 @@
     .second-column {
         width: calc(100% - 300px);
 
+        p.readmore {
+            margin-bottom: 0px;
+        }
+
+        p.readmore + a {
+            text-decoration: none;
+        }
+
         .media-group {
             display: flex;
             flex-direction: column;

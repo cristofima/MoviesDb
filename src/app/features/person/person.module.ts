@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PersonDetailsComponent } from './person.component';
+import { PersonDetailsComponent } from './components/person.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
+import { PersonService } from './services/person.service';
 
 const routes: Routes = [
   {
@@ -24,6 +25,7 @@ const routes: Routes = [
   ],
   exports: [
     PersonDetailsComponent
-  ]
+  ],
+  providers: [PersonService]
 })
 export class PersonModule { }

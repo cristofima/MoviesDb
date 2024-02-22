@@ -1,4 +1,4 @@
-<app-generic-details type="Movie">
+<app-generic-details type="Movie" [callback]="movieDetailsCallback">
   <ng-template #mainInfo let-movie="data" let-contrastColor="contrastColor">
     <h3>{{movie.title}} <span *ngIf="movie.releaseDate">({{movie.releaseDate | date:'yyyy'}})</span></h3>
     <h6>
