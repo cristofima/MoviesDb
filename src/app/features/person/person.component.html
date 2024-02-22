@@ -51,5 +51,40 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <h3>Acting</h3>
+            <div ngbAccordion [closeOthers]="false" #accordion="ngbAccordion">
+                <div ngbAccordionItem *ngFor="let credit of person.creditsList">
+                    <h2 ngbAccordionHeader>
+                        <button ngbAccordionButton>{{ credit.year }}</button>
+                    </h2>
+                    <div ngbAccordionCollapse>
+                        <div ngbAccordionBody>
+                            <ng-template>
+                                <ul class="media-group">
+                                    <li *ngFor="let media of credit.credits" class="media-item">
+                                        <a [routerLink]="['/', media.mediaType, media.id]">{{ media.title }} <span>({{media.releaseDate | date:'MMMM'}})</span></a>
+                                        <span class="media-item-role">
+                                            <ng-container *ngIf="media.mediaType == 'movie'; else showEpisodes">
+                                                <span><span> as </span>{{ media.character }}</span>
+                                            </ng-container>
+
+                                            <ng-template #showEpisodes>
+                                                <div *ngFor="let job of media.jobs">
+                                                    <span *ngIf="job.episodeCount">({{job.episodeCount}} episode{{job.episodeCount > 1 ? 's' : ''}})</span>
+                                                    <span *ngIf="job.job"> as </span>
+                                                    <span *ngIf="job.job">{{ job.job }}</span>
+                                                </div>
+                                            </ng-template>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

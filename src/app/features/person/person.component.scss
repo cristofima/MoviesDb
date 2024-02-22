@@ -32,6 +32,40 @@
 
     .second-column {
         width: calc(100% - 300px);
+
+        .media-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .media-item {
+            display: flex;
+            flex-direction: column;
+
+            a > span {
+                font-weight: normal;
+            }
+
+            .media-item-role > div > span:first-child{
+                color: rgba(0,0,0,.5);
+            }
+
+            .media-item-role {
+                display: flex;
+                flex-direction: column;
+            }
+
+            a {
+                text-decoration: none;
+                color: black;
+                font-weight: bold;
+            }
+
+            a:hover {
+                color: blue
+            }
+        }
     }
 
     .known-for-container {

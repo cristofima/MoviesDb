@@ -19,5 +19,21 @@ export interface Person {
         twitterId: string;
         tiktokId: string;
         youtubeId: string;
-    }
+    },
+    creditsList: PersonCredit[];
+}
+
+export interface PersonCredit {
+    year: number;
+    credits: {
+        id: number;
+        title: string;
+        releaseDate: Date;
+        character?: string;
+        jobs?: {
+            episodeCount: number;
+            job: string;
+        }[];
+        mediaType: 'movie' | 'tv';
+    }[]
 }

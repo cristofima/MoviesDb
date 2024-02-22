@@ -135,6 +135,7 @@ export class TMDbService {
             profilePath: data.profile_path,
             knownCredits: data.combined_credits.cast.length,
             knownFor: PersonUtil.getKnownForMedia(data),
+            creditsList: PersonUtil.getCreditsList(data),
             externalIds: {
               facebookId: data.external_ids.facebook_id,
               instagramId: data.external_ids.instagram_id,
