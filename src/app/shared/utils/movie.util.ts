@@ -80,9 +80,7 @@ export class MovieUtil {
             };
         }
 
-        const { trailerKey, recommendations, people, topBilledCast, keywords, productionCompany } = BaseMediaUtil.getCommonExtraData(data, 'Movie');
-
-        return { certification, trailerKey, recommendations, collection, people, topBilledCast, keywords, productionCompany };
+        return {...BaseMediaUtil.getCommonExtraData(data, 'Movie'), certification, collection };
     }
 
     private static getMovieCertification(results: any[], countryCode: string) {

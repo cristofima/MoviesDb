@@ -38,15 +38,30 @@ export class BaseMediaUtil {
         }
 
         if (data[creditsKey] && data[creditsKey].crew) {
-            let searchArr = mediaType === 'Movie' ? ['Characters', 'Director', 'Screenplay'] : ['Creator', 'Director', 'Writer'];
-            people = data[creditsKey].crew.filter(crew => searchArr.includes(crew.job))
-                .map((crew: any) => {
-                    return {
-                        id: crew.id,
-                        name: crew.name,
-                        job: crew.job
-                    };
-                }).sort((a: Crew, b: Crew) => a.job.localeCompare(b.job));
+            if(mediaType === 'Movie') {
+                let searchArr = ['Characters', 'Director', 'Screenplay'];
+                people = data[creditsKey].crew
+                    .filter((crew: any) => searchArr.includes(crew.job))
+                    .map((crew: any) => {
+                        return {
+                            id: crew.id,
+                            name: crew.name,
+                            job: crew.job
+                        };
+                    });
+            }else{
+                people = data[creditsKey].crew
+                    .filter((crew: any) => crew.department === 'Production' && crew.jobs.length === 1 && crew.jobs[0].job === 'Executive Producer')
+                    .map((crew: any) => {
+                        return {
+                            id: crew.id,
+                            name: crew.name,
+                            job: 'Creator'
+                        };
+                    });
+            }
+            
+            people.sort((a: Crew, b: Crew) => a.job.localeCompare(b.job));
         }
 
         let keywords: string[] = [];

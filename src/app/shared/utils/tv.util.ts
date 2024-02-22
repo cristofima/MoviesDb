@@ -20,7 +20,7 @@ export class TVUtil {
         };
 
         if (extractExtraData) {
-            let productionCountryCode = data.origin_country && data.origin_country.length[0];
+            let productionCountryCode = data.origin_country && data.origin_country[0];
             let originCountryCode = data.production_companies && data.production_companies[0]?.origin_country;
 
             const extraData = this.getExtraTVData(data, originCountryCode, productionCountryCode);
@@ -45,9 +45,7 @@ export class TVUtil {
             }
         }
 
-        const { trailerKey, recommendations, people, topBilledCast, keywords, productionCompany } = BaseMediaUtil.getCommonExtraData(data, 'TV');
-
-        return { certification, trailerKey, recommendations, people, topBilledCast, keywords, productionCompany };
+        return {...BaseMediaUtil.getCommonExtraData(data, 'TV'), certification };
     }
 
     private static getTVCertification(results: any[], countryCode: string) {
