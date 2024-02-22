@@ -1,7 +1,6 @@
 <app-generic-details type="Movie">
   <ng-template #mainInfo let-movie="data" let-contrastColor="contrastColor">
-    <h3>{{movie.title}} <span *ngIf="movie.releaseDate" class="movie-year">({{movie.releaseDate | date:'yyyy'}})</span>
-    </h3>
+    <h3>{{movie.title}} <span *ngIf="movie.releaseDate">({{movie.releaseDate | date:'yyyy'}})</span></h3>
     <h6>
       <span class="certification-box" *ngIf="movie.certification"
         [title]="movie.certification | certification">{{movie.certification}}</span> {{movie.releaseDate |
@@ -81,7 +80,7 @@
           <div class="col-md-12">
             <ng-container *ngIf="movie.recommendations.length; else emptyRecommendations">
               <a *ngFor="let r of movie.recommendations" [routerLink]="['/', r.mediaType, r.id]">
-                <img src="https://image.tmdb.org/t/p/original{{r.posterPath}}" class="img-thumbnail img-similar"
+                <img src="https://image.tmdb.org/t/p/w154{{r.posterPath}}" class="img-thumbnail img-similar"
                   [title]="r.title" loading="lazy">
               </a>
             </ng-container>
