@@ -79,8 +79,8 @@
                                     <li *ngFor="let media of credit.credits" class="media-item">
                                         <a [routerLink]="['/', media.mediaType, media.id]">{{ media.title }} <span>({{media.releaseDate | date:'MMMM'}})</span></a>
                                         <span class="media-item-role">
-                                            <ng-container *ngIf="media.mediaType == 'movie'; else showEpisodes">
-                                                <span><span> as </span>{{ media.character }}</span>
+                                            <ng-container *ngIf="media.mediaType === 'movie'; else showEpisodes">
+                                                <span *ngIf="media.character"><span> as </span>{{ media.character }}</span>
                                             </ng-container>
 
                                             <ng-template #showEpisodes>

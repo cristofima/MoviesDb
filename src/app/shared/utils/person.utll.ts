@@ -5,7 +5,24 @@ export class PersonUtil {
 
     public static getKnownForMedia(data: any): MinimalMedia[] {
         return ([...data.combined_credits.cast] as any[])
-            .sort((a: any, b: any) => b.popularity - a.popularity)
+            .filter((c: any) => c.character !== 'Self' && !c.character.includes('(voice)'))
+            .sort((a: any, b: any) => {
+                let episodeCountA = a.episode_count || 1;
+                let episodeCountB = b.episode_count || 1;
+
+                if (b.vote_average !== a.vote_average) {
+                    const weightedScoreA = a.vote_average * a.vote_count * episodeCountA;
+                    const weightedScoreB = b.vote_average * b.vote_count * episodeCountB;
+
+                    return weightedScoreB - weightedScoreA;
+                }
+
+                if (b.popularity !== a.popularity) {
+                    return b.popularity * episodeCountB - a.popularity * episodeCountA;
+                }
+
+                return new Date(b.release_date).getTime() - new Date(a.release_date).getTime();
+            })
             .slice(0, 8)
             .map((c: any) => {
                 return {
