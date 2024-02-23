@@ -1,5 +1,26 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-  <a class="navbar-brand" routerLink="/">&nbsp;&nbsp;Movies Db</a>
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">&nbsp;&nbsp;Movies Db</a>
+    <button
+			class="navbar-toggler"
+			type="button"
+			aria-controls="navbarContent"
+			[attr.aria-expanded]="!collapsed"
+			aria-label="Toggle navigation"
+			(click)="collapsed = !collapsed"
+		>
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+    <div class="navbar-collapse" [class.collapse]="collapsed" id="navbarContent">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/movie">Movies</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
 </nav>
 
 <ngx-spinner type="square-jelly-box"></ngx-spinner>
