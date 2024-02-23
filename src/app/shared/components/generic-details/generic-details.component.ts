@@ -56,14 +56,18 @@ export class GenericDetailsComponent implements OnInit {
   }
 
   private async getDominantColor() {
-    let imgUrl = `image/t/p/w300${this.data.posterPath}`;
-    this.posterImgDominantColor = await this.dominantColorService.getDominantColor(imgUrl);
-    this.contrastColor = ColorUtil.getContrastColor(this.posterImgDominantColor);
-    this.firstBackgroundImg = `url(https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces${this.data.backdropPath})`;
-
-    let rgbColor = ColorUtil.hexToRgb(this.posterImgDominantColor);
-    let rgbString = `${rgbColor.r}, ${rgbColor.g}, ${rgbColor.b}`;
-
-    this.secondBackgroundImg = `linear-gradient(to right, rgba(${rgbString}, 1) calc((50vw - 170px) - 340px), rgba(${rgbString}, 0.84) 50%, rgba(${rgbString}, 0.84) 100%)`;
+    if(this.data.posterPath){
+      let imgUrl = `image/t/p/w300${this.data.posterPath}`;
+      this.posterImgDominantColor = await this.dominantColorService.getDominantColor(imgUrl);
+      this.contrastColor = ColorUtil.getContrastColor(this.posterImgDominantColor);
+      this.firstBackgroundImg = `url(https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces${this.data.backdropPath})`;
+  
+      let rgbColor = ColorUtil.hexToRgb(this.posterImgDominantColor);
+      let rgbString = `${rgbColor.r}, ${rgbColor.g}, ${rgbColor.b}`;
+  
+      this.secondBackgroundImg = `linear-gradient(to right, rgba(${rgbString}, 1) calc((50vw - 170px) - 340px), rgba(${rgbString}, 0.84) 50%, rgba(${rgbString}, 0.84) 100%)`;
+    }else{
+      this.contrastColor = 'black';
+    }
   }
 }

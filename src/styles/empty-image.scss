@@ -1,0 +1,44 @@
+.image-content {
+    min-width: 300px;
+    width: 300px;
+    height: 450px;
+
+    .poster, .profile {
+        display: block;
+        min-width: 300px;
+        width: 300px;
+        height: 450px;
+        position: relative;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        border-radius: 10px;
+    }
+
+    .no-image-holder {
+        width: 100%;
+        height: 100%;
+        background-color: #dbdbdb;
+        background-size: 50%;
+        border: 1px solid #d7d7d7;
+        z-index: -1;
+    }
+    
+    .glyphicons_v2  {
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+    
+    .glyphicons_v2.poster {
+        background-image: url(/assets/glyphicons/glyphicons-basic-picture-grey.svg);
+    }
+
+    .glyphicons_v2.profile.female {
+        background-image: url(/assets/glyphicons/glyphicons-basic-user-female-grey.svg);
+    }
+
+    .glyphicons_v2.profile.male {
+        background-image: url(/assets/glyphicons/glyphicons-basic-user-male-grey.svg);
+    }
+}
+

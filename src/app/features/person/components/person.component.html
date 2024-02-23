@@ -1,6 +1,14 @@
 <div class="container" *ngIf="person">
     <div class="first-column">
-        <img src="https://media.themoviedb.org/t/p/w300_and_h450_bestv2{{person.profilePath}}">
+        <img *ngIf="person.profilePath; else emptyImage" src="https://media.themoviedb.org/t/p/w300_and_h450_bestv2{{person.profilePath}}">
+
+        <ng-template #emptyImage>
+            <div class="image-content">
+              <div class="glyphicons_v2 picture profile no-image-holder"
+                [ngClass]="{female: person.gender === 'Female', male: person.gender === 'Male' || person.gender !== 'Female'}"></div>
+            </div>
+          </ng-template>
+
         <h5>Personal Info</h5>
 
         <div class="personal-info">
@@ -18,7 +26,8 @@
             </div>
             <div>
                 <span>Birthday</span>
-                <span>{{person.birthday | date}} <ng-container *ngIf="!person.deathday">({{person.age}} years old)</ng-container></span>
+                <span *ngIf="person.birthday">{{person.birthday | date}} <ng-container *ngIf="!person.deathday">({{person.age}} years old)</ng-container></span>
+                <span *ngIf="!person.birthday">-</span>
             </div>
             <div *ngIf="person.deathday">
                 <span>Day of Death</span>
@@ -26,7 +35,7 @@
             </div>
             <div>
                 <span>Place of Birth</span>
-                <span>{{person.placeOfBirth}}</span>
+                <span>{{person.placeOfBirth || '-'}}</span>
             </div>
         </div>
     </div>

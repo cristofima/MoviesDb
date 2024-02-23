@@ -3,8 +3,14 @@
   <div class="large-container" [style.background-image]="firstBackgroundImg">
     <div class="row main-info-container" [ngStyle]="{color: contrastColor, 'background-image': secondBackgroundImg}">
       <div class="col-md-3">
-        <img class="img-fluid rounded mb-3 mb-md-0 img-principal"
+        <img *ngIf="data.posterPath; else emptyImage" class="img-fluid rounded mb-3 mb-md-0 img-principal"
           src="https://image.tmdb.org/t/p/w300{{data.posterPath}}">
+
+          <ng-template #emptyImage>
+            <div class="image-content">
+              <div class="glyphicons_v2 picture poster no-image-holder"></div>
+            </div>
+          </ng-template>
       </div>
 
       <div class="col-md-9">
