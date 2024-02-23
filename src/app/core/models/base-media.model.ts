@@ -30,6 +30,7 @@ export interface Cast {
     name: string;
     character: string;
     profilePath: string;
+    episodeCount?: number;
 }
 
 export interface Crew {

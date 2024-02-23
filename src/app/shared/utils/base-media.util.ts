@@ -25,21 +25,28 @@ export class BaseMediaUtil {
         let people: Crew[] = [];
         let topBilledCast: Cast[] = [];
         let creditsKey = mediaType === 'Movie' ? 'credits' : 'aggregate_credits';
+        let isTV = mediaType === 'TV';
         if (data[creditsKey] && data[creditsKey].cast) {
             topBilledCast = data[creditsKey].cast.filter(cast => cast.order <= 8 && cast.known_for_department === 'Acting')
                 .map((cast: any) => {
-                    return {
+                    let mediaCast: Cast = {
                         id: cast.id,
                         name: cast.name,
                         character: cast.character,
                         profilePath: cast.profile_path
                     };
+
+                    if (isTV) {
+                        mediaCast.character = cast.roles[0].character;
+                        mediaCast.episodeCount = cast.roles[0].episode_count;
+                    }
+
+                    return mediaCast;
                 });
         }
 
-        if (data[creditsKey] && data[creditsKey].crew) {
-            if(mediaType === 'Movie') {
-                let searchArr = ['Characters', 'Director', 'Screenplay'];
+        if (!isTV && data.credits && data.credits.crew) {
+            let searchArr = ['Characters', 'Director', 'Screenplay'];
                 people = data[creditsKey].crew
                     .filter((crew: any) => searchArr.includes(crew.job))
                     .map((crew: any) => {
@@ -49,19 +56,16 @@ export class BaseMediaUtil {
                             job: crew.job
                         };
                     });
-            }else{
-                people = data[creditsKey].crew
-                    .filter((crew: any) => crew.department === 'Production' && crew.jobs.length === 1 && crew.jobs[0].job === 'Executive Producer')
-                    .map((crew: any) => {
-                        return {
-                            id: crew.id,
-                            name: crew.name,
-                            job: 'Creator'
-                        };
-                    });
-            }
             
             people.sort((a: Crew, b: Crew) => a.job.localeCompare(b.job));
+        }else if(isTV && data.created_by) {
+            people = data.created_by.map((creator: any) => {
+                return {
+                    id: creator.credit_id,
+                    name: creator.name,
+                    job: 'Creator'
+                };
+            });
         }
 
         let keywords: string[] = [];
