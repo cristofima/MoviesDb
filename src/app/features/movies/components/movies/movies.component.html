@@ -18,7 +18,7 @@
       <ng-container *ngIf="movies.length; else emptyMovies">
         <div *ngFor="let movie of movies" class="col-lg-3 col-sm-6 mb-4">
           <div class="card h-100">
-            <app-movie-poster [movie]="movie"></app-movie-poster>
+            <app-movie-poster [media]="movie"></app-movie-poster>
           </div>
         </div>
       </ng-container>

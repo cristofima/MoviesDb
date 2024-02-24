@@ -6,5 +6,78 @@
 
   <br />
 
-  
+  <h3>Trending</h3>
+  <ul ngbNav #navTrending="ngbNav" [(activeId)]="activeTrending" class="nav-tabs">
+    <li [ngbNavItem]="1">
+      <button ngbNavLink>Today</button>
+      <ng-template ngbNavContent>
+        <div class="row">
+          <div class="media-container">
+            <div *ngFor="let media of trendingMediaToday" class="card">
+              <app-movie-poster [media]="media" showSmallFormat="true"></app-movie-poster>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="2">
+      <button ngbNavLink>This Week</button>
+      <ng-template ngbNavContent>
+        <div class="row">
+          <div class="media-container">
+            <div *ngFor="let media of trendingMediaThisWeek" class="card">
+              <app-movie-poster [media]="media" showSmallFormat="true"></app-movie-poster>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </li>
+  </ul>
+
+  <div [ngbNavOutlet]="navTrending" class="mt-2"></div>
+
+  <br />
+
+  <h3>What's Popular</h3>
+  <ul ngbNav #navPopular="ngbNav" [(activeId)]="activePopular" class="nav-tabs">
+    <li [ngbNavItem]="1">
+      <button ngbNavLink>Streaming</button>
+      <ng-template ngbNavContent>
+        <div class="row">
+          <div class="media-container">
+            <div *ngFor="let media of popularStreaming" class="card">
+              <app-movie-poster [media]="media" showSmallFormat="true"></app-movie-poster>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="2">
+      <button ngbNavLink>On TV</button>
+      <ng-template ngbNavContent>
+        <div class="row">
+          <div class="media-container">
+            <div *ngFor="let media of popularOnTV" class="card">
+              <app-movie-poster [media]="media" showSmallFormat="true"></app-movie-poster>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="3">
+      <button ngbNavLink>In Theaters</button>
+      <ng-template ngbNavContent>
+        <div class="row">
+          <div class="media-container">
+            <div *ngFor="let media of popularInTheaters" class="card">
+              <app-movie-poster [media]="media" showSmallFormat="true"></app-movie-poster>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </li>
+  </ul>
+
+  <div [ngbNavOutlet]="navPopular" class="mt-2"></div>
+
 </div>

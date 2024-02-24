@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { HomeService } from './services/home.service';
+import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 
 const routes: Routes = [
   {
@@ -19,7 +20,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     RouterModule.forChild(routes),    
-    SharedModule
+    SharedModule,
+    NgbNavModule
   ],
   providers: [HomeService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

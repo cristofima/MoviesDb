@@ -5,6 +5,11 @@ export interface MinimalMedia {
     mediaType: 'movie' | 'tv';
 }
 
+export interface MinimalMediaV2 extends MinimalMedia {
+    voteAverage: number;
+    releaseDate: Date;
+}
+
 export interface BaseMedia extends MinimalMedia {
     overview: string;
     tagline: string;
