@@ -3,11 +3,11 @@ import { Movie } from 'src/app/core/models/movie.model';
 import { TV } from 'src/app/core/models/tv.model';
 
 @Component({
-  selector: 'app-movie-poster',
-  templateUrl: './movie-poster.component.html',
-  styleUrls: ['./movie-poster.component.scss']
+  selector: 'app-media-poster',
+  templateUrl: './media-poster.component.html',
+  styleUrls: ['./media-poster.component.scss']
 })
-export class MoviePosterComponent implements OnInit {
+export class MediaPosterComponent implements OnInit {
 
   @Input({ required: true }) media: Movie | TV;
   @Input() showSmallFormat = false;
