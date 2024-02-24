@@ -1,22 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MoviesComponent } from './components/movies/movies.component';
+import { TvShowsComponent } from './components/tv-shows.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 const routes: Routes = [
   {
     path: '',
-    component: MoviesComponent
+    component: TvShowsComponent
   }
 ];
 
 @NgModule({
-  declarations: [MoviesComponent],
+  declarations: [
+    TvShowsComponent
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     SharedModule
   ]
 })
-export class MoviesModule { }
+export class TvShowsModule { }

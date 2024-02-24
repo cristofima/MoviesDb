@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="search-container">
+      <input type="search" [(ngModel)]="search" (keydown.enter)="searchMedia()" placeholder="Search for a {{mediaType === 'movie' ? 'movie' : 'tv show'}}"
+        (click)="loadMedia()" />
+      <button type="button" class="btn btn-primary" (click)="searchMedia()">Search</button>
+    </div>
+  
+    <br />
+  
+    <div class="overflow-auto d-flex flex-sm-row flex-column justify-content-center">
+      <ngb-pagination *ngIf="maxResults" [collectionSize]="maxResults" [(page)]="pageNumber" [maxSize]="15"
+        [pageSize]="pageSize" (pageChange)="paginateMedia()" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+    </div>
+  
+    <div class="row">
+      <ng-container *ngIf="mediaList.length; else emptyMedia">
+        <div *ngFor="let movie of mediaList" class="col-lg-3 col-sm-6 mb-4">
+          <div class="card h-100">
+            <app-media-poster [media]="movie"></app-media-poster>
+          </div>
+        </div>
+      </ng-container>
+  
+      <ng-template #emptyMedia>
+        <div class="alert alert-warning" style="width: 100%;" role="alert">
+          No {{mediaType === 'movie' ? 'movies' : 'tv shows'}} found
+        </div>
+      </ng-template>
+  
+    </div>
+
+    <div class="overflow-auto overflow-auto d-flex flex-sm-row flex-column justify-content-center">
+      <ngb-pagination *ngIf="maxResults" [collectionSize]="maxResults" [(page)]="pageNumber" [maxSize]="15"
+        [pageSize]="pageSize" (pageChange)="paginateMedia()" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+    </div>
+  </div>

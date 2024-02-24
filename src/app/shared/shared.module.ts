@@ -6,25 +6,34 @@ import { BorderClassPipe } from './pipes/border-class.pipe';
 import { CertificationPipe } from './pipes/certification.pipe';
 import { RouterModule } from '@angular/router';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { MediaListComponent } from './components/media-list/media-list.component';
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+import { MediaService } from './services/media.service';
 
 @NgModule({
   declarations: [
     GenericDetailsComponent,
     MediaPosterComponent,
     BorderClassPipe,
-    CertificationPipe
+    CertificationPipe,
+    MediaListComponent
   ],
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule,
-    NgCircleProgressModule
+    NgCircleProgressModule,
+    NgbPaginationModule
   ],
   exports: [
     GenericDetailsComponent,
     MediaPosterComponent,
+    MediaListComponent,
     BorderClassPipe,
     CertificationPipe
   ],
+  providers: [MediaService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SharedModule { }

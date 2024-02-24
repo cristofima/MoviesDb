@@ -8,7 +8,7 @@
         </h6>
 
         <p class="card-text">
-            <a *ngFor="let genre of tv.genres" href="javascript:void(0);">
+            <a *ngFor="let genre of tv.genres" [routerLink]="['/tv-shows']" [queryParams]="{genreId: genre.id}">
                 <span class="badge text-bg-primary genre-badge">{{ genre.name }}</span>
             </a>
         </p>

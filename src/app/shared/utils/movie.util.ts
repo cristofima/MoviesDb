@@ -1,29 +1,8 @@
 import { Movie, MinimalCollection } from "src/app/core/models/movie.model";
 import { LanguageUtil } from "./language.util";
-import { PaginationModel } from "src/app/core/models/pagination.model";
 import { BaseMediaUtil } from "./base-media.util";
 
 export class MovieUtil {
-
-    public static getPaginationMovies(data: any): PaginationModel {
-        let movies = data['results'].map((movie: any) => {
-            return {
-                id: movie.id,
-                title: movie.title,
-                posterPath: movie.poster_path,
-                voteAverage: movie.vote_average,
-                releaseDate: movie.release_date,
-                mediaType: 'movie'
-            };
-        });
-
-        return {
-            page: data['page'],
-            results: movies,
-            totalPages: data['total_pages'],
-            totalResults: data['total_results']
-        };
-    }
 
     public static getFullMovieData(data: any, extractExtraData = true) {
         let movie: Movie = {
