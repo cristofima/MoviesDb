@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { MovieFilter } from 'src/app/core/models/movie-filter';
-import { Movie } from 'src/app/core/models/movie.model';
 import { PaginationModel } from 'src/app/core/models/pagination.model';
 import { MediaService } from '../../services/media.service';
+import { MinimalMedia } from 'src/app/core/models/base-media.model';
 
 @Component({
   selector: 'app-movies',
@@ -13,7 +13,7 @@ import { MediaService } from '../../services/media.service';
 })
 export class MoviesComponent {
 
-  movies: Movie[] = [];
+  movies: MinimalMedia[] = [];
   pageNumber = 1;
   pageSize = 20;
 

@@ -10,9 +10,9 @@ export class MovieUtil {
             return {
                 id: movie.id,
                 title: movie.title,
-                overview: movie.overview,
                 posterPath: movie.poster_path,
                 voteAverage: movie.vote_average,
+                releaseDate: movie.release_date,
                 mediaType: 'movie'
             };
         });

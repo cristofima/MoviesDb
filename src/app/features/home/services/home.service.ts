@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable, forkJoin  } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { MinimalMediaV2 } from 'src/app/core/models/base-media.model';
+import { MinimalMedia } from 'src/app/core/models/base-media.model';
 import { TMDbService } from 'src/app/core/services/tmdb.service';
 
 @Injectable()
 export class HomeService extends TMDbService {
 
-    getTrendingMedia(frecuency: 'day' | 'week'): Observable<MinimalMediaV2[]> {
+    getTrendingMedia(frecuency: 'day' | 'week'): Observable<MinimalMedia[]> {
         return this.getQuery(`trending/all/${frecuency}`)
             .pipe(
                 map((data: any) => {
@@ -25,7 +25,7 @@ export class HomeService extends TMDbService {
             );
     }
 
-    getPopularMedia(option: 'tv' | 'theater'): Observable<MinimalMediaV2[]> {
+    getPopularMedia(option: 'tv' | 'theater'): Observable<MinimalMedia[]> {
         let endpoint = option === 'tv' ? 'tv/popular' : 'discover/movie';
         let queryParams = option === 'tv' ? '' : 'watch_region=US&with_release_type=3|2';
         let mediaType = option === 'tv' ? 'tv' : 'movie';
@@ -47,7 +47,7 @@ export class HomeService extends TMDbService {
             );
     }
 
-    getPopularStreaming(): Observable<MinimalMediaV2[]> {
+    getPopularStreaming(): Observable<MinimalMedia[]> {
         const callback = (mediaType: 'movie' | 'tv') => 
             this.getQuery(`discover/${mediaType}`, 'watch_region=US&with_watch_monetization_types=flatrate')
                 .pipe(

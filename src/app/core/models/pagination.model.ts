@@ -1,8 +1,8 @@
-import { Movie } from "./movie.model";
+import { MinimalMedia } from "./base-media.model";
 
 export interface PaginationModel {
   page: number;
-  results: Movie[];
+  results: MinimalMedia[];
   totalPages: number;
   totalResults: number;
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { HomeService } from '../services/home.service';
-import { MinimalMediaV2 } from 'src/app/core/models/base-media.model';
+import { MinimalMedia } from 'src/app/core/models/base-media.model';
 
 @Component({
   selector: 'app-home',
@@ -10,12 +10,12 @@ import { MinimalMediaV2 } from 'src/app/core/models/base-media.model';
 })
 export class HomeComponent implements OnInit {
 
-  trendingMediaToday: MinimalMediaV2[] = [];
-  trendingMediaThisWeek: MinimalMediaV2[] = [];
+  trendingMediaToday: MinimalMedia[] = [];
+  trendingMediaThisWeek: MinimalMedia[] = [];
 
-  popularStreaming: MinimalMediaV2[] = [];
-  popularOnTV: MinimalMediaV2[] = [];
-  popularInTheaters: MinimalMediaV2[] = [];
+  popularStreaming: MinimalMedia[] = [];
+  popularOnTV: MinimalMedia[] = [];
+  popularInTheaters: MinimalMedia[] = [];
 
   activeTrending = 1;
   activePopular = 1;

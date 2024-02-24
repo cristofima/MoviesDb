@@ -3,11 +3,8 @@ export interface MinimalMedia {
     title: string;
     posterPath: string;
     mediaType: 'movie' | 'tv';
-}
-
-export interface MinimalMediaV2 extends MinimalMedia {
-    voteAverage: number;
-    releaseDate: Date;
+    voteAverage?: number;
+    releaseDate?: Date;
 }
 
 export interface BaseMedia extends MinimalMedia {
