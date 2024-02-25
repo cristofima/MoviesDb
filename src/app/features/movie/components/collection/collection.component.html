@@ -19,9 +19,9 @@
     <div class="row">
       <h3 style="width: 100%;">Movies</h3>
 
-      <div *ngFor="let movie of collection.movies" class="col-lg-3 col-sm-6 mb-4">
+      <div *ngFor="let movie of collection.movies" class="col-lg-2 col-sm-6 mb-4">
         <div class="card h-100">
-          <app-media-poster [media]="movie"></app-media-poster>
+          <app-media-poster [media]="movie" sizeformat="medium"></app-media-poster>
         </div>
       </div>
     </div>

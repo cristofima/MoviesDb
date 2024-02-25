@@ -3,11 +3,11 @@
 <div class="card-body">
   <div class="card-title">
     <div class="row">
-      <div class="col-md-{{showSmallFormat ? '12' : '8'}}">
+      <div class="col-md-{{primaryColSize}}">
         <a [ngStyle]="{'font-size': fontSize}" [routerLink]="['/', media.mediaType, media.id]">{{media.title}}</a>
         <p [ngStyle]="{'font-size': fontSize}" *ngIf="media[dateKey] ">{{media[dateKey] | date}}</p>
       </div>
-      <div *ngIf="!showSmallFormat" class="col-md-4">
+      <div *ngIf="sizeformat === 'large'" class="col-md-3">
         <circle-progress *ngIf="media.voteAverage > 0; else elseBlock" [percent]="media.voteAverage * 10"
           [unitsFontSize]="10" [titleFontSize]="10" [radius]="25" [outerStrokeWidth]="5"
           [innerStrokeWidth]="5" [outerStrokeColor]="media.voteAverage | borderClass"></circle-progress>
