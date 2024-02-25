@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { MinimalMedia } from 'src/app/core/models/base-media.model';
 import { MediaFilter } from 'src/app/core/models/media-filter';
@@ -10,7 +10,7 @@ import { MediaService } from 'src/app/shared/services/media.service';
   templateUrl: './media-list.component.html',
   styleUrls: ['./media-list.component.scss']
 })
-export class MediaListComponent {
+export class MediaListComponent implements OnInit {
 
   mediaList: MinimalMedia[] = [];
   pageSize = 20;
@@ -25,11 +25,11 @@ export class MediaListComponent {
   @Input() genreId: number;
   @Input({required: true}) mediaType: 'movie' | 'tv';
 
-  constructor(private mediaService: MediaService, private titleService: Title) {
-    this.titleService.setTitle("Movies | Movies Db");
-  }
+  constructor(private mediaService: MediaService, private titleService: Title) { }
 
   ngOnInit() {
+    const prefix = this.mediaType === 'movie' ? 'Movies' : 'TV Shows';
+    this.titleService.setTitle(`${prefix} | Movies Db`);
     this.loadParams();
   }
 

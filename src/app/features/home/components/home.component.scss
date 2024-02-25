@@ -1,18 +1,6 @@
 .container {
+  padding-top: 20px;
   padding-bottom: 20px;
-}
-
-.search-container {
-  display: flex;
-  padding: 20px 0 20px 0;
-  gap: 5px;
-
-  input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-  }
 }
 
 .row > .media-container {
@@ -23,10 +11,10 @@
   padding-bottom: 10px;
 
   .card {
-      border-radius: 15px;
-      overflow: hidden;
-      border-radius: 8px;
-      width: 150px;
-      min-width: 150px;
+    border-radius: 15px;
+    overflow: hidden;
+    border-radius: 8px;
+    width: 150px;
+    min-width: 150px;
   }
 }

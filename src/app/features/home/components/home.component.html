@@ -1,11 +1,4 @@
 <div class="container">
-  <div class="search-container">
-    <input type="search" (keydown.enter)="searchMedia()" placeholder="Search for a movie, tv show or person"/>
-    <button type="button" class="btn btn-primary" (click)="searchMedia()">Search</button>
-  </div>
-
-  <br />
-
   <h3>Trending</h3>
   <ul ngbNav #navTrending="ngbNav" [(activeId)]="activeTrending" class="nav-tabs">
     <li [ngbNavItem]="1">

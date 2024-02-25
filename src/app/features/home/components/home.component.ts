@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   activePopular = 1;
 
   constructor(private homeService: HomeService, private titleService: Title) {
-    this.titleService.setTitle("Movies Db");
+    this.titleService.setTitle("Home | Movies Db");
   }
 
   ngOnInit() {
@@ -50,10 +50,6 @@ export class HomeComponent implements OnInit {
 
   private async loadPopularInTheaters(){
     this.popularInTheaters = await this.homeService.getPopularMedia('theater').toPromise();
-  }
-
-  searchMedia() {
-    
   }
 
 }
