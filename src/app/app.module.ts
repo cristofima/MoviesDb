@@ -8,7 +8,6 @@ import { AppComponent } from "./app.component";
 
 import { GlobalHttpInterceptor } from "./core/interceptors/global-http.interceptor";
 
-import { NgxSpinnerModule } from "ngx-spinner";
 import { NgHttpCachingConfig, NgHttpCachingLocalStorage, NgHttpCachingModule } from "ng-http-caching";
 
 import { PageNotFoundComponent } from "./shared/components/error-pages/page-not-found/page-not-found.component";
@@ -30,7 +29,6 @@ const ngHttpCachingConfig: NgHttpCachingConfig = {
     AppRoutingModule,
     HttpClientModule,
     NgHttpCachingModule.forRoot(ngHttpCachingConfig),
-    NgxSpinnerModule,
     NgCircleProgressModule.forRoot({
       radius: 90,
       outerStrokeWidth: 12,

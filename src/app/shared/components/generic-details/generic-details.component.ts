@@ -3,7 +3,6 @@ import { Collection } from '../../../core/models/collection.model';
 import { Movie } from '../../../core/models/movie.model';
 import { DominantColorService } from 'src/app/core/services/dominant-color.service';
 import { ActivatedRoute } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { Title } from '@angular/platform-browser';
 import { ColorUtil } from '../../utils/color.util';
 import { TV } from 'src/app/core/models/tv.model';
@@ -28,10 +27,9 @@ export class GenericDetailsComponent implements OnInit {
   @ContentChild('mainInfo') mainInfo: TemplateRef<any>;
   @ContentChild('aditionalInfo') aditionalInfo: TemplateRef<any>;
 
-  constructor(private actRouter: ActivatedRoute, private spinner: NgxSpinnerService, private titleService: Title, private dominantColorService: DominantColorService) { }
+  constructor(private actRouter: ActivatedRoute, private titleService: Title, private dominantColorService: DominantColorService) { }
 
   ngOnInit(): void {
-    this.spinner.show();
     this.actRouter.params.subscribe(params => {
       this.loadDetails(params['id']);
     });
@@ -50,7 +48,6 @@ export class GenericDetailsComponent implements OnInit {
       title = (this.data as TV).title;
     }
 
-    this.spinner.hide();
     this.getDominantColor();
     this.titleService.setTitle(`${title} | Movies Db`);
   }

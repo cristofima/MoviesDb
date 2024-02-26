@@ -27,8 +27,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/ngx-spinner/animations/square-jelly-box.css"
+              "src/styles.scss"
             ],
             "scripts": [],
             "vendorChunk": true,

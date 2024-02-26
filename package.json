@@ -25,7 +25,6 @@
     "@ng-bootstrap/ng-bootstrap": "^15.1.2",
     "ng-circle-progress": "^1.7.1",
     "ng-http-caching": "^16.0.12",
-    "ngx-spinner": "^16.0.2",
     "node-vibrant": "^3.1.6",
     "rxjs": "^6.6.7",
     "tslib": "^2.0.0",

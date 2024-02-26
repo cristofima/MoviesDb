@@ -1,8 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
 import { NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { Person } from 'src/app/core/models/person.model';
 import { PersonService } from '../services/person.service';
 
@@ -17,19 +15,16 @@ export class PersonDetailsComponent implements OnInit {
   showFullBiography = false;
   @ViewChild('accordion', { static: false }) accordion: NgbAccordion;
 
-  constructor(private actRouter: ActivatedRoute, private personService: PersonService,
-    private spinner: NgxSpinnerService, private titleService: Title) { }
+  @Input('id') private personId: number;
+
+  constructor(private personService: PersonService, private titleService: Title) { }
 
   ngOnInit(): void {
-    this.spinner.show();
-    this.actRouter.params.subscribe(params => {
-      this.loadDetails(params['id']);
-    });
+    this.loadDetails();
   }
 
-  private async loadDetails(id: number) {
-    this.person = await this.personService.getPersonDetails(id).toPromise();
-    this.spinner.hide();
+  private async loadDetails() {
+    this.person = await this.personService.getPersonDetails(this.personId).toPromise();
     this.titleService.setTitle(`${this.person.name} | Movies Db`);
     setTimeout(() => {
       this.accordion && this.accordion.expandAll();
