@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionDirective } from '@ng-bootstrap/ng-bootstrap';
 import { Person } from 'src/app/core/models/person.model';
 import { PersonService } from '../services/person.service';
 
@@ -13,7 +13,7 @@ export class PersonDetailsComponent implements OnInit {
 
   person: Person;
   showFullBiography = false;
-  @ViewChild('accordion', { static: false }) accordion: NgbAccordion;
+  @ViewChild('accordion', { static: false }) accordion: NgbAccordionDirective;
 
   @Input('id') private personId: number;
 

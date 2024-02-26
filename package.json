@@ -13,28 +13,28 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^16.2.12",
-    "@angular/common": "^16.2.12",
-    "@angular/compiler": "^16.2.12",
-    "@angular/core": "^16.2.12",
-    "@angular/forms": "^16.2.12",
-    "@angular/localize": "^16.2.12",
-    "@angular/platform-browser": "^16.2.12",
-    "@angular/platform-browser-dynamic": "^16.2.12",
-    "@angular/router": "^16.2.12",
-    "@ng-bootstrap/ng-bootstrap": "^15.1.2",
+    "@angular/animations": "^17.2.2",
+    "@angular/common": "^17.2.2",
+    "@angular/compiler": "^17.2.2",
+    "@angular/core": "^17.2.2",
+    "@angular/forms": "^17.2.2",
+    "@angular/localize": "^17.2.2",
+    "@angular/platform-browser": "^17.2.2",
+    "@angular/platform-browser-dynamic": "^17.2.2",
+    "@angular/router": "^17.2.2",
+    "@ng-bootstrap/ng-bootstrap": "^16.0.0",
     "ng-circle-progress": "^1.7.1",
-    "ng-http-caching": "^16.0.12",
+    "ng-http-caching": "^17.0.1",
     "node-vibrant": "^3.1.6",
     "rxjs": "^6.6.7",
     "tslib": "^2.0.0",
-    "zone.js": "~0.13.3"
+    "zone.js": "~0.14.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^16.2.12",
-    "@angular/cli": "^16.2.12",
-    "@angular/compiler-cli": "^16.2.12",
-    "@angular/language-service": "^16.2.12",
+    "@angular-devkit/build-angular": "^17.2.1",
+    "@angular/cli": "^17.2.1",
+    "@angular/compiler-cli": "^17.2.2",
+    "@angular/language-service": "^17.2.2",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "^2.0.8",
     "@types/node": "^12.20.36",
@@ -49,6 +49,6 @@
     "protractor": "~7.0.0",
     "ts-node": "^8.6.2",
     "tslint": "~6.1.0",
-    "typescript": "^5.1.6"
+    "typescript": "^5.3.3"
   }
 }

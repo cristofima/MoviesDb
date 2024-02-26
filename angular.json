@@ -79,19 +79,19 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "app-movies:build",
-            "proxyConfig": "src/proxy.config.json"
+            "proxyConfig": "src/proxy.config.json",
+            "buildTarget": "app-movies:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "app-movies:build:production"
+              "buildTarget": "app-movies:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "app-movies:build"
+            "buildTarget": "app-movies:build"
           }
         },
         "test": {
