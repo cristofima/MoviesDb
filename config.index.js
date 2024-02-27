@@ -9,7 +9,8 @@ const targetPath = "./src/environments/environment.prod.ts";
 
 const envConfigFile = `export const environment = {
    production: true,
-   apiKey: '${API_KEY}'
+   apiKey: '${API_KEY}',
+   proxyServer: '${process.env.PROXY_SERVER}'
 };
 `;
 

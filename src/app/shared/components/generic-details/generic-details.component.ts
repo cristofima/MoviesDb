@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { ColorUtil } from '../../utils/color.util';
 import { TV } from 'src/app/core/models/tv.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-generic-details',
@@ -54,7 +55,13 @@ export class GenericDetailsComponent implements OnInit {
 
   private async getDominantColor() {
     if(this.data.posterPath){
-      let imgUrl = `image/t/p/w300${this.data.posterPath}`;
+      let imgUrl: string;
+      if(environment.production){
+        imgUrl = `${environment.proxyServer}/image?url=https://media.themoviedb.org/t/p/w300${this.data.posterPath}`;
+      }else{
+        imgUrl = `image/t/p/w300${this.data.posterPath}`;
+      }
+      
       this.posterImgDominantColor = await this.dominantColorService.getDominantColor(imgUrl);
       this.contrastColor = ColorUtil.getContrastColor(this.posterImgDominantColor);
       this.firstBackgroundImg = `url(https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces${this.data.backdropPath})`;
