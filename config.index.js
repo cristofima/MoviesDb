@@ -4,13 +4,19 @@ if (!API_KEY) {
   return
 }
 
+const PROXY_SERVER = process.env.PROXY_SERVER;
+if (!PROXY_SERVER) {
+  console.log('PROXY_SERVER is missing');
+  return
+}
+
 const fs = require('node:fs');
 const targetPath = "./src/environments/environment.prod.ts";
 
 const envConfigFile = `export const environment = {
    production: true,
    apiKey: '${API_KEY}',
-   proxyServer: '${process.env.PROXY_SERVER}'
+   proxyServer: '${PROXY_SERVER}'
 };
 `;
 
