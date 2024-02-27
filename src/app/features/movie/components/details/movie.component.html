@@ -48,8 +48,15 @@
             <div class="top-billed-cast-container">
               <div *ngFor="let cast of movie.topBilledCast" class="card">
                 <a [routerLink]="['/person/', cast.id]">
-                  <img [src]="cast.profilePath ? 'https://image.tmdb.org/t/p/w185' + cast.profilePath : '/assets/images/no-image.png'"
-                  class="card-img-top" [title]="cast.name" loading="lazy">
+                  <img *ngIf="cast.profilePath; else emptyImage" src="https://image.tmdb.org/t/p/w185{{cast.profilePath}}"
+                    class="card-img-top" [title]="cast.name" loading="lazy">
+
+                  <ng-template #emptyImage>
+                    <div class="image-content" style="width: 136px; height: 205px; min-width: 136px">
+                      <div class="glyphicons_v2 profile no-image-holder" style="z-index: 1;"
+                        [ngClass]="{female: cast.gender === 'Female', male: cast.gender === 'Male' || cast.gender !== 'Female'}"></div>
+                    </div>
+                  </ng-template>
                 </a>
                 
                 <div class="cast-text">
@@ -77,11 +84,18 @@
     
         <div class="row">
           <h4>Recommendations</h4>
-          <div class="col-md-12">
+          <div class="col-md-12 image-content">
             <ng-container *ngIf="movie.recommendations.length; else emptyRecommendations">
               <a *ngFor="let r of movie.recommendations" [routerLink]="['/', r.mediaType, r.id]">
-                <img src="https://image.tmdb.org/t/p/w154{{r.posterPath}}" class="img-thumbnail img-similar"
+                <img *ngIf="r.posterPath; else emptyImage" src="https://image.tmdb.org/t/p/w154{{r.posterPath}}" class="img-thumbnail img-similar"
                   [title]="r.title" loading="lazy">
+                
+                <ng-template #emptyImage>
+                  <div [title]="r.title" style="width: 94px; height: 140px; min-width: 94px; display: inline-block;
+                    position: relative; top: 65px;">
+                    <div class="glyphicons_v2 recomendation no-image-holder"></div>
+                  </div>
+                </ng-template>
               </a>
             </ng-container>
             

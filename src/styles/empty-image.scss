@@ -1,18 +1,17 @@
 .image-content {
-    min-width: 300px;
-    width: 300px;
-    height: 450px;
+    .poster, .profile, .recomendation {
+        min-width: inherit;
+        width: inherit;
+        height: inherit;
+        overflow: hidden;
+        border-radius: 10px;
+    }
 
     .poster, .profile {
         display: block;
-        min-width: 300px;
-        width: 300px;
-        height: 450px;
         position: relative;
         top: 0;
         left: 0;
-        overflow: hidden;
-        border-radius: 10px;
     }
 
     .no-image-holder {
@@ -29,7 +28,7 @@
         background-repeat: no-repeat;
     }
     
-    .glyphicons_v2.poster {
+    .glyphicons_v2.poster, .glyphicons_v2.recomendation {
         background-image: url(/assets/glyphicons/glyphicons-basic-picture-grey.svg);
     }
 

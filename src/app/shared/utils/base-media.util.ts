@@ -33,7 +33,8 @@ export class BaseMediaUtil {
                         id: cast.id,
                         name: cast.name,
                         character: cast.character,
-                        profilePath: cast.profile_path
+                        profilePath: cast.profile_path,
+                        gender: cast.gender
                     };
 
                     if (isTV) {
