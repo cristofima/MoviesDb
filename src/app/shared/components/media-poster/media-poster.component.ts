@@ -15,17 +15,19 @@ export class MediaPosterComponent implements OnInit {
   posterSize = 'w342';
   fontSize = '1em';
   dateKey = 'releaseDate';
-  primaryColSize = 9;
+  titleFontSize = 15;
+  bottomPosition = '85px';
 
   ngOnInit(): void {
     if(this.sizeformat === 'small'){
       this.posterSize = 'w154';
       this.fontSize = '0.9em';
-      this.primaryColSize = 12;
+      this.titleFontSize = 13;
+      this.bottomPosition = '130px';
     }else if(this.sizeformat === 'medium'){
       this.posterSize = 'w185';
       this.fontSize = '0.93em';
-      this.primaryColSize = 12;
+      this.bottomPosition = '82px';
     }
 
     if('firstAirDate' in this.media){

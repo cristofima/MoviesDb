@@ -2,19 +2,22 @@
     src="https://image.tmdb.org/t/p/{{posterSize}}{{media.posterPath}}" alt=""></a>
 <div class="card-body">
   <div class="card-title">
+    <div class="circle-progress-container" [ngStyle]="{'bottom': bottomPosition}">
+      <circle-progress *ngIf="media.voteAverage > 0; else elseBlock" [percent]="media.voteAverage * 10"
+        [unitsFontSize]="5" [titleFontSize]="titleFontSize" [radius]="15" [outerStrokeWidth]="3" backgroundColor="white"
+        [titleFontWeight]="700" [unitsFontWeight]="700" [showInnerStroke]="false"
+        backgroundPadding="3" [outerStrokeColor]="media.voteAverage | borderClass"></circle-progress>
+      <ng-template #elseBlock>
+        <circle-progress [titleFontSize]="titleFontSize" [radius]="15" [outerStrokeWidth]="3" backgroundColor="white"
+          [titleFontWeight]="700" [showInnerStroke]="false" title="NR" backgroundPadding="3"
+          [showUnits]="false" [showInnerStroke]="false"></circle-progress>
+      </ng-template>
+    </div>
+
     <div class="row">
-      <div class="col-md-{{primaryColSize}}">
+      <div class="col-md-12">
         <a [ngStyle]="{'font-size': fontSize}" [routerLink]="['/', media.mediaType, media.id]">{{media.title}}</a>
         <p [ngStyle]="{'font-size': fontSize}" *ngIf="media[dateKey] ">{{media[dateKey] | date}}</p>
-      </div>
-      <div *ngIf="sizeformat === 'large'" class="col-md-3">
-        <circle-progress *ngIf="media.voteAverage > 0; else elseBlock" [percent]="media.voteAverage * 10"
-          [unitsFontSize]="10" [titleFontSize]="10" [radius]="25" [outerStrokeWidth]="5"
-          [innerStrokeWidth]="5" [outerStrokeColor]="media.voteAverage | borderClass"></circle-progress>
-        <ng-template #elseBlock>
-          <circle-progress [unitsFontSize]="10" [titleFontSize]="10" title="N/A" [innerStrokeWidth]="5"
-            [radius]="25" [outerStrokeWidth]="6" [showUnits]="false"></circle-progress>
-        </ng-template>
       </div>
     </div>
   </div>
