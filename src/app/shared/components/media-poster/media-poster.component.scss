@@ -8,7 +8,11 @@ a:hover {
     color: blue
 }
 
-.circle-progress-container {
-    position: absolute;
-    left: 13px;
+.img-container {
+    position: relative;
+
+    .circle-progress-container {
+        position: absolute;
+        left: 13px;
+    }
 }

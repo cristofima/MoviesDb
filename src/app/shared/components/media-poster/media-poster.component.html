@@ -1,19 +1,24 @@
-<a [routerLink]="['/', media.mediaType, media.id]"><img class="card-img-top" loading="lazy"
-    src="https://image.tmdb.org/t/p/{{posterSize}}{{media.posterPath}}" alt=""></a>
+<div class="img-container">
+  <a [routerLink]="['/', media.mediaType, media.id]">
+    <img class="card-img-top" loading="lazy" src="https://image.tmdb.org/t/p/{{posterSize}}{{media.posterPath}}" alt=""
+      [ngStyle]="{'min-height': minImgHeight}">
+  </a>
+
+  <div class="circle-progress-container" [ngStyle]="{'bottom': bottomPosition}">
+    <circle-progress *ngIf="media.voteAverage > 0; else elseBlock" [percent]="media.voteAverage * 10"
+      [unitsFontSize]="5" [titleFontSize]="titleFontSize" [radius]="15" [outerStrokeWidth]="3" backgroundColor="white"
+      [titleFontWeight]="700" [unitsFontWeight]="700" [showInnerStroke]="false"
+      backgroundPadding="3" [outerStrokeColor]="media.voteAverage | borderClass"></circle-progress>
+    <ng-template #elseBlock>
+      <circle-progress [titleFontSize]="titleFontSize" [radius]="15" [outerStrokeWidth]="3" backgroundColor="white"
+        [titleFontWeight]="700" [showInnerStroke]="false" title="NR" backgroundPadding="3"
+        [showUnits]="false" [showInnerStroke]="false"></circle-progress>
+    </ng-template>
+  </div>
+</div>
+
 <div class="card-body">
   <div class="card-title">
-    <div class="circle-progress-container" [ngStyle]="{'bottom': bottomPosition}">
-      <circle-progress *ngIf="media.voteAverage > 0; else elseBlock" [percent]="media.voteAverage * 10"
-        [unitsFontSize]="5" [titleFontSize]="titleFontSize" [radius]="15" [outerStrokeWidth]="3" backgroundColor="white"
-        [titleFontWeight]="700" [unitsFontWeight]="700" [showInnerStroke]="false"
-        backgroundPadding="3" [outerStrokeColor]="media.voteAverage | borderClass"></circle-progress>
-      <ng-template #elseBlock>
-        <circle-progress [titleFontSize]="titleFontSize" [radius]="15" [outerStrokeWidth]="3" backgroundColor="white"
-          [titleFontWeight]="700" [showInnerStroke]="false" title="NR" backgroundPadding="3"
-          [showUnits]="false" [showInnerStroke]="false"></circle-progress>
-      </ng-template>
-    </div>
-
     <div class="row">
       <div class="col-md-12">
         <a [ngStyle]="{'font-size': fontSize}" [routerLink]="['/', media.mediaType, media.id]">{{media.title}}</a>
