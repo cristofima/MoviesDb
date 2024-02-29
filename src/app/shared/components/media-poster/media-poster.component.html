@@ -6,13 +6,11 @@
 
   <div class="circle-progress-container" [ngStyle]="{'bottom': bottomPosition}">
     <circle-progress *ngIf="media.voteAverage > 0; else elseBlock" [percent]="media.voteAverage * 10"
-      [unitsFontSize]="5" [titleFontSize]="titleFontSize" [radius]="15" [outerStrokeWidth]="3" backgroundColor="white"
-      [titleFontWeight]="700" [unitsFontWeight]="700" [showInnerStroke]="false"
+      [unitsFontSize]="5" [titleFontSize]="titleFontSize" [radius]="15" [outerStrokeWidth]="3"
       backgroundPadding="3" [outerStrokeColor]="media.voteAverage | borderClass"></circle-progress>
     <ng-template #elseBlock>
-      <circle-progress [titleFontSize]="titleFontSize" [radius]="15" [outerStrokeWidth]="3" backgroundColor="white"
-        [titleFontWeight]="700" [showInnerStroke]="false" title="NR" backgroundPadding="3"
-        [showUnits]="false" [showInnerStroke]="false"></circle-progress>
+      <circle-progress [titleFontSize]="titleFontSize" [radius]="15" [outerStrokeWidth]="3" [showUnits]="false"
+        title="NR" backgroundPadding="3"></circle-progress>
     </ng-template>
   </div>
 </div>

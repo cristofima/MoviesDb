@@ -17,8 +17,7 @@
     <div class="user-score-container">
       <ng-container *ngIf="movie.voteAverage > 0">
         <circle-progress [percent]="movie.voteAverage * 10" [outerStrokeColor]="movie.voteAverage | borderClass"
-          [titleFontSize]="15" [unitsFontSize]="15" [radius]="30" [innerStrokeWidth]="3" [outerStrokeWidth]="5"
-          [titleColor]="contrastColor" [unitsColor]="contrastColor"></circle-progress>
+          [titleFontSize]="20" [unitsFontSize]="15" [radius]="27" [outerStrokeWidth]="5"></circle-progress>
         <h6>User<br />Score</h6>
       </ng-container>
 

@@ -4,8 +4,7 @@
 
     <div class="user-score-container" *ngIf="collection.voteAverage > 0">
       <circle-progress [percent]="collection.voteAverage * 10" [outerStrokeColor]="collection.voteAverage | borderClass"
-        [titleFontSize]="15" [unitsFontSize]="15" [radius]="30" [innerStrokeWidth]="3" [outerStrokeWidth]="5"
-        [titleColor]="contrastColor" [unitsColor]="contrastColor"></circle-progress>
+        [titleFontSize]="20" [unitsFontSize]="15" [radius]="27" [outerStrokeWidth]="5"></circle-progress>
       <h6>User<br />Score</h6>
     </div>
 

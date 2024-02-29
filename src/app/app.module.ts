@@ -12,6 +12,7 @@ import { NgHttpCachingConfig, NgHttpCachingLocalStorage, NgHttpCachingModule } f
 
 import { PageNotFoundComponent } from "./shared/components/error-pages/page-not-found/page-not-found.component";
 import { SharedModule } from "./shared/shared.module";
+
 import { NgCircleProgressModule } from "ng-circle-progress";
 
 const ngHttpCachingConfig: NgHttpCachingConfig = {
@@ -30,17 +31,17 @@ const ngHttpCachingConfig: NgHttpCachingConfig = {
     HttpClientModule,
     NgHttpCachingModule.forRoot(ngHttpCachingConfig),
     NgCircleProgressModule.forRoot({
-      radius: 90,
       outerStrokeWidth: 12,
-      innerStrokeWidth: 8,
-      outerStrokeColor: "#D8CFCD",
-      innerStrokeColor: "#D8CFCD",
+      titleColor: "white",
+      unitsColor: "white",
+      backgroundColor: "#081c22",
       animationDuration: 300,
+      titleFontWeight: "700",
+      unitsFontWeight: "700",
       animation: true,
       showSubtitle: false,
-      unitsFontSize: "40",
-      titleFontSize: "40",
-      showZeroOuterStroke: false
+      showZeroOuterStroke: false,
+      showInnerStroke: false
     }),
     SharedModule
   ],
