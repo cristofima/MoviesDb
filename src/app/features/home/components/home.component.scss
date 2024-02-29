@@ -18,3 +18,13 @@
     min-width: 150px;
   }
 }
+
+.nav-tabs .nav-link {
+  color: rgba(var(--tmdbDarkBlue), 1);
+  font-weight: 600;
+}
+
+.nav-tabs .nav-link.active {
+  background-color: rgb(var(--tmdbDarkBlue));
+  color: #1ed5a9;
+}

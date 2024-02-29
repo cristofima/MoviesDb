@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --tmdbDarkBlue: 3, 37, 65;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+}
+
+::-webkit-scrollbar {
+    height: 8px; // height of horizontal scrollbar
+    width: 8px; // width of vertical scrollbar
+}
