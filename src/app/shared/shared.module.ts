@@ -10,6 +10,7 @@ import { MediaListComponent } from './components/media-list/media-list.component
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { MediaService } from './services/media.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { MediaService } from './services/media.service';
     FormsModule,
     RouterModule,
     NgCircleProgressModule,
-    NgbPaginationModule
+    NgbPaginationModule,
+    TranslateModule
   ],
   exports: [
     GenericDetailsComponent,

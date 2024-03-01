@@ -15,10 +15,18 @@
     <div class="navbar-collapse" [class.collapse]="collapsed" id="navbarContent">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/movies" routerLinkActive="active-link">Movies</a>
+          <a class="nav-link" routerLink="/movies" routerLinkActive="active-link">{{ 'Movies' | translate }}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/tv-shows" routerLinkActive="active-link">TV Shows</a>
+          <a class="nav-link" routerLink="/tv-shows" routerLinkActive="active-link">{{ 'TV Shows' | translate }}</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <select class="form-select" aria-label="Default language" (change)="onLanguageChange($event.target.value)">
+            <option value="">{{ 'SelectDefaultLanguage' | translate }}</option>
+            <option *ngFor="let lang of laguages" [value]="lang.code" [selected]="lang.code === selectedLanguage">{{lang.name | translate}}</option>
+          </select>
         </li>
       </ul>
     </div>

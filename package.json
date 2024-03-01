@@ -23,6 +23,8 @@
     "@angular/platform-browser-dynamic": "^17.2.2",
     "@angular/router": "^17.2.2",
     "@ng-bootstrap/ng-bootstrap": "^16.0.0",
+    "@ngx-translate/core": "^15.0.0",
+    "@ngx-translate/http-loader": "^8.0.0",
     "ng-circle-progress": "^1.7.1",
     "ng-http-caching": "^17.0.1",
     "node-vibrant": "^3.1.6",

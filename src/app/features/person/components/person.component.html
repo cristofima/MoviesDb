@@ -9,43 +9,43 @@
             </div>
           </ng-template>
 
-        <h5>Personal Info</h5>
+        <h5>{{ 'Personal Info' | translate }}</h5>
 
         <div class="personal-info">
             <div>
-                <span>Known For</span>
-                <span>{{person.knownForDepartment}}</span>
+                <span>{{ 'Known For' | translate }}</span>
+                <span>{{ person.knownForDepartment | translate }}</span>
             </div>
             <div>
-                <span>Known Credits</span>
+                <span>{{ 'Known Credits' | translate }}</span>
                 <span>{{person.knownCredits}}</span>
             </div>
             <div>
-                <span>Gender</span>
-                <span>{{person.gender}}</span>
+                <span>{{ 'Gender' | translate }}</span>
+                <span>{{ person.gender | translate }}</span>
             </div>
             <div>
-                <span>Birthday</span>
+                <span>{{ 'Birthday' | translate }}</span>
                 <span *ngIf="person.birthday">{{person.birthday | date}} <ng-container *ngIf="!person.deathday">({{person.age}} years old)</ng-container></span>
                 <span *ngIf="!person.birthday">-</span>
             </div>
             <div *ngIf="person.deathday">
-                <span>Day of Death</span>
+                <span>{{ 'Day of Death' | translate }}</span>
                 <span>{{person.deathday | date}} ({{person.age}} years old)</span>
             </div>
             <div>
-                <span>Place of Birth</span>
+                <span>{{ 'Place of Birth' | translate }}</span>
                 <span>{{person.placeOfBirth || '-'}}</span>
             </div>
         </div>
     </div>
     <div class="second-column">
         <h2>{{person.name}}</h2>
-        <h5>Biography</h5>
+        <h5>{{ 'Biography' | translate }}</h5>
         <ng-container *ngIf="person.biography; else emptyBiography">
             <ng-container *ngIf="person.biography.length > 1000 && !showFullBiography; else fullBiography">
                 <p class="readmore">{{person.biography | slice:0:1000}}...</p>
-                <a href="javacript:void(0)" class="btn btn-link" (click)="showFullBiography = !showFullBiography">Show more</a>
+                <a href="javacript:void(0)" class="btn btn-link" (click)="showFullBiography = !showFullBiography">{{ 'ShowMore' | translate}}</a>
             </ng-container>
             <ng-template #fullBiography>
                 <p>{{person.biography}}</p>
@@ -53,10 +53,10 @@
         </ng-container>
         
         <ng-template #emptyBiography>
-            <p>We don't have a biography for <i>{{person.name}}</i>.</p>
+            <p [innerHTML]="'EmptyBiography' | translate:paramEmptyBiography"></p>
         </ng-template>
         
-        <h5>Known For</h5>
+        <h5>{{ 'Known For' | translate }}</h5>
         <div class="row">
             <div class="known-for-container">
                 <div *ngFor="let media of person.knownFor" class="card">
@@ -75,7 +75,7 @@
         </div>
 
         <div class="row">
-            <h3>Acting</h3>
+            <h3>{{ 'Acting' | translate }}</h3>
             <div ngbAccordion [closeOthers]="false" #accordion="ngbAccordion">
                 <div ngbAccordionItem *ngFor="let credit of person.creditsList">
                     <h2 ngbAccordionHeader>
@@ -89,13 +89,13 @@
                                         <a [routerLink]="['/', media.mediaType, media.id]">{{ media.title }} <span>({{media.releaseDate | date:'MMMM'}})</span></a>
                                         <span class="media-item-role">
                                             <ng-container *ngIf="media.mediaType === 'movie'; else showEpisodes">
-                                                <span *ngIf="media.character"><span> as </span>{{ media.character }}</span>
+                                                <span *ngIf="media.character"><span> {{ 'as' | translate }} </span>{{ media.character }}</span>
                                             </ng-container>
 
                                             <ng-template #showEpisodes>
                                                 <div *ngFor="let job of media.jobs">
-                                                    <span *ngIf="job.episodeCount">({{job.episodeCount}} episode{{job.episodeCount > 1 ? 's' : ''}})</span>
-                                                    <span *ngIf="job.job"> as </span>
+                                                    <span *ngIf="job.episodeCount">({{job.episodeCount}} {{ job.episodeCount > 1 ? ('episodes' | translate) : ('episode' | translate) }})</span>
+                                                    <span *ngIf="job.job"> {{ 'as' | translate }} </span>
                                                     <span *ngIf="job.job">{{ job.job }}</span>
                                                 </div>
                                             </ng-template>

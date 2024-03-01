@@ -7,6 +7,7 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
 import { CollectionDetailsComponent } from './components/collection/collection.component';
 import { TimePipe } from './pipes/time.pipe';
 import { MovieService } from './services/movie.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -29,7 +30,8 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     SharedModule,
-    NgCircleProgressModule
+    NgCircleProgressModule,
+    TranslateModule
   ],
   providers: [MovieService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

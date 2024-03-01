@@ -1,8 +1,8 @@
 <div class="container">
     <div class="search-container">
-      <input type="search" [(ngModel)]="search" (keydown.enter)="searchMedia()" placeholder="Search for a {{mediaType === 'movie' ? 'movie' : 'tv show'}}"
+      <input type="search" [(ngModel)]="search" (keydown.enter)="searchMedia()" placeholder="{{ 'SearchPlaceHolder' | translate}}"
         (click)="loadMedia()" />
-      <button type="button" class="btn btn-primary" (click)="searchMedia()">Search</button>
+      <button type="button" class="btn btn-primary" (click)="searchMedia()">{{ 'Search' | translate}}</button>
     </div>
   
     <br />
@@ -23,7 +23,7 @@
   
       <ng-template #emptyMedia>
         <div class="alert alert-warning" style="width: 100%;" role="alert">
-          No {{mediaType === 'movie' ? 'movies' : 'tv shows'}} found
+          {{ 'NoResults' | translate}}
         </div>
       </ng-template>
   

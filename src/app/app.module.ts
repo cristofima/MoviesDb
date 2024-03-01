@@ -1,7 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -14,10 +14,16 @@ import { PageNotFoundComponent } from "./shared/components/error-pages/page-not-
 import { SharedModule } from "./shared/shared.module";
 
 import { NgCircleProgressModule } from "ng-circle-progress";
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 const ngHttpCachingConfig: NgHttpCachingConfig = {
   store: new NgHttpCachingLocalStorage()
 };
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -30,6 +36,14 @@ const ngHttpCachingConfig: NgHttpCachingConfig = {
     AppRoutingModule,
     HttpClientModule,
     NgHttpCachingModule.forRoot(ngHttpCachingConfig),
+    TranslateModule.forRoot({
+      defaultLanguage: 'en-US',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
     NgCircleProgressModule.forRoot({
       outerStrokeWidth: 12,
       titleColor: "white",

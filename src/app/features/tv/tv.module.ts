@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { TvService } from './services/tv.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -21,7 +22,8 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     SharedModule,
-    NgCircleProgressModule
+    NgCircleProgressModule,
+    TranslateModule
   ],
   exports: [
     TvDetailsComponent

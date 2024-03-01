@@ -1,5 +1,5 @@
 <app-generic-details type="TV" [callback]="tvDetailsCallback">
-    <ng-template #mainInfo let-tv="data" let-contrastColor="contrastColor">
+    <ng-template #mainInfo let-tv="data">
         <h3>{{tv.title}} <span *ngIf="tv.firstAirDate">({{tv.firstAirDate | date:'yyyy'}})</span></h3>
         <h6>
             <span class="certification-box" *ngIf="tv.certification"
@@ -17,21 +17,21 @@
             <ng-container *ngIf="tv.voteAverage > 0">
                 <circle-progress [percent]="tv.voteAverage * 10" [outerStrokeColor]="tv.voteAverage | borderClass"
                     [titleFontSize]="20" [unitsFontSize]="15" [radius]="27" [outerStrokeWidth]="5"></circle-progress>
-                <h6>User<br />Score</h6>
+                <h6 [innerHTML]="'User Score' | translate"></h6>
             </ng-container>
 
             <a *ngIf="tv.trailerKey" class="btn btn-secondary" href="https://www.youtube.com/watch?v={{tv.trailerKey}}"
-                target="_blank">Play Trailer</a>
+                target="_blank">{{ 'Play Trailer' | translate }}</a>
         </div>
 
         <p *ngIf="tv.tagline" class="tagline">{{tv.tagline}}</p>
-        <h5>Overview</h5>
+        <h5>{{ 'Overview' | translate }}</h5>
         <p>{{tv.overview}}</p>
 
         <div class="people" *ngIf="tv.people.length">
             <div class="profile" *ngFor="let person of tv.people">
                 <span>{{person.name}}</span>
-                <span>{{person.job}}</span>
+                <span>{{ person.job | translate }}</span>
             </div>
         </div>
     </ng-template>
@@ -41,7 +41,7 @@
             <div class="media-info">
                 <ng-container *ngIf="tv.topBilledCast.length">
                     <hr />
-                    <h4>Series Cast</h4>
+                    <h4>{{ 'Series Cast' | translate }}</h4>
                     <div class="row">
                         <div class="top-billed-cast-container">
                             <div *ngFor="let cast of tv.topBilledCast" class="card">
@@ -63,7 +63,7 @@
                                         <span class="cast-name">{{cast.name}}</span>
                                     </a>
                                     <span>{{cast.character}}</span>
-                                    <span class="episode-count">{{cast.episodeCount}} episodes</span>
+                                    <span class="episode-count">{{cast.episodeCount}} {{ cast.episodeCount > 1 ? ('episodes' | translate) : ('episode' | translate) }}</span>
                                 </div>
                             </div>
                         </div>
@@ -73,7 +73,7 @@
                 <hr />
 
                 <div class="row">
-                    <h4>Recommendations</h4>
+                    <h4>{{ 'Recommendations' | translate }}</h4>
                     <div class="col-md-12">
                         <ng-container *ngIf="tv.recommendations.length; else emptyRecommendations">
                             <a *ngFor="let r of tv.recommendations" [routerLink]="['/', r.mediaType, r.id]">
@@ -83,34 +83,33 @@
                         </ng-container>
 
                         <ng-template #emptyRecommendations>
-                            <p>We don't have enough data to suggest any movies/tv-shows based on <i>{{tv.title}}</i>.
-                            </p>
+                            <p [innerHTML]="'EmptyRecommendations' | translate"></p>
                         </ng-template>
                     </div>
                 </div>
             </div>
 
             <div class="minor-data">
-                <div *ngIf="tv.status"><span>Status</span> <span>{{tv.status}}</span></div>
+                <div *ngIf="tv.status"><span>{{ 'Status' | translate }}</span> <span>{{tv.status}}</span></div>
                 <div>
-                    <span>Network</span>
+                    <span>{{ 'Network' | translate }}</span>
                     <section *ngIf="tv.network; else emptyNetwork">
                       <img [src]="'https://image.tmdb.org/t/p/h30' + tv.network.logoPath"
                         [title]="tv.network.name" loading="lazy">
                     </section>
           
-                    <ng-template #emptyNetwork><span>No network has been added.</span></ng-template>
+                    <ng-template #emptyNetwork><span>{{ 'EmptyProductionCompany' | translate }}</span></ng-template>
                   </div>
-                <div *ngIf="tv.type"><span>Type</span> <span>{{tv.type}}</span></div>
-                <div *ngIf="tv.originalLanguage"><span>Original Language</span> <span>{{tv.originalLanguage}}</span></div>
+                <div *ngIf="tv.type"><span>{{ 'Type' | translate }}</span> <span>{{tv.type}}</span></div>
+                <div *ngIf="tv.originalLanguage"><span>{{ 'Original Language' | translate }}</span> <span>{{tv.originalLanguage}}</span></div>
                 <div>
-                    <span>Keywords</span>
+                    <span>{{ 'Keywords' | translate }}</span>
                     <section class="keywords" *ngIf="tv.keywords.length; else emptyKeyworks">
                         <span *ngFor="let keyword of tv.keywords"
                             class="badge text-bg-secondary">{{keyword}}</span>
                     </section>
 
-                    <ng-template #emptyKeyworks><span>No keywords have been added.</span></ng-template>
+                    <ng-template #emptyKeyworks><span>{{ 'EmptyKeyworks' | translate }}</span></ng-template>
                 </div>
             </div>
         </div>

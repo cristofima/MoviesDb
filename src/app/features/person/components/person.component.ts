@@ -12,6 +12,7 @@ import { PersonService } from '../services/person.service';
 export class PersonDetailsComponent implements OnInit {
 
   person: Person;
+  paramEmptyBiography: any;
   showFullBiography = false;
   @ViewChild('accordion', { static: false }) accordion: NgbAccordionDirective;
 
@@ -25,6 +26,10 @@ export class PersonDetailsComponent implements OnInit {
 
   private async loadDetails() {
     this.person = await this.personService.getPersonDetails(this.personId).toPromise();
+    this.paramEmptyBiography = {
+      value: this.person.name
+    };
+
     this.titleService.setTitle(`${this.person.name} | Movies Db`);
     setTimeout(() => {
       this.accordion && this.accordion.expandAll();

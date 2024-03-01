@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { HomeService } from './services/home.service';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -21,7 +22,8 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forChild(routes),    
     SharedModule,
-    NgbNavModule
+    NgbNavModule,
+    TranslateModule
   ],
   providers: [HomeService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

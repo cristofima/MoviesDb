@@ -1,8 +1,8 @@
 <div class="container">
-  <h3>Trending</h3>
+  <h3>{{ 'Trending' | translate }}</h3>
   <ul ngbNav #navTrending="ngbNav" [(activeId)]="activeTrending" class="nav-tabs">
     <li [ngbNavItem]="1">
-      <button ngbNavLink>Today</button>
+      <button ngbNavLink>{{ 'Today' | translate }}</button>
       <ng-template ngbNavContent>
         <div class="row">
           <div class="media-container">
@@ -14,7 +14,7 @@
       </ng-template>
     </li>
     <li [ngbNavItem]="2">
-      <button ngbNavLink>This Week</button>
+      <button ngbNavLink>{{ 'This Week' | translate }}</button>
       <ng-template ngbNavContent>
         <div class="row">
           <div class="media-container">
@@ -31,10 +31,10 @@
 
   <br />
 
-  <h3>What's Popular</h3>
+  <h3>{{ 'What\'s Popular' | translate }}</h3>
   <ul ngbNav #navPopular="ngbNav" [(activeId)]="activePopular" class="nav-tabs">
     <li [ngbNavItem]="1">
-      <button ngbNavLink>Streaming</button>
+      <button ngbNavLink>{{ 'Streaming' | translate }}</button>
       <ng-template ngbNavContent>
         <div class="row">
           <div class="media-container">
@@ -46,7 +46,7 @@
       </ng-template>
     </li>
     <li [ngbNavItem]="2">
-      <button ngbNavLink>On TV</button>
+      <button ngbNavLink>{{ 'On TV' | translate }}</button>
       <ng-template ngbNavContent>
         <div class="row">
           <div class="media-container">
@@ -58,7 +58,7 @@
       </ng-template>
     </li>
     <li [ngbNavItem]="3">
-      <button ngbNavLink>In Theaters</button>
+      <button ngbNavLink>{{ 'In Theaters' | translate }}</button>
       <ng-template ngbNavContent>
         <div class="row">
           <div class="media-container">

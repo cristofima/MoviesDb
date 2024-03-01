@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
 import { PersonService } from './services/person.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -21,7 +22,8 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     SharedModule,
-    NgbAccordionModule
+    NgbAccordionModule,
+    TranslateModule
   ],
   exports: [
     PersonDetailsComponent

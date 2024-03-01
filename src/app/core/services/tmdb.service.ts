@@ -8,13 +8,16 @@ import { HttpClient } from '@angular/common/http';
 export class TMDbService {
 
   private apiKey = environment.apiKey;
+  private language: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.language = localStorage.getItem('language') || 'en-US';
+  }
 
   public getQuery(query: string, params: string = '') {
     const url = `https://api.themoviedb.org/3/${query}`;
 
-    params = `?api_key=${this.apiKey}&${params}`;
+    params = `?api_key=${this.apiKey}&language=${this.language}&${params}`;
 
     return this.http.get(`${url}${params}`);
   }
