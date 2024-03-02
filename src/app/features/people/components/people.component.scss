@@ -1,0 +1,34 @@
+@import 'empty-image';
+
+.container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    .person-text {
+        display: flex;
+        flex-direction: column;
+        padding: 5px 10px 3px 10px;
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        a:hover {
+            color: blue
+        }
+
+        .person-name {
+            font-weight: bold;
+        }
+
+        span {
+            font-size: smaller;
+        }
+
+        .known-for {
+            font-size: 0.8rem;
+            color: rgba(0, 0, 0, .6);
+        }
+    }
+}

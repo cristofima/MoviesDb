@@ -1,0 +1,38 @@
+<div class="container">
+    <h3>{{ 'PopularPeople' | translate }}</h3>
+
+    <div class="overflow-auto d-flex flex-sm-row flex-column justify-content-center">
+        <ngb-pagination *ngIf="maxResults" [collectionSize]="maxResults" [(page)]="pageNumber" [maxSize]="15"
+          [pageSize]="pageSize" (pageChange)="paginateMedia()" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3 col-sm-6 mb-4" *ngFor="let person of popularPeople">
+            <div class="card">
+                <a [routerLink]="['/person/', person.id]">
+                    @if(person.profilePath){
+                        <img class="card-img-top" loading="lazy" src="https://media.themoviedb.org/t/p/w235_and_h235_face{{person.profilePath}}" [alt]="person.name">
+                    }
+                    @else{
+                        <div class="image-content" style="width: 304px; height: 304px; min-width: 304px;">
+                            <div class="glyphicons_v2 profile no-image-holder" style="z-index: 1;"
+                              [ngClass]="{female: person.gender === 'Female', male: person.gender === 'Male' || person.gender !== 'Female'}"></div>
+                        </div>
+                    }
+                </a>
+                
+                <div class="card-body person-text">
+                    <a [routerLink]="['/person/', person.id]">
+                        <span class="person-name">{{person.name}}</span>
+                      </a>
+                    <span class="known-for">{{ person.knownFor }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="overflow-auto d-flex flex-sm-row flex-column justify-content-center">
+        <ngb-pagination *ngIf="maxResults" [collectionSize]="maxResults" [(page)]="pageNumber" [maxSize]="15"
+          [pageSize]="pageSize" (pageChange)="paginateMedia()" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+    </div>
+</div>
