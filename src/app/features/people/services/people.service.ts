@@ -15,7 +15,7 @@ export class PeopleService extends TMDbService {
             return {
               id: person.id,
               name: person.name,
-              gender: person.gender,
+              gender: person.gender === 1 ? 'Female' : 'Male',
               profilePath: person.profile_path,
               knownFor: person.known_for.map((media: any) => media.title || media.name)
             };

@@ -1,112 +1,131 @@
-<div class="container" *ngIf="person">
+@if (person) {
+  <div class="container">
     <div class="first-column">
-        <img *ngIf="person.profilePath; else emptyImage" src="https://media.themoviedb.org/t/p/w300_and_h450_bestv2{{person.profilePath}}">
-
-        <ng-template #emptyImage>
-            <div class="image-content" style="width: 300px; height: 450px; min-width: 300px;">
-              <div class="glyphicons_v2 profile no-image-holder"
-                [ngClass]="{female: person.gender === 'Female', male: person.gender === 'Male' || person.gender !== 'Female'}"></div>
-            </div>
-          </ng-template>
-
-        <h5>{{ 'Personal Info' | translate }}</h5>
-
-        <div class="personal-info">
-            <div>
-                <span>{{ 'Known For' | translate }}</span>
-                <span>{{ person.knownForDepartment | translate }}</span>
-            </div>
-            <div>
-                <span>{{ 'Known Credits' | translate }}</span>
-                <span>{{person.knownCredits}}</span>
-            </div>
-            <div>
-                <span>{{ 'Gender' | translate }}</span>
-                <span>{{ person.gender | translate }}</span>
-            </div>
-            <div>
-                <span>{{ 'Birthday' | translate }}</span>
-                <span *ngIf="person.birthday">{{person.birthday | date}} <ng-container *ngIf="!person.deathday">({{person.age}} years old)</ng-container></span>
-                <span *ngIf="!person.birthday">-</span>
-            </div>
-            <div *ngIf="person.deathday">
-                <span>{{ 'Day of Death' | translate }}</span>
-                <span>{{person.deathday | date}} ({{person.age}} years old)</span>
-            </div>
-            <div>
-                <span>{{ 'Place of Birth' | translate }}</span>
-                <span>{{person.placeOfBirth || '-'}}</span>
-            </div>
+      @if(person.profilePath) {
+        <img src="https://media.themoviedb.org/t/p/w300_and_h450_bestv2{{person.profilePath}}">
+      }
+      @else {
+        <div class="image-content" style="width: 300px; height: 450px; min-width: 300px;">
+          <div class="glyphicons_v2 profile no-image-holder"
+            [ngClass]="{female: person.gender === 'Female', male: person.gender === 'Male' || person.gender !== 'Female'}">
+          </div>
         </div>
+      }
+      <h5>{{ 'Personal Info' | translate }}</h5>
+      <div class="personal-info">
+        <div>
+          <span>{{ 'Known For' | translate }}</span>
+          <span>{{ person.knownForDepartment | translate }}</span>
+        </div>
+        <div>
+          <span>{{ 'Known Credits' | translate }}</span>
+          <span>{{person.knownCredits}}</span>
+        </div>
+        <div>
+          <span>{{ 'Gender' | translate }}</span>
+          <span>{{ person.gender | translate }}</span>
+        </div>
+        <div>
+          <span>{{ 'Birthday' | translate }}</span>
+          @if (person.birthday) {
+            <span>{{person.birthday | date}} @if(!person.deathday) {({{person.age}} years old)}</span>
+          }
+          @if (!person.birthday) {
+            <span>-</span>
+          }
+        </div>
+        @if (person.deathday) {
+          <div>
+            <span>{{ 'Day of Death' | translate }}</span>
+            <span>{{person.deathday | date}} ({{person.age}} years old)</span>
+          </div>
+        }
+        <div>
+          <span>{{ 'Place of Birth' | translate }}</span>
+          <span>{{person.placeOfBirth || '-'}}</span>
+        </div>
+      </div>
     </div>
     <div class="second-column">
-        <h2>{{person.name}}</h2>
-        <h5>{{ 'Biography' | translate }}</h5>
-        <ng-container *ngIf="person.biography; else emptyBiography">
-            <ng-container *ngIf="person.biography.length > 1000 && !showFullBiography; else fullBiography">
-                <p class="readmore">{{person.biography | slice:0:1000}}...</p>
-                <a href="javacript:void(0)" class="btn btn-link" (click)="showFullBiography = !showFullBiography">{{ 'ShowMore' | translate}}</a>
-            </ng-container>
-            <ng-template #fullBiography>
-                <p>{{person.biography}}</p>
-            </ng-template>
-        </ng-container>
-        
-        <ng-template #emptyBiography>
-            <p [innerHTML]="'EmptyBiography' | translate:paramEmptyBiography"></p>
-        </ng-template>
-        
-        <h5>{{ 'Known For' | translate }}</h5>
-        <div class="row">
-            <div class="known-for-container">
-                <div *ngFor="let media of person.knownFor" class="card">
-                    <a [routerLink]="['/', media.mediaType, media.id]">
-                        <img [src]="'https://image.tmdb.org/t/p/w185' + media.posterPath" class="card-img-top"
-                            [title]="media.title" loading="lazy">
-                    </a>
-        
-                    <div class="media-text">
-                        <a [routerLink]="['/', media.mediaType, media.id]">
-                            <span class="media-name">{{media.title}}</span>
-                        </a>
-                    </div>
-                </div>
+      <h2>{{person.name}}</h2>
+      <h5>{{ 'Biography' | translate }}</h5>
+      @if(person.biography) {
+        @if(person.biography.length > 1000 && !showFullBiography) {
+          <p class="readmore">{{person.biography | slice:0:1000}}...</p>
+          <a href="javacript:void(0)" class="btn btn-link" (click)="showFullBiography = !showFullBiography">{{ 'ShowMore' | translate}}</a>
+        }
+        @else {
+          <p>{{person.biography}}</p>
+        }
+      }
+      @else {
+        <p [innerHTML]="'EmptyBiography' | translate:paramEmptyBiography"></p>
+      }
+      <h5>{{ 'Known For' | translate }}</h5>
+      <div class="row">
+        <div class="known-for-container">
+          @for (media of person.knownFor; track media) {
+            <div class="card">
+              <a [routerLink]="['/', media.mediaType, media.id]">
+                <img src="https://image.tmdb.org/t/p/w185{{media.posterPath}}" class="card-img-top"
+                  [title]="media.title" loading="lazy">
+              </a>
+              <div class="media-text">
+                <a [routerLink]="['/', media.mediaType, media.id]">
+                  <span class="media-name">{{media.title}}</span>
+                </a>
+              </div>
             </div>
+          }
         </div>
-
-        <div class="row">
-            <h3>{{ 'Acting' | translate }}</h3>
-            <div ngbAccordion [closeOthers]="false" #accordion="ngbAccordion">
-                <div ngbAccordionItem *ngFor="let credit of person.creditsList">
-                    <h2 ngbAccordionHeader>
-                        <button ngbAccordionButton>{{ credit.year }}</button>
-                    </h2>
-                    <div ngbAccordionCollapse>
-                        <div ngbAccordionBody>
-                            <ng-template>
-                                <ul class="media-group">
-                                    <li *ngFor="let media of credit.credits" class="media-item">
-                                        <a [routerLink]="['/', media.mediaType, media.id]">{{ media.title }} <span>({{media.releaseDate | date:'MMMM'}})</span></a>
-                                        <span class="media-item-role">
-                                            <ng-container *ngIf="media.mediaType === 'movie'; else showEpisodes">
-                                                <span *ngIf="media.character"><span> {{ 'as' | translate }} </span>{{ media.character }}</span>
-                                            </ng-container>
-
-                                            <ng-template #showEpisodes>
-                                                <div *ngFor="let job of media.jobs">
-                                                    <span *ngIf="job.episodeCount">({{job.episodeCount}} {{ job.episodeCount > 1 ? ('episodes' | translate) : ('episode' | translate) }})</span>
-                                                    <span *ngIf="job.job"> {{ 'as' | translate }} </span>
-                                                    <span *ngIf="job.job">{{ job.job }}</span>
-                                                </div>
-                                            </ng-template>
-                                        </span>
-                                    </li>
-                                </ul>
-                            </ng-template>
-                        </div>
-                    </div>
-                </div>
+      </div>
+      <div class="row">
+        <h3>{{ 'Acting' | translate }}</h3>
+        <div ngbAccordion [closeOthers]="false" #accordion="ngbAccordion">
+          @for (credit of person.creditsList; track credit) {
+            <div ngbAccordionItem>
+              <h2 ngbAccordionHeader>
+                <button ngbAccordionButton>{{ credit.year }}</button>
+              </h2>
+              <div ngbAccordionCollapse>
+                <div ngbAccordionBody>
+                  <ng-template>
+                    <ul class="media-group">
+                      @for (media of credit.credits; track media) {
+                        <li class="media-item">
+                          <a [routerLink]="['/', media.mediaType, media.id]">{{ media.title }} <span>({{media.releaseDate | date:'MMMM'}})</span></a>
+                          <span class="media-item-role">
+                            @if(media.mediaType === 'movie') {
+                              @if (media.character) {
+                                <span><span> {{ 'as' | translate }} </span>{{ media.character }}</span>
+                              }
+                            }
+                            @else {
+                            @for (job of media.jobs; track job) {
+                              <div>
+                                @if (job.episodeCount) {
+                                  <span>({{job.episodeCount}} {{ job.episodeCount > 1 ? ('episodes' | translate) : ('episode' | translate) }})</span>
+                                }
+                                @if (job.job) {
+                                  <span> {{ 'as' | translate }} </span>
+                                }
+                                @if (job.job) {
+                                  <span>{{ job.job }}</span>
+                                }
+                              </div>
+                            }
+                          }
+                        </span>
+                      </li>
+                    }
+                  </ul>
+                </ng-template>
+              </div>
             </div>
+          </div>
+          }
         </div>
+      </div>
     </div>
-</div>
+  </div>
+}

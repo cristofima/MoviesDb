@@ -6,9 +6,11 @@
       <ng-template ngbNavContent>
         <div class="row">
           <div class="media-container">
-            <div *ngFor="let media of trendingMediaToday" class="card">
-              <app-media-poster [media]="media" sizeformat="small"></app-media-poster>
-            </div>
+            @for (media of trendingMediaToday; track media) {
+              <div class="card">
+                <app-media-poster [media]="media" sizeformat="small"></app-media-poster>
+              </div>
+            }
           </div>
         </div>
       </ng-template>
@@ -18,9 +20,11 @@
       <ng-template ngbNavContent>
         <div class="row">
           <div class="media-container">
-            <div *ngFor="let media of trendingMediaThisWeek" class="card">
-              <app-media-poster [media]="media" sizeformat="small"></app-media-poster>
-            </div>
+            @for (media of trendingMediaThisWeek; track media) {
+              <div class="card">
+                <app-media-poster [media]="media" sizeformat="small"></app-media-poster>
+              </div>
+            }
           </div>
         </div>
       </ng-template>
@@ -38,9 +42,11 @@
       <ng-template ngbNavContent>
         <div class="row">
           <div class="media-container">
-            <div *ngFor="let media of popularStreaming" class="card">
-              <app-media-poster [media]="media" sizeformat="small"></app-media-poster>
-            </div>
+            @for (media of popularStreaming; track media) {
+              <div class="card">
+                <app-media-poster [media]="media" sizeformat="small"></app-media-poster>
+              </div>
+            }
           </div>
         </div>
       </ng-template>
@@ -50,9 +56,11 @@
       <ng-template ngbNavContent>
         <div class="row">
           <div class="media-container">
-            <div *ngFor="let media of popularOnTV" class="card">
-              <app-media-poster [media]="media" sizeformat="small"></app-media-poster>
-            </div>
+            @for (media of popularOnTV; track media) {
+              <div class="card">
+                <app-media-poster [media]="media" sizeformat="small"></app-media-poster>
+              </div>
+            }
           </div>
         </div>
       </ng-template>
@@ -62,9 +70,11 @@
       <ng-template ngbNavContent>
         <div class="row">
           <div class="media-container">
-            <div *ngFor="let media of popularInTheaters" class="card">
-              <app-media-poster [media]="media" sizeformat="small"></app-media-poster>
-            </div>
+            @for (media of popularInTheaters; track media) {
+              <div class="card">
+                <app-media-poster [media]="media" sizeformat="small"></app-media-poster>
+              </div>
+            }
           </div>
         </div>
       </ng-template>

@@ -2,15 +2,15 @@
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="/">&nbsp;&nbsp;Movies Db</a>
     <button
-			class="navbar-toggler"
-			type="button"
-			aria-controls="navbarContent"
-			[attr.aria-expanded]="!collapsed"
-			aria-label="Toggle navigation"
-			(click)="collapsed = !collapsed"
-		>
-			<span class="navbar-toggler-icon"></span>
-		</button>
+      class="navbar-toggler"
+      type="button"
+      aria-controls="navbarContent"
+      [attr.aria-expanded]="!collapsed"
+      aria-label="Toggle navigation"
+      (click)="collapsed = !collapsed"
+      >
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
     <div class="navbar-collapse" [class.collapse]="collapsed" id="navbarContent">
       <ul class="navbar-nav me-auto">
@@ -28,13 +28,15 @@
         <li class="nav-item">
           <select class="form-select" aria-label="Default language" (change)="onLanguageChange($event.target.value)">
             <option value="">{{ 'SelectDefaultLanguage' | translate }}</option>
-            <option *ngFor="let lang of laguages" [value]="lang.code" [selected]="lang.code === selectedLanguage">{{lang.name | translate}}</option>
+            @for (lang of laguages; track lang) {
+              <option [value]="lang.code" [selected]="lang.code === selectedLanguage">{{lang.name | translate}}</option>
+            }
           </select>
         </li>
       </ul>
     </div>
   </div>
-  
+
 </nav>
 
 <router-outlet></router-outlet>

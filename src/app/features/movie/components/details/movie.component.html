@@ -1,63 +1,81 @@
 <app-generic-details type="Movie" [callback]="movieDetailsCallback">
   <ng-template #mainInfo let-movie="data">
-    <h3>{{movie.title}} <span *ngIf="movie.releaseDate">({{movie.releaseDate | date:'yyyy'}})</span></h3>
+    <h3>{{movie.title}} @if (movie.releaseDate) {
+      <span>({{movie.releaseDate | date:'yyyy'}})</span>
+    }</h3>
     <h6>
-      <span class="certification-box" *ngIf="movie.certification"
-        [title]="movie.certification | certification">{{movie.certification}}</span> {{movie.releaseDate |
-      date:'MM/dd/yyyy'}} <span *ngIf="movie.originCountry">({{movie.originCountry}})</span>
-      <span class="runtime" *ngIf="movie.runtime"> {{movie.runtime | time}}</span>
+      @if (movie.certification) {
+        <span class="certification-box"
+        [title]="movie.certification | certification">{{movie.certification}}</span>
+        } {{movie.releaseDate |
+        date:'MM/dd/yyyy'}} @if (movie.originCountry) {
+        <span>({{movie.originCountry}})</span>
+      }
+      @if (movie.runtime) {
+        <span class="runtime"> {{movie.runtime | time}}</span>
+      }
     </h6>
 
     <p class="card-text">
-      <a *ngFor="let genre of movie.genres" [routerLink]="['/movies']" [queryParams]="{genreId: genre.id}">
-        <span class="badge text-bg-primary genre-badge">{{ genre.name }}</span>
-      </a>
+      @for (genre of movie.genres; track genre) {
+        <a [routerLink]="['/movies']" [queryParams]="{genreId: genre.id}">
+          <span class="badge text-bg-primary genre-badge">{{ genre.name }}</span>
+        </a>
+      }
     </p>
 
     <div class="user-score-container">
-      <ng-container *ngIf="movie.voteAverage > 0">
+      @if(movie.voteAverage > 0) {
         <circle-progress [percent]="movie.voteAverage * 10" [outerStrokeColor]="movie.voteAverage | borderClass"
-          [titleFontSize]="20" [unitsFontSize]="15" [radius]="27" [outerStrokeWidth]="5"></circle-progress>
+        [titleFontSize]="20" [unitsFontSize]="15" [radius]="27" [outerStrokeWidth]="5"></circle-progress>
         <h6 [innerHTML]="'User Score' | translate"></h6>
-      </ng-container>
+      }
 
-      <a *ngIf="movie.trailerKey" class="btn btn-secondary" href="https://www.youtube.com/watch?v={{movie.trailerKey}}"
+      @if (movie.trailerKey) {
+        <a class="btn btn-secondary" href="https://www.youtube.com/watch?v={{movie.trailerKey}}"
         target="_blank">{{ 'Play Trailer' | translate }}</a>
+      }
     </div>
 
-    <p *ngIf="movie.tagline" class="tagline">{{movie.tagline}}</p>
+    @if (movie.tagline) {
+      <p class="tagline">{{movie.tagline}}</p>
+    }
     <h5>{{ 'Overview' | translate }}</h5>
     <p>{{movie.overview}}</p>
 
-    <div class="people" *ngIf="movie.people.length">
-      <div class="profile" *ngFor="let person of movie.people">
-        <span>{{person.name}}</span>
-        <span>{{person.job | translate}}</span>
+    @if (movie.people.length) {
+      <div class="people">
+        @for (person of movie.people; track person) {
+          <div class="profile">
+            <span>{{person.name}}</span>
+            <span>{{person.job | translate}}</span>
+          </div>
+        }
       </div>
-    </div>
+    }
   </ng-template>
 
   <ng-template #aditionalInfo let-movie="data" let-posterImgDominantColor="posterImgDominantColor">
     <div class="aditionalInfo-container">
       <div class="media-info">
-        <ng-container *ngIf="movie.topBilledCast.length">
+        @if (movie.topBilledCast.length) {
           <hr />
           <h4>{{ 'Top Billed Cast' | translate }}</h4>
           <div class="row">
             <div class="top-billed-cast-container">
-              <div *ngFor="let cast of movie.topBilledCast" class="card">
-                <a [routerLink]="['/person/', cast.id]">
-                  <img *ngIf="cast.profilePath; else emptyImage" src="https://image.tmdb.org/t/p/w185{{cast.profilePath}}"
-                    class="card-img-top" [title]="cast.name" loading="lazy">
-
-                  <ng-template #emptyImage>
+              @for (cast of movie.topBilledCast; track cast) {
+                <div class="card">
+                  <a [routerLink]="['/person/', cast.id]">
+                    @if(cast.profilePath) {
+                      <img src="https://image.tmdb.org/t/p/w185{{cast.profilePath}}" class="card-img-top" [title]="cast.name" loading="lazy">
+                    }
+                    @else {
                     <div class="image-content" style="width: 136px; height: 205px; min-width: 136px">
                       <div class="glyphicons_v2 profile no-image-holder" style="z-index: 1;"
                         [ngClass]="{female: cast.gender === 'Female', male: cast.gender === 'Male' || cast.gender !== 'Female'}"></div>
                     </div>
-                  </ng-template>
+                    }
                 </a>
-                
                 <div class="cast-text">
                   <a [routerLink]="['/person/', cast.id]">
                     <span class="cast-name">{{cast.name}}</span>
@@ -65,70 +83,85 @@
                   <span>{{cast.character}}</span>
                 </div>
               </div>
-            </div>
+            }
           </div>
-        </ng-container>
-        
-        <ng-container *ngIf="movie.collection">
-          <hr />
-          <div class="row collection-container"
-            style="background-image: linear-gradient(to right, rgba(3, 37, 65, 1) 0%, rgba(3, 37, 65, 0.6) 100%), url(https://media.themoviedb.org/t/p/w1440_and_h320_multi_faces{{movie.collection.backdropPath}})">
-            <h2>{{ 'Part of the' | translate }} {{movie.collection.name}}</h2>
-            <a class="btn rounded-pill" [style.background-color]="posterImgDominantColor"
-              [routerLink]="['/movie/collection/', movie.collection.id]">{{ 'VIEW THE COLLECTION' | translate }}</a>
-          </div>
-        </ng-container>
-    
+        </div>
+      }
+
+      @if(movie.collection) {
         <hr />
-    
-        <div class="row">
-          <h4>{{ 'Recommendations' | translate }}</h4>
-          <div class="col-md-12 image-content">
-            <ng-container *ngIf="movie.recommendations.length; else emptyRecommendations">
-              <a *ngFor="let r of movie.recommendations" [routerLink]="['/', r.mediaType, r.id]">
-                <img *ngIf="r.posterPath; else emptyImage" src="https://image.tmdb.org/t/p/w154{{r.posterPath}}" class="img-thumbnail img-similar"
-                  [title]="r.title" loading="lazy">
-                
-                <ng-template #emptyImage>
+        <div class="row collection-container"
+          style="background-image: linear-gradient(to right, rgba(3, 37, 65, 1) 0%, rgba(3, 37, 65, 0.6) 100%), url(https://media.themoviedb.org/t/p/w1440_and_h320_multi_faces{{movie.collection.backdropPath}})">
+          <h2>{{ 'Part of the' | translate }} {{movie.collection.name}}</h2>
+          <a class="btn rounded-pill" [style.background-color]="posterImgDominantColor"
+          [routerLink]="['/movie/collection/', movie.collection.id]">{{ 'VIEW THE COLLECTION' | translate }}</a>
+        </div>
+      }
+
+      <hr />
+
+      <div class="row">
+        <h4>{{ 'Recommendations' | translate }}</h4>
+        <div class="col-md-12 image-content">
+          @if(movie.recommendations.length){
+            @for (r of movie.recommendations; track r) {
+              <a [routerLink]="['/', r.mediaType, r.id]">
+                @if(r.posterPath) {
+                  <img src="https://image.tmdb.org/t/p/w154{{r.posterPath}}" class="img-thumbnail img-similar" [title]="r.title"
+                    loading="lazy">
+                }
+                @else {
                   <div [title]="r.title" style="width: 94px; height: 140px; min-width: 94px; display: inline-block;
-                    position: relative; top: 65px;">
+                                                                                        position: relative; top: 65px;">
                     <div class="glyphicons_v2 recomendation no-image-holder"></div>
                   </div>
-                </ng-template>
+                }
               </a>
-            </ng-container>
-            
-            <ng-template #emptyRecommendations>
-              <p [innerHTML]="'EmptyRecommendations' | translate"></p>
-            </ng-template>
-          </div>
-        </div>
-      </div>
-
-      <div class="minor-data">
-        <div *ngIf="movie.status"><span>{{ 'Status' | translate }}</span> <span>{{movie.status | translate}}</span></div>
-        <div>
-          <span>{{ 'Production Company' | translate }}</span>
-          <section *ngIf="movie.productionCompany; else emptyProductionCompany">
-            <img [src]="'https://image.tmdb.org/t/p/h30' + movie.productionCompany.logoPath"
-              [title]="movie.productionCompany.name" loading="lazy">
-          </section>
-
-          <ng-template #emptyProductionCompany><span>{{ 'EmptyProductionCompany' | translate }}</span></ng-template>
-        </div>
-        <div *ngIf="movie.originalLanguage"><span>{{ 'Original Language' | translate }}</span> <span>{{movie.originalLanguage}}</span></div>
-        <div><span>{{ 'Budget' | translate }}</span> <span>{{movie.budget ? (movie.budget | currency) : '-'}}</span></div>
-        <div><span>{{ 'Revenue' | translate }}</span> <span>{{movie.revenue ? (movie.revenue | currency) : '-'}}</span></div>
-
-        <div>
-          <span>{{ 'Keywords' | translate }}</span>
-          <section class="keywords" *ngIf="movie.keywords.length; else emptyKeyworks">
-            <span *ngFor="let keyword of movie.keywords" class="badge text-bg-secondary">{{keyword}}</span>
-          </section>
-
-          <ng-template #emptyKeyworks><span>{{ 'EmptyKeyworks' | translate }}</span></ng-template>
-        </div>
+            }
+          }
+          @else {
+            <p [innerHTML]="'EmptyRecommendations' | translate"></p>
+          }
       </div>
     </div>
-  </ng-template>
+  </div>
+
+  <div class="minor-data">
+    @if (movie.status) {
+      <div><span>{{ 'Status' | translate }}</span> <span>{{movie.status | translate}}</span></div>
+    }
+    <div>
+      <span>{{ 'Production Company' | translate }}</span>
+      @if(movie.productionCompany) {
+        <section>
+          <img src="https://image.tmdb.org/t/p/h30{{movie.productionCompany.logoPath}}" [title]="movie.productionCompany.name"
+            loading="lazy">
+          </section>
+        }
+      @else {
+        <span>{{ 'EmptyProductionCompany' | translate }}</span>
+      }
+    </div>
+    @if (movie.originalLanguage) {
+      <div><span>{{ 'Original Language' | translate }}</span> <span>{{movie.originalLanguage}}</span></div>
+    }
+    <div><span>{{ 'Budget' | translate }}</span> <span>{{movie.budget ? (movie.budget | currency) : '-'}}</span></div>
+    <div><span>{{ 'Revenue' | translate }}</span> <span>{{movie.revenue ? (movie.revenue | currency) : '-'}}</span></div>
+
+    <div>
+      <span>{{ 'Keywords' | translate }}</span>
+      @if(movie.keywords.length) {
+        <section class="keywords">
+          @for (keyword of movie.keywords; track keyword) {
+            <span class="badge text-bg-secondary">{{keyword}}</span>
+          }
+        </section>
+      }
+      @else {
+        <span>{{ 'EmptyKeyworks' | translate }}</span>
+      }
+  </div>
+</div>
+</div>
+</ng-template>
 </app-generic-details>

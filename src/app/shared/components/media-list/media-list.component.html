@@ -1,36 +1,40 @@
 <div class="container">
-    <div class="search-container">
-      <input type="search" [(ngModel)]="search" (keydown.enter)="searchMedia()" placeholder="{{ 'SearchPlaceHolder' | translate}}"
-        (click)="loadMedia()" />
-      <button type="button" class="btn btn-primary" (click)="searchMedia()">{{ 'Search' | translate}}</button>
-    </div>
-  
-    <br />
-  
-    <div class="overflow-auto d-flex flex-sm-row flex-column justify-content-center">
-      <ngb-pagination *ngIf="maxResults" [collectionSize]="maxResults" [(page)]="pageNumber" [maxSize]="15"
-        [pageSize]="pageSize" (pageChange)="paginateMedia()" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
-    </div>
-  
-    <div class="row">
-      <ng-container *ngIf="mediaList.length; else emptyMedia">
-        <div *ngFor="let movie of mediaList" class="col-lg-3 col-sm-6 mb-4">
+  <div class="search-container">
+    <input type="search" [(ngModel)]="search" (keydown.enter)="searchMedia()" placeholder="{{ 'SearchPlaceHolder' | translate}}"
+      (click)="loadMedia()" />
+    <button type="button" class="btn btn-primary" (click)="searchMedia()">{{ 'Search' | translate}}</button>
+  </div>
+
+  <br />
+
+  <div class="overflow-auto d-flex flex-sm-row flex-column justify-content-center">
+    @if (maxResults) {
+      <ngb-pagination [collectionSize]="maxResults" [(page)]="pageNumber" [maxSize]="15"
+      [pageSize]="pageSize" (pageChange)="paginateMedia()" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+    }
+  </div>
+
+  <div class="row">
+    @if(mediaList.length) {
+      @for (movie of mediaList; track movie) {
+        <div class="col-lg-3 col-sm-6 mb-4">
           <div class="card h-100">
             <app-media-poster [media]="movie"></app-media-poster>
           </div>
         </div>
-      </ng-container>
-  
-      <ng-template #emptyMedia>
-        <div class="alert alert-warning" style="width: 100%;" role="alert">
-          {{ 'NoResults' | translate}}
-        </div>
-      </ng-template>
-  
+      }
+    }
+    @else {
+    <div class="alert alert-warning" style="width: 100%;" role="alert">
+      {{ 'NoResults' | translate}}
     </div>
+  }
+</div>
 
-    <div class="overflow-auto overflow-auto d-flex flex-sm-row flex-column justify-content-center">
-      <ngb-pagination *ngIf="maxResults" [collectionSize]="maxResults" [(page)]="pageNumber" [maxSize]="15"
-        [pageSize]="pageSize" (pageChange)="paginateMedia()" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
-    </div>
-  </div>
+<div class="overflow-auto overflow-auto d-flex flex-sm-row flex-column justify-content-center">
+  @if (maxResults) {
+    <ngb-pagination [collectionSize]="maxResults" [(page)]="pageNumber" [maxSize]="15"
+    [pageSize]="pageSize" (pageChange)="paginateMedia()" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+  }
+</div>
+</div>

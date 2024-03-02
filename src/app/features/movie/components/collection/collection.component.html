@@ -2,11 +2,13 @@
   <ng-template #mainInfo let-collection="data">
     <h3>{{collection.name}}</h3>
 
-    <div class="user-score-container" *ngIf="collection.voteAverage > 0">
-      <circle-progress [percent]="collection.voteAverage * 10" [outerStrokeColor]="collection.voteAverage | borderClass"
+    @if (collection.voteAverage > 0) {
+      <div class="user-score-container">
+        <circle-progress [percent]="collection.voteAverage * 10" [outerStrokeColor]="collection.voteAverage | borderClass"
         [titleFontSize]="20" [unitsFontSize]="15" [radius]="27" [outerStrokeWidth]="5"></circle-progress>
-      <h6 [innerHTML]="'User Score' | translate"></h6>
-    </div>
+        <h6 [innerHTML]="'User Score' | translate"></h6>
+      </div>
+    }
 
     <h5>{{ 'Overview' | translate }}</h5>
     <p>{{collection.overview}}</p>
@@ -18,11 +20,13 @@
     <div class="row">
       <h3 style="width: 100%;">{{ 'Movies' | translate }}</h3>
 
-      <div *ngFor="let movie of collection.movies" class="col-lg-2 col-sm-6 mb-4">
-        <div class="card h-100">
-          <app-media-poster [media]="movie" sizeformat="medium"></app-media-poster>
+      @for (movie of collection.movies; track movie) {
+        <div class="col-lg-2 col-sm-6 mb-4">
+          <div class="card h-100">
+            <app-media-poster [media]="movie" sizeformat="medium"></app-media-poster>
+          </div>
         </div>
-      </div>
+      }
     </div>
   </ng-template>
 </app-generic-details>

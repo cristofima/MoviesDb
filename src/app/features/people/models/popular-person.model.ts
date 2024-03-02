@@ -1,7 +1,7 @@
 export interface PopularPerson {
     id: number;
     name: string;
-    gender: number;
+    gender: string;
     profilePath: string;
     knownFor: string[];
 }

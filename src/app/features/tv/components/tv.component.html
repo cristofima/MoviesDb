@@ -1,117 +1,145 @@
 <app-generic-details type="TV" [callback]="tvDetailsCallback">
-    <ng-template #mainInfo let-tv="data">
-        <h3>{{tv.title}} <span *ngIf="tv.firstAirDate">({{tv.firstAirDate | date:'yyyy'}})</span></h3>
-        <h6>
-            <span class="certification-box" *ngIf="tv.certification"
-                [title]="tv.certification | certification">{{tv.certification}}</span> {{tv.firstAirDate |
-            date:'MM/dd/yyyy'}}
-        </h6>
+  <ng-template #mainInfo let-tv="data">
+    <h3>{{tv.title}} @if (tv.firstAirDate) {
+      <span>({{tv.firstAirDate | date:'yyyy'}})</span>
+    }</h3>
+    <h6>
+      @if (tv.certification) {
+        <span class="certification-box"
+        [title]="tv.certification | certification">{{tv.certification}}</span>
+        } {{tv.firstAirDate |
+        date:'MM/dd/yyyy'}}
+      </h6>
 
-        <p class="card-text">
-            <a *ngFor="let genre of tv.genres" [routerLink]="['/tv-shows']" [queryParams]="{genreId: genre.id}">
-                <span class="badge text-bg-primary genre-badge">{{ genre.name }}</span>
-            </a>
-        </p>
+      <p class="card-text">
+        @for (genre of tv.genres; track genre) {
+          <a [routerLink]="['/tv-shows']" [queryParams]="{genreId: genre.id}">
+            <span class="badge text-bg-primary genre-badge">{{ genre.name }}</span>
+          </a>
+        }
+      </p>
 
-        <div class="user-score-container">
-            <ng-container *ngIf="tv.voteAverage > 0">
-                <circle-progress [percent]="tv.voteAverage * 10" [outerStrokeColor]="tv.voteAverage | borderClass"
-                    [titleFontSize]="20" [unitsFontSize]="15" [radius]="27" [outerStrokeWidth]="5"></circle-progress>
-                <h6 [innerHTML]="'User Score' | translate"></h6>
-            </ng-container>
+      <div class="user-score-container">
+        @if(tv.voteAverage > 0) {
+          <circle-progress [percent]="tv.voteAverage * 10" [outerStrokeColor]="tv.voteAverage | borderClass"
+          [titleFontSize]="20" [unitsFontSize]="15" [radius]="27" [outerStrokeWidth]="5"></circle-progress>
+          <h6 [innerHTML]="'User Score' | translate"></h6>
+        }
 
-            <a *ngIf="tv.trailerKey" class="btn btn-secondary" href="https://www.youtube.com/watch?v={{tv.trailerKey}}"
-                target="_blank">{{ 'Play Trailer' | translate }}</a>
-        </div>
+        @if (tv.trailerKey) {
+          <a class="btn btn-secondary" href="https://www.youtube.com/watch?v={{tv.trailerKey}}"
+          target="_blank">{{ 'Play Trailer' | translate }}</a>
+        }
+      </div>
 
-        <p *ngIf="tv.tagline" class="tagline">{{tv.tagline}}</p>
-        <h5>{{ 'Overview' | translate }}</h5>
-        <p>{{tv.overview}}</p>
+      @if (tv.tagline) {
+        <p class="tagline">{{tv.tagline}}</p>
+      }
+      <h5>{{ 'Overview' | translate }}</h5>
+      <p>{{tv.overview}}</p>
 
-        <div class="people" *ngIf="tv.people.length">
-            <div class="profile" *ngFor="let person of tv.people">
-                <span>{{person.name}}</span>
-                <span>{{ person.job | translate }}</span>
+      @if (tv.people.length) {
+        <div class="people">
+          @for (person of tv.people; track person) {
+            <div class="profile">
+              <span>{{person.name}}</span>
+              <span>{{ person.job | translate }}</span>
             </div>
+          }
         </div>
+      }
     </ng-template>
 
     <ng-template #aditionalInfo let-tv="data">
-        <div class="aditionalInfo-container">
-            <div class="media-info">
-                <ng-container *ngIf="tv.topBilledCast.length">
-                    <hr />
-                    <h4>{{ 'Series Cast' | translate }}</h4>
-                    <div class="row">
-                        <div class="top-billed-cast-container">
-                            <div *ngFor="let cast of tv.topBilledCast" class="card">
-                                <a [routerLink]="['/person/', cast.id]">
-                                    <img *ngIf="cast.profilePath; else emptyImage" src="https://image.tmdb.org/t/p/w185{{cast.profilePath}}"
-                                        class="card-img-top" [title]="cast.name" loading="lazy">
-                                        
-                                    <ng-template #emptyImage>
-                                        <div class="image-content" style="width: 136px; height: 205px; min-width: 136px">
-                                            <div class="glyphicons_v2 profile no-image-holder" style="z-index: 1;"
-                                                [ngClass]="{female: cast.gender === 'Female', male: cast.gender === 'Male' || cast.gender !== 'Female'}">
-                                            </div>
-                                        </div>
-                                    </ng-template>
-                                </a>
-
-                                <div class="cast-text">
-                                    <a [routerLink]="['/person/', cast.id]">
-                                        <span class="cast-name">{{cast.name}}</span>
-                                    </a>
-                                    <span>{{cast.character}}</span>
-                                    <span class="episode-count">{{cast.episodeCount}} {{ cast.episodeCount > 1 ? ('episodes' | translate) : ('episode' | translate) }}</span>
-                                </div>
-                            </div>
+      <div class="aditionalInfo-container">
+        <div class="media-info">
+          @if (tv.topBilledCast.length) {
+            <hr />
+            <h4>{{ 'Series Cast' | translate }}</h4>
+            <div class="row">
+              <div class="top-billed-cast-container">
+                @for (cast of tv.topBilledCast; track cast) {
+                  <div class="card">
+                    <a [routerLink]="['/person/', cast.id]">
+                      @if(cast.profilePath) {
+                        <img src="https://image.tmdb.org/t/p/w185{{cast.profilePath}}" class="card-img-top" [title]="cast.name" loading="lazy">
+                      }
+                      @else {
+                      <div class="image-content" style="width: 136px; height: 205px; min-width: 136px">
+                        <div class="glyphicons_v2 profile no-image-holder" style="z-index: 1;"
+                          [ngClass]="{female: cast.gender === 'Female', male: cast.gender === 'Male' || cast.gender !== 'Female'}">
                         </div>
-                    </div>
-                </ng-container>
-
-                <hr />
-
-                <div class="row">
-                    <h4>{{ 'Recommendations' | translate }}</h4>
-                    <div class="col-md-12">
-                        <ng-container *ngIf="tv.recommendations.length; else emptyRecommendations">
-                            <a *ngFor="let r of tv.recommendations" [routerLink]="['/', r.mediaType, r.id]">
-                                <img src="https://image.tmdb.org/t/p/w154{{r.posterPath}}"
-                                    class="img-thumbnail img-similar" [title]="r.title" loading="lazy">
-                            </a>
-                        </ng-container>
-
-                        <ng-template #emptyRecommendations>
-                            <p [innerHTML]="'EmptyRecommendations' | translate"></p>
-                        </ng-template>
-                    </div>
-                </div>
-            </div>
-
-            <div class="minor-data">
-                <div *ngIf="tv.status"><span>{{ 'Status' | translate }}</span> <span>{{tv.status}}</span></div>
-                <div>
-                    <span>{{ 'Network' | translate }}</span>
-                    <section *ngIf="tv.network; else emptyNetwork">
-                      <img [src]="'https://image.tmdb.org/t/p/h30' + tv.network.logoPath"
-                        [title]="tv.network.name" loading="lazy">
-                    </section>
-          
-                    <ng-template #emptyNetwork><span>{{ 'EmptyProductionCompany' | translate }}</span></ng-template>
+                      </div>
+                    }
+                  </a>
+                  <div class="cast-text">
+                    <a [routerLink]="['/person/', cast.id]">
+                      <span class="cast-name">{{cast.name}}</span>
+                    </a>
+                    <span>{{cast.character}}</span>
+                    <span class="episode-count">{{cast.episodeCount}} {{ cast.episodeCount > 1 ? ('episodes' | translate) : ('episode' | translate) }}</span>
                   </div>
-                <div *ngIf="tv.type"><span>{{ 'Type' | translate }}</span> <span>{{tv.type}}</span></div>
-                <div *ngIf="tv.originalLanguage"><span>{{ 'Original Language' | translate }}</span> <span>{{tv.originalLanguage}}</span></div>
-                <div>
-                    <span>{{ 'Keywords' | translate }}</span>
-                    <section class="keywords" *ngIf="tv.keywords.length; else emptyKeyworks">
-                        <span *ngFor="let keyword of tv.keywords"
-                            class="badge text-bg-secondary">{{keyword}}</span>
-                    </section>
-
-                    <ng-template #emptyKeyworks><span>{{ 'EmptyKeyworks' | translate }}</span></ng-template>
                 </div>
+              }
             </div>
+          </div>
+        }
+
+        <hr />
+
+        <div class="row">
+          <h4>{{ 'Recommendations' | translate }}</h4>
+          <div class="col-md-12">
+            @if(tv.recommendations.length) {
+              @for (r of tv.recommendations; track r) {
+                <a [routerLink]="['/', r.mediaType, r.id]">
+                  <img src="https://image.tmdb.org/t/p/w154{{r.posterPath}}"
+                    class="img-thumbnail img-similar" [title]="r.title" loading="lazy">
+                  </a>
+                }
+              }
+            @else {
+              <p [innerHTML]="'EmptyRecommendations' | translate"></p>
+            }
+          </div>
         </div>
-    </ng-template>
+      </div>
+
+      <div class="minor-data">
+        @if (tv.status) {
+          <div><span>{{ 'Status' | translate }}</span> <span>{{tv.status}}</span></div>
+        }
+        <div>
+          <span>{{ 'Network' | translate }}</span>
+          @if(tv.network) {
+            <section>
+              <img src="https://image.tmdb.org/t/p/h30{{tv.network.logoPath}}" [title]="tv.network.name" loading="lazy">
+            </section>
+          }
+          @else {
+            <span>{{ 'EmptyProductionCompany' | translate }}</span>
+          }
+      </div>
+      @if (tv.type) {
+        <div><span>{{ 'Type' | translate }}</span> <span>{{tv.type}}</span></div>
+      }
+      @if (tv.originalLanguage) {
+        <div><span>{{ 'Original Language' | translate }}</span> <span>{{tv.originalLanguage}}</span></div>
+      }
+      <div>
+        <span>{{ 'Keywords' | translate }}</span>
+        @if(tv.keywords.length) {
+          <section class="keywords">
+            @for (keyword of tv.keywords; track keyword) {
+              <span class="badge text-bg-secondary">{{keyword}}</span>
+            }
+          </section>
+        }
+        @else {
+          <span>{{ 'EmptyKeyworks' | translate }}</span>
+        }
+    </div>
+  </div>
+</div>
+</ng-template>
 </app-generic-details>
