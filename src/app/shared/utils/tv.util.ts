@@ -40,8 +40,12 @@ export class TVUtil {
         let certification: string;
         if (data.content_ratings && data.content_ratings.results) {
             certification = this.getTVCertification(data.content_ratings.results, originCountryCode);
-            if (!certification && originCountryCode !== productionCountryCode) {
-                certification = this.getTVCertification(data.content_ratings.results, productionCountryCode);
+            if (!certification) {
+                if (originCountryCode !== productionCountryCode) {
+                    certification = this.getTVCertification(data.content_ratings.results, productionCountryCode);
+                } else {
+                    certification = this.getTVCertification(data.content_ratings.results, 'US');
+                }
             }
         }
 
@@ -49,8 +53,7 @@ export class TVUtil {
     }
 
     private static getTVCertification(results: any[], countryCode: string) {
-        let certification =  results.find((contentRating: any) => contentRating.iso_3166_1 === countryCode)?.rating;
-        if (certification && certification === 'NR') certification = '';
+        let certification =  results.find((contentRating: any) => contentRating.iso_3166_1 === countryCode && contentRating.rating !== 'NR')?.rating || '';
 
         return certification;
     }

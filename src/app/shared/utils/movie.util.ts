@@ -45,8 +45,12 @@ export class MovieUtil {
         let certification: string;
         if (data.release_dates && data.release_dates.results) {
             certification = this.getMovieCertification(data.release_dates.results, originCountryCode);
-            if (!certification && originCountryCode !== productionCountryCode) {
-                certification = this.getMovieCertification(data.release_dates.results, productionCountryCode);
+            if (!certification) {
+                if (originCountryCode !== productionCountryCode) {
+                    certification = this.getMovieCertification(data.release_dates.results, productionCountryCode);
+                } else {
+                    certification = this.getMovieCertification(data.release_dates.results, 'US');
+                }
             }
         }
 
@@ -60,7 +64,7 @@ export class MovieUtil {
             };
         }
 
-        return {...BaseMediaUtil.getCommonExtraData(data, 'Movie'), certification, collection };
+        return { ...BaseMediaUtil.getCommonExtraData(data, 'Movie'), certification, collection };
     }
 
     private static getMovieCertification(results: any[], countryCode: string) {
@@ -68,12 +72,12 @@ export class MovieUtil {
         results.find((release: any) => {
             if (release.iso_3166_1 === countryCode) {
                 // Type 3 is for Theatrical certification and 4 for Digital
-                certification = release.release_dates.find((r: any) => r.type == 4)?.certification;
-                if (!certification) certification = release.release_dates.find((r: any) => r.type == 3)?.certification;
-                if (!certification) certification = release.release_dates.find((r: any) => r.certification)?.certification;
-
                 // NR means Not Rated
-                if (certification && certification === 'NR') certification = '';
+                certification = release.release_dates.find((r: any) => r.type === 4 && r.certification !== 'NR')?.certification;
+                if (!certification) certification = release.release_dates.find((r: any) => r.type == 3 && r.certification !== 'NR')?.certification;
+                if (!certification) certification = release.release_dates.find((r: any) => r.certification && r.certification !== 'NR')?.certification;
+
+                if (!certification) certification = '';
                 return true;
             }
         });
