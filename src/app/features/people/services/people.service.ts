@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { TMDbService } from 'src/app/core/services/tmdb.service';
+import { TMDbService } from '@/core/services/tmdb.service';
 import { PaginationPopularPeopleModel } from '../models/popular-person.model';
 
 @Injectable()

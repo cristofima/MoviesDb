@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Collection } from 'src/app/core/models/collection.model';
-import { Movie } from 'src/app/core/models/movie.model';
-import { TMDbService } from 'src/app/core/services/tmdb.service';
-import { MovieUtil } from 'src/app/shared/utils/movie.util';
+import { Collection } from '@/core/models/collection.model';
+import { Movie } from '@/core/models/movie.model';
+import { TMDbService } from '@/core/services/tmdb.service';
+import { MovieUtil } from '@/shared/utils/movie.util';
 
 @Injectable()
 export class MovieService extends TMDbService {

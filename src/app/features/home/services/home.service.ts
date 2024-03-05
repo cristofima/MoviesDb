@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, forkJoin  } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { MinimalMedia } from 'src/app/core/models/base-media.model';
-import { TMDbService } from 'src/app/core/services/tmdb.service';
+import { MinimalMedia } from '@/core/models/base-media.model';
+import { TMDbService } from '@/core/services/tmdb.service';
 
 @Injectable()
 export class HomeService extends TMDbService {

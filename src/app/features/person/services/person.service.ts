@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Person } from 'src/app/core/models/person.model';
-import { TMDbService } from 'src/app/core/services/tmdb.service';
-import { PersonUtil } from 'src/app/shared/utils/person.utll';
+import { Person } from '@/core/models/person.model';
+import { TMDbService } from '@/core/services/tmdb.service';
+import { PersonUtil } from '@/shared/utils/person.utll';
 
 @Injectable()
 export class PersonService extends TMDbService {

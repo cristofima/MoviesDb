@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { MinimalMedia } from 'src/app/core/models/base-media.model';
-import { MediaFilter } from 'src/app/core/models/media-filter';
-import { PaginationModel } from 'src/app/core/models/pagination.model';
-import { MediaService } from 'src/app/shared/services/media.service';
+import { MinimalMedia } from '@/core/models/base-media.model';
+import { MediaFilter } from '@/core/models/media-filter';
+import { PaginationModel } from '@/core/models/pagination.model';
+import { MediaService } from '@/shared/services/media.service';
 
 @Component({
   selector: 'app-media-list',

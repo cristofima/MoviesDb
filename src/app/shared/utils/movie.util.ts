@@ -1,6 +1,6 @@
-import { Movie, MinimalCollection } from "src/app/core/models/movie.model";
-import { LanguageUtil } from "./language.util";
-import { BaseMediaUtil } from "./base-media.util";
+import { Movie, MinimalCollection } from '@/core/models/movie.model';
+import { LanguageUtil } from './language.util';
+import { BaseMediaUtil } from './base-media.util';
 
 export class MovieUtil {
 

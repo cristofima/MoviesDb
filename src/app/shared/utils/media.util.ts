@@ -1,4 +1,4 @@
-import { PaginationModel } from "src/app/core/models/pagination.model";
+import { PaginationModel } from '@/core/models/pagination.model';
 
 export class MediaUtil {
 

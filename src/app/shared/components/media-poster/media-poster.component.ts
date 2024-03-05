@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Movie } from 'src/app/core/models/movie.model';
-import { TV } from 'src/app/core/models/tv.model';
+import { Movie } from '@/core/models/movie.model';
+import { TV } from '@/core/models/tv.model';
 
 @Component({
   selector: 'app-media-poster',

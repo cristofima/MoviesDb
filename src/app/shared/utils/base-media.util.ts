@@ -1,4 +1,4 @@
-import { Cast, Company, Crew, RecommendedMedia } from "src/app/core/models/base-media.model";
+import { Cast, Company, Crew, RecommendedMedia } from '@/core/models/base-media.model';
 
 export class BaseMediaUtil {
 

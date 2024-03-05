@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { MediaFilter } from 'src/app/core/models/media-filter';
-import { PaginationModel } from 'src/app/core/models/pagination.model';
-import { TMDbService } from 'src/app/core/services/tmdb.service';
+import { MediaFilter } from '@/core/models/media-filter';
+import { PaginationModel } from '@/core/models/pagination.model';
+import { TMDbService } from '@/core/services/tmdb.service';
 import { MediaUtil } from '../utils/media.util';
 
 @Injectable()

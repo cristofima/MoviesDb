@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { NgbAccordionDirective } from '@ng-bootstrap/ng-bootstrap';
-import { Person } from 'src/app/core/models/person.model';
+import { Person } from '@/core/models/person.model';
 import { PersonService } from '../services/person.service';
 
 @Component({

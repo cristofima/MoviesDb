@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { HomeService } from '../services/home.service';
-import { MinimalMedia } from 'src/app/core/models/base-media.model';
+import { MinimalMedia } from '@/core/models/base-media.model';
 
 @Component({
   selector: 'app-home',

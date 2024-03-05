@@ -1,11 +1,11 @@
 import { Component, ContentChild, Input, OnInit, TemplateRef } from '@angular/core';
-import { Collection } from '../../../core/models/collection.model';
-import { Movie } from '../../../core/models/movie.model';
-import { DominantColorService } from 'src/app/core/services/dominant-color.service';
+import { Collection } from '@/core/models/collection.model';
+import { Movie } from '@/core/models/movie.model';
+import { DominantColorService } from '@/core/services/dominant-color.service';
 import { ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { ColorUtil } from '../../utils/color.util';
-import { TV } from 'src/app/core/models/tv.model';
+import { ColorUtil } from '@/shared/utils/color.util';
+import { TV } from '@/core/models/tv.model';
 import { environment } from 'src/environments/environment';
 
 @Component({

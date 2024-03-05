@@ -1,5 +1,5 @@
-import { MinimalMedia } from "src/app/core/models/base-media.model";
-import { PersonCredit } from "src/app/core/models/person.model";
+import { MinimalMedia } from '@/core/models/base-media.model';
+import { PersonCredit } from '@/core/models/person.model';
 
 export class PersonUtil {
 
