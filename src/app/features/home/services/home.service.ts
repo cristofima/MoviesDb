@@ -25,6 +25,32 @@ export class HomeService extends TMDbService {
             );
     }
 
+    getUpcomingMedia(mediaType: 'movie' | 'tv', nextMonths = 3): Observable<MinimalMedia[]> {
+        let today = new Date();
+        let gteDate = today.toISOString();
+
+        today.setMonth(today.getMonth() + nextMonths);
+        let lteDate = today.toISOString();
+
+        let dateParam = mediaType === 'movie' ? 'primary_release_date' : 'first_air_date';
+
+        return this.getQuery(`discover/${mediaType}`, `watch_region=US&with_release_type=3|2&${dateParam}.gte=${gteDate}&${dateParam}.lte=${lteDate}`)
+            .pipe(
+                map((data: any) => {
+                    return data['results'].map((media: any) => {
+                        return {
+                            id: media.id,
+                            title: media.title || media.name,
+                            mediaType: mediaType,
+                            posterPath: media.poster_path,
+                            voteAverage: media.vote_average,
+                            releaseDate: media.release_date || media.first_air_date
+                        };
+                    });
+                })
+            );
+    }
+
     getPopularMedia(option: 'tv' | 'theater'): Observable<MinimalMedia[]> {
         let endpoint = option === 'tv' ? 'tv/popular' : 'discover/movie';
         let queryParams = option === 'tv' ? '' : 'watch_region=US&with_release_type=3|2';

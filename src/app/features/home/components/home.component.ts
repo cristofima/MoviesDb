@@ -13,11 +13,15 @@ export class HomeComponent implements OnInit {
   trendingMediaToday: MinimalMedia[] = [];
   trendingMediaThisWeek: MinimalMedia[] = [];
 
+  upcomingMovies: MinimalMedia[] = [];
+  upcomingTV: MinimalMedia[] = [];
+
   popularStreaming: MinimalMedia[] = [];
   popularOnTV: MinimalMedia[] = [];
   popularInTheaters: MinimalMedia[] = [];
 
   activeTrending = 1;
+  activeUpcoming = 1;
   activePopular = 1;
 
   constructor(private homeService: HomeService, private titleService: Title) {
@@ -27,6 +31,8 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.loadTrendingToday();
     this.loadTrendingThisWeek();
+    this.loadUpcomingMovies();
+    this.loadUpcomingTV();
     this.loadPopularStreaming();
     this.loadPopularOnTV();
     this.loadPopularInTheaters();
@@ -38,6 +44,14 @@ export class HomeComponent implements OnInit {
 
   private async loadTrendingThisWeek(){
     this.trendingMediaThisWeek = await this.homeService.getTrendingMedia('week').toPromise();
+  }
+
+  private async loadUpcomingMovies(){
+    this.upcomingMovies = await this.homeService.getUpcomingMedia('movie').toPromise();
+  }
+
+  private async loadUpcomingTV(){
+    this.upcomingTV = await this.homeService.getUpcomingMedia('tv').toPromise();
   }
 
   private async loadPopularStreaming(){

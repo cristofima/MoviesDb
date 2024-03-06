@@ -35,6 +35,42 @@
 
   <br />
 
+  <h3>{{ 'Upcoming' | translate }}</h3>
+  <ul ngbNav #navUpcoming="ngbNav" [(activeId)]="activeUpcoming" class="nav-tabs">
+    <li [ngbNavItem]="1">
+      <button ngbNavLink>{{ 'Movies' | translate }}</button>
+      <ng-template ngbNavContent>
+        <div class="row">
+          <div class="media-container">
+            @for (media of upcomingMovies; track media) {
+              <div class="card">
+                <app-media-poster [media]="media" sizeformat="small"></app-media-poster>
+              </div>
+            }
+          </div>
+        </div>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="2">
+      <button ngbNavLink>{{ 'TV Shows' | translate }}</button>
+      <ng-template ngbNavContent>
+        <div class="row">
+          <div class="media-container">
+            @for (media of upcomingTV; track media) {
+              <div class="card">
+                <app-media-poster [media]="media" sizeformat="small"></app-media-poster>
+              </div>
+            }
+          </div>
+        </div>
+      </ng-template>
+    </li>
+  </ul>
+
+  <div [ngbNavOutlet]="navUpcoming" class="mt-2"></div>
+
+  <br />
+
   <h3>{{ 'What\'s Popular' | translate }}</h3>
   <ul ngbNav #navPopular="ngbNav" [(activeId)]="activePopular" class="nav-tabs">
     <li [ngbNavItem]="1">
