@@ -111,8 +111,7 @@
                     loading="lazy">
                 }
                 @else {
-                  <div [title]="r.title" style="width: 94px; height: 140px; min-width: 94px; display: inline-block;
-                                                                                        position: relative; top: 65px;">
+                  <div [title]="r.title" style="width: 94px; height: 140px; min-width: 94px; display: inline-block; position: relative; top: 65px;">
                     <div class="glyphicons_v2 recomendation no-image-holder"></div>
                   </div>
                 }
@@ -120,7 +119,7 @@
             }
           }
           @else {
-            <p [innerHTML]="'EmptyRecommendations' | translate"></p>
+            <p [innerHTML]="'EmptyRecommendations' | translate: {value: movie.title}"></p>
           }
       </div>
     </div>

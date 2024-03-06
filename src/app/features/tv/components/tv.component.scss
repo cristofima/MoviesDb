@@ -13,6 +13,10 @@
     align-items: center;
     gap: 10px;
 
+    .img-container img {
+        border-radius: 10px;
+    }
+
     .rating, .overview, .last-episode-date {
         font-size: 0.9rem;
     }

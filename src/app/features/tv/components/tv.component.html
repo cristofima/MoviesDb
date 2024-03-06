@@ -89,8 +89,8 @@
           @if(tv.lastSeason) {
             <h5>{{ (tv.status === 'Ended' ? 'LastSeason' : 'CurrentSeason') | translate }}</h5>
             <div class="last-season">
-              <div>
-                <img src="https://image.tmdb.org/t/p/w130_and_h195_bestv2{{tv.lastSeason.posterPath}}" class="img-thumbnail" [alt]="tv.lastSeason.name" loading="lazy">
+              <div class="img-container">
+                <img src="https://image.tmdb.org/t/p/w130_and_h195_bestv2{{tv.lastSeason.posterPath}}" [alt]="tv.lastSeason.name" loading="lazy">
               </div>
               <div>
                 <h5>{{tv.lastSeason.name}}</h5>
@@ -122,7 +122,7 @@
                   }
                 }
               @else {
-                <p [innerHTML]="'EmptyRecommendations' | translate"></p>
+                <p [innerHTML]="'EmptyRecommendations' | translate: {value: tv.title}"></p>
               }
             </div>
           </div>

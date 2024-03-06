@@ -43,7 +43,7 @@
     "Acting": "Acting",
     "as": "as",
     "Number of Movies": "Number of Movies",
-    "EmptyRecommendations": "We don't have enough data to suggest any movies/tv-shows.",
+    "EmptyRecommendations": "We don't have enough data to suggest any movies/tv-shows based on <i>{{value}}</i>.",
     "EmptyProductionCompany": "No production company has been added.",
     "EmptyKeyworks": "No keywords have been added.",
     "EmptyBiography": "We don't have a biography for <i>{{value}}</i>.",
