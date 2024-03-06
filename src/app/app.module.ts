@@ -1,6 +1,9 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID } from "@angular/core";
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { AppRoutingModule } from "./app-routing.module";
@@ -16,6 +19,7 @@ import { SharedModule } from "./shared/shared.module";
 import { NgCircleProgressModule } from "ng-circle-progress";
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { SettingsService } from "./core/services/settings.service";
 
 const ngHttpCachingConfig: NgHttpCachingConfig = {
   store: new NgHttpCachingLocalStorage()
@@ -24,6 +28,8 @@ const ngHttpCachingConfig: NgHttpCachingConfig = {
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
+
+registerLocaleData(localeEs, 'es-MX');
 
 @NgModule({
   declarations: [
@@ -65,6 +71,11 @@ export function HttpLoaderFactory(http: HttpClient) {
       useClass: GlobalHttpInterceptor,
       multi: true,
     },
+    {
+      provide: LOCALE_ID,
+      deps: [SettingsService],
+      useFactory: (settingsService) => settingsService.getLanguage()
+    }
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
