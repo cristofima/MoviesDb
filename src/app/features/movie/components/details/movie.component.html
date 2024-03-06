@@ -8,7 +8,7 @@
         <span class="certification-box"
         [title]="movie.certification | certification">{{movie.certification}}</span>
         } {{movie.releaseDate |
-        date:'MM/dd/yyyy'}} @if (movie.originCountry) {
+        date: 'shortDate'}} @if (movie.originCountry) {
         <span>({{movie.originCountry}})</span>
       }
       @if (movie.runtime) {

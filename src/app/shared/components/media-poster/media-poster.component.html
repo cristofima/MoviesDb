@@ -1,4 +1,4 @@
-<div class="img-container">
+<div class="img-container" [ngStyle]="{'min-height': minImgHeight}">
   <a [routerLink]="['/', media.mediaType, media.id]">
     <img class="card-img-top" loading="lazy" src="https://image.tmdb.org/t/p/{{posterSize}}{{media.posterPath}}" alt=""
       [ngStyle]="{'min-height': minImgHeight}">

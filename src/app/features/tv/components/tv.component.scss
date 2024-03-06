@@ -6,3 +6,26 @@
         color: rgba(0, 0, 0, .5);
     }
 }
+
+.last-season {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+
+    .rating, .overview, .last-episode-date {
+        font-size: 0.9rem;
+    }
+
+    .rating {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 5px;
+        font-weight: bold;
+    }
+
+    .overview {
+        max-lines: 2;
+    }
+}

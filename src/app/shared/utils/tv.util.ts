@@ -1,5 +1,5 @@
-import { TV } from "src/app/core/models/tv.model";
-import { BaseMediaUtil } from "./base-media.util";
+import { TV } from '@/core/models/tv.model';
+import { BaseMediaUtil } from './base-media.util';
 
 export class TVUtil {
 
@@ -16,7 +16,8 @@ export class TVUtil {
             genres: data.genres,
             mediaType: 'tv',
             firstAirDate: data.first_air_date ? new Date(data.first_air_date) : null,
-            type: data.type
+            type: data.type,
+            lastAirDate: data.last_air_date ? new Date(data.last_air_date) : null
         };
 
         if (extractExtraData) {
@@ -31,6 +32,31 @@ export class TVUtil {
             tv.topBilledCast = extraData.topBilledCast;
             tv.keywords = extraData.keywords;
             tv.network = extraData.productionCompany;
+
+            tv.lastEpisodeToAir = data.last_episode_to_air && {
+                id: data.last_episode_to_air.id,
+                name: data.last_episode_to_air.name,
+                airDate: data.last_episode_to_air.air_date ? new Date(data.last_episode_to_air.air_date) : null,
+                episodeNumber: data.last_episode_to_air.episode_number,
+                episodeType: data.last_episode_to_air.episode_type,
+                seasonNumber: data.last_episode_to_air.season_number
+            }
+
+            if(data.seasons && tv.lastEpisodeToAir) {
+                let lastSeason = data.seasons.find((season: any) => season.season_number === tv.lastEpisodeToAir.seasonNumber);
+                if(lastSeason){
+                    tv.lastSeason = {
+                        id: lastSeason.id,
+                        name: lastSeason.name,
+                        overview: lastSeason.overview,
+                        seasonNumber: lastSeason.season_number,
+                        episodeCount: lastSeason.episode_count,
+                        airDate: lastSeason.air_date ? new Date(lastSeason.air_date) : null,
+                        posterPath: lastSeason.poster_path,
+                        voteAverage: lastSeason.vote_average
+                    }
+                }
+            }
         }
 
         return tv;

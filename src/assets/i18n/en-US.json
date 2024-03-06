@@ -63,5 +63,9 @@
     "Male": "Male",
     "Female": "Female",
     "People": "People",
-    "PopularPeople": "Popular People"
+    "PopularPeople": "Popular People",
+    "LastSeason": "Last Season",
+    "CurrentSeason": "Current Season",
+    "SeasonFinale": "Season Finale",
+    "SeasonOverview": "{{seasonName}} of {{title}} premiered on {{airDate}}"
 }

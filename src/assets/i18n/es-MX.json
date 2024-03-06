@@ -63,5 +63,9 @@
     "Male": "Masculino",
     "Female": "Femenino",
     "People": "Personas",
-    "PopularPeople": "Personas populares"
+    "PopularPeople": "Personas populares",
+    "LastSeason": "Última temporada",
+    "CurrentSeason": "Temporada actual",
+    "SeasonFinale": "Final de temporada",
+    "SeasonOverview": "{{seasonName}} de {{title}} se estrenó el {{airDate}}"
 }
