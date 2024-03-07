@@ -10,9 +10,14 @@ export class AppComponent implements OnInit {
   
   collapsed = true;
   selectedLanguage: string = 'en-US';
-  laguages = [
+  languages = [
     { name: 'English', code: 'en-US' },
-    { name: 'Spanish', code: 'es-MX' }
+    { name: 'Spanish', code: 'es-MX' },
+    { name: 'Portuguese', code: 'pt-PT' },
+    { name: 'French', code: 'fr-FR' },
+    { name: 'German', code: 'de-DE' },
+    { name: 'Italian', code: 'it-IT' },
+    { name: 'Russian', code: 'ru-RU' }
   ];
 
   constructor(private translate: TranslateService) {}

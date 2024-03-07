@@ -28,7 +28,7 @@
         <li class="nav-item">
           <select class="form-select" aria-label="Default language" (change)="onLanguageChange($event.target.value)">
             <option value="">{{ 'SelectDefaultLanguage' | translate }}</option>
-            @for (lang of laguages; track lang) {
+            @for (lang of languages; track lang) {
               <option [value]="lang.code" [selected]="lang.code === selectedLanguage">{{'Languages.'+lang.name | translate}}</option>
             }
           </select>
