@@ -11,14 +11,14 @@
           </div>
         </div>
       }
-      <h5>{{ 'Personal Info' | translate }}</h5>
+      <h5>{{ 'PersonalInfo' | translate }}</h5>
       <div class="personal-info">
         <div>
-          <span>{{ 'Known For' | translate }}</span>
+          <span>{{ 'KnownFor' | translate }}</span>
           <span>{{ person.knownForDepartment | translate }}</span>
         </div>
         <div>
-          <span>{{ 'Known Credits' | translate }}</span>
+          <span>{{ 'KnownCredits' | translate }}</span>
           <span>{{person.knownCredits}}</span>
         </div>
         <div>
@@ -28,7 +28,7 @@
         <div>
           <span>{{ 'Birthday' | translate }}</span>
           @if (person.birthday) {
-            <span>{{person.birthday | date}} @if(!person.deathday) {({{person.age}} years old)}</span>
+            <span>{{person.birthday | date}} @if(!person.deathday) {({{ 'YearsOld' | translate:{age: person.age} }})}</span>
           }
           @if (!person.birthday) {
             <span>-</span>
@@ -36,12 +36,12 @@
         </div>
         @if (person.deathday) {
           <div>
-            <span>{{ 'Day of Death' | translate }}</span>
-            <span>{{person.deathday | date}} ({{person.age}} years old)</span>
+            <span>{{ 'DayOfDeath' | translate }}</span>
+            <span>{{person.deathday | date}} ({{ 'YearsOld' | translate:{age: person.age} }})</span>
           </div>
         }
         <div>
-          <span>{{ 'Place of Birth' | translate }}</span>
+          <span>{{ 'PlaceOfBirth' | translate }}</span>
           <span>{{person.placeOfBirth || '-'}}</span>
         </div>
       </div>
@@ -59,9 +59,9 @@
         }
       }
       @else {
-        <p [innerHTML]="'EmptyBiography' | translate:paramEmptyBiography"></p>
+        <p [innerHTML]="'EmptyBiography' | translate:{value: person.name}"></p>
       }
-      <h5>{{ 'Known For' | translate }}</h5>
+      <h5>{{ 'KnownFor' | translate }}</h5>
       <div class="row">
         <div class="known-for-container">
           @for (media of person.knownFor; track media) {
@@ -101,28 +101,28 @@
                               }
                             }
                             @else {
-                            @for (job of media.jobs; track job) {
-                              <div>
-                                @if (job.episodeCount) {
-                                  <span>({{job.episodeCount}} {{ job.episodeCount > 1 ? ('episodes' | translate) : ('episode' | translate) }})</span>
-                                }
-                                @if (job.job) {
-                                  <span> {{ 'as' | translate }} </span>
-                                }
-                                @if (job.job) {
-                                  <span>{{ job.job }}</span>
-                                }
-                              </div>
+                              @for (job of media.jobs; track job) {
+                                <div>
+                                  @if (job.episodeCount) {
+                                    <span>({{job.episodeCount}} {{ job.episodeCount > 1 ? ('episodes' | translate) : ('episode' | translate) }})</span>
+                                  }
+                                  @if (job.job) {
+                                    <span> {{ 'as' | translate }} </span>
+                                  }
+                                  @if (job.job) {
+                                    <span>{{ job.job }}</span>
+                                  }
+                                </div>
+                              }
                             }
-                          }
-                        </span>
-                      </li>
-                    }
-                  </ul>
-                </ng-template>
+                          </span>
+                        </li>
+                      }
+                    </ul>
+                  </ng-template>
+                </div>
               </div>
             </div>
-          </div>
           }
         </div>
       </div>

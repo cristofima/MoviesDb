@@ -22,12 +22,12 @@
         @if(tv.voteAverage > 0) {
           <circle-progress [percent]="tv.voteAverage * 10" [outerStrokeColor]="tv.voteAverage | borderClass"
           [titleFontSize]="20" [unitsFontSize]="15" [radius]="27" [outerStrokeWidth]="5"></circle-progress>
-          <h6 [innerHTML]="'User Score' | translate"></h6>
+          <h6 [innerHTML]="'UserScore' | translate"></h6>
         }
 
         @if (tv.trailerKey) {
           <a class="btn btn-secondary" href="https://www.youtube.com/watch?v={{tv.trailerKey}}"
-          target="_blank">{{ 'Play Trailer' | translate }}</a>
+          target="_blank">{{ 'PlayTrailer' | translate }}</a>
         }
       </div>
 
@@ -54,7 +54,7 @@
         <div class="media-info">
           @if (tv.topBilledCast.length) {
             <hr />
-            <h4>{{ 'Series Cast' | translate }}</h4>
+            <h4>{{ 'SeriesCast' | translate }}</h4>
             <div class="row">
               <div class="top-billed-cast-container">
                 @for (cast of tv.topBilledCast; track cast) {
@@ -87,7 +87,7 @@
           <hr />
 
           @if(tv.lastSeason) {
-            <h5>{{ (tv.status === 'Ended' ? 'LastSeason' : 'CurrentSeason') | translate }}</h5>
+            <h5>{{ ((tv.status === 'Ended' || tv.status === 'Canceled') ? 'LastSeason' : 'CurrentSeason') | translate }}</h5>
             <div class="last-season">
               <div class="img-container">
                 <img src="https://image.tmdb.org/t/p/w130_and_h195_bestv2{{tv.lastSeason.posterPath}}" [alt]="tv.lastSeason.name" loading="lazy">
@@ -130,7 +130,7 @@
 
       <div class="minor-data">
         @if (tv.status) {
-          <div><span>{{ 'Status' | translate }}</span> <span>{{tv.status}}</span></div>
+          <div><span>{{ 'Status' | translate }}</span> <span>{{ 'TVStatus.'+tv.status | translate }}</span></div>
         }
         <div>
           <span>{{ 'Network' | translate }}</span>
@@ -147,7 +147,7 @@
         <div><span>{{ 'Type' | translate }}</span> <span>{{tv.type}}</span></div>
       }
       @if (tv.originalLanguage) {
-        <div><span>{{ 'Original Language' | translate }}</span> <span>{{tv.originalLanguage}}</span></div>
+        <div><span>{{ 'OriginalLanguage' | translate }}</span> <span>{{ 'Languages.'+tv.originalLanguage | translate }}</span></div>
       }
       <div>
         <span>{{ 'Keywords' | translate }}</span>

@@ -25,10 +25,13 @@ export class MediaListComponent implements OnInit {
   @Input() genreId: number;
   @Input({required: true}) mediaType: 'movie' | 'tv';
 
+  languageKeyMediaType: string;
+
   constructor(private mediaService: MediaService, private titleService: Title) { }
 
   ngOnInit() {
     const prefix = this.mediaType === 'movie' ? 'Movies' : 'TV Shows';
+    this.languageKeyMediaType = this.mediaType === 'movie' ? 'Movies' : 'TVShows';
     this.titleService.setTitle(`${prefix} | Movies Db`);
     this.loadParams();
   }

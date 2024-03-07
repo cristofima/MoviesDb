@@ -1,6 +1,7 @@
 <div class="container">
   <div class="search-container">
-    <input type="search" [(ngModel)]="search" (keydown.enter)="searchMedia()" placeholder="{{ 'SearchPlaceHolder' | translate}}"
+    <input type="search" [(ngModel)]="search" (keydown.enter)="searchMedia()" 
+      placeholder="{{ 'SearchPlaceHolder' | translate:{mediaType: (languageKeyMediaType | translate)} }}"
       (click)="loadMedia()" />
     <button type="button" class="btn btn-primary" (click)="searchMedia()">{{ 'Search' | translate}}</button>
   </div>

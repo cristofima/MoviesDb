@@ -28,12 +28,12 @@
       @if(movie.voteAverage > 0) {
         <circle-progress [percent]="movie.voteAverage * 10" [outerStrokeColor]="movie.voteAverage | borderClass"
         [titleFontSize]="20" [unitsFontSize]="15" [radius]="27" [outerStrokeWidth]="5"></circle-progress>
-        <h6 [innerHTML]="'User Score' | translate"></h6>
+        <h6 [innerHTML]="'UserScore' | translate"></h6>
       }
 
       @if (movie.trailerKey) {
         <a class="btn btn-secondary" href="https://www.youtube.com/watch?v={{movie.trailerKey}}"
-        target="_blank">{{ 'Play Trailer' | translate }}</a>
+        target="_blank">{{ 'PlayTrailer' | translate }}</a>
       }
     </div>
 
@@ -60,7 +60,7 @@
       <div class="media-info">
         @if (movie.topBilledCast.length) {
           <hr />
-          <h4>{{ 'Top Billed Cast' | translate }}</h4>
+          <h4>{{ 'TopBilledCast' | translate }}</h4>
           <div class="row">
             <div class="top-billed-cast-container">
               @for (cast of movie.topBilledCast; track cast) {
@@ -92,7 +92,7 @@
         <hr />
         <div class="row collection-container"
           style="background-image: linear-gradient(to right, rgba(3, 37, 65, 1) 0%, rgba(3, 37, 65, 0.6) 100%), url(https://media.themoviedb.org/t/p/w1440_and_h320_multi_faces{{movie.collection.backdropPath}})">
-          <h2>{{ 'Part of the' | translate }} {{movie.collection.name}}</h2>
+          <h2>{{ 'PartOfThe' | translate }} {{movie.collection.name}}</h2>
           <a class="btn rounded-pill" [style.background-color]="posterImgDominantColor"
           [routerLink]="['/movie/collection/', movie.collection.id]">{{ 'VIEW THE COLLECTION' | translate }}</a>
         </div>
@@ -127,10 +127,10 @@
 
   <div class="minor-data">
     @if (movie.status) {
-      <div><span>{{ 'Status' | translate }}</span> <span>{{movie.status | translate}}</span></div>
+      <div><span>{{ 'Status' | translate }}</span> <span>{{ 'MovieStatus.'+movie.status | translate }}</span></div>
     }
     <div>
-      <span>{{ 'Production Company' | translate }}</span>
+      <span>{{ 'ProductionCompany' | translate }}</span>
       @if(movie.productionCompany) {
         <section>
           <img src="https://image.tmdb.org/t/p/h30{{movie.productionCompany.logoPath}}" [title]="movie.productionCompany.name"
@@ -142,7 +142,7 @@
       }
     </div>
     @if (movie.originalLanguage) {
-      <div><span>{{ 'Original Language' | translate }}</span> <span>{{movie.originalLanguage}}</span></div>
+      <div><span>{{ 'OriginalLanguage' | translate }}</span> <span>{{ 'Languages.'+movie.originalLanguage | translate }}</span></div>
     }
     <div><span>{{ 'Budget' | translate }}</span> <span>{{movie.budget ? (movie.budget | currency) : '-'}}</span></div>
     <div><span>{{ 'Revenue' | translate }}</span> <span>{{movie.revenue ? (movie.revenue | currency) : '-'}}</span></div>

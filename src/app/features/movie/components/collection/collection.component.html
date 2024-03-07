@@ -6,13 +6,13 @@
       <div class="user-score-container">
         <circle-progress [percent]="collection.voteAverage * 10" [outerStrokeColor]="collection.voteAverage | borderClass"
         [titleFontSize]="20" [unitsFontSize]="15" [radius]="27" [outerStrokeWidth]="5"></circle-progress>
-        <h6 [innerHTML]="'User Score' | translate"></h6>
+        <h6 [innerHTML]="'UserScore' | translate"></h6>
       </div>
     }
 
     <h5>{{ 'Overview' | translate }}</h5>
     <p>{{collection.overview}}</p>
-    <p><b>{{ 'Number of Movies' | translate }}:</b> {{collection.movies.length}}</p>
+    <p><b>{{ 'NumberOfMovies' | translate }}:</b> {{collection.movies.length}}</p>
   </ng-template>
 
   <ng-template #aditionalInfo let-collection="data">

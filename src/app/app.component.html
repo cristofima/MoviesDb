@@ -18,7 +18,7 @@
           <a class="nav-link" routerLink="/movies" routerLinkActive="active-link">{{ 'Movies' | translate }}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/tv-shows" routerLinkActive="active-link">{{ 'TV Shows' | translate }}</a>
+          <a class="nav-link" routerLink="/tv-shows" routerLinkActive="active-link">{{ 'TVShows' | translate }}</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/people" routerLinkActive="active-link">{{ 'People' | translate }}</a>
@@ -29,7 +29,7 @@
           <select class="form-select" aria-label="Default language" (change)="onLanguageChange($event.target.value)">
             <option value="">{{ 'SelectDefaultLanguage' | translate }}</option>
             @for (lang of laguages; track lang) {
-              <option [value]="lang.code" [selected]="lang.code === selectedLanguage">{{lang.name | translate}}</option>
+              <option [value]="lang.code" [selected]="lang.code === selectedLanguage">{{'Languages.'+lang.name | translate}}</option>
             }
           </select>
         </li>
