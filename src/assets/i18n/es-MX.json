@@ -7,7 +7,9 @@
         "French": "Francés",
         "German": "Alemán",
         "Italian": "Italiano",
-        "Russian": "Ruso"
+        "Russian": "Ruso",
+        "Chinese": "Chino",
+        "Japanese": "Japonés"
     },
     "Trending": "Tendencias",
     "Today": "Hoy",
@@ -23,10 +25,13 @@
     "UserScore": "Puntuación<br />de usuario",
     "PlayTrailer": "Reproducir trailer",
     "Overview": "Resumen",
+    "Jobs": {
+        "Screenplay": "Guión",
+        "Creator": "Creador",
+        "Director": "Director",
+        "Characters": "Personajes"
+    },
     "TopBilledCast": "Actores Principales",
-    "Screenplay": "Guión",
-    "Creator": "Creador",
-    "Characters": "Personajes",
     "SeriesCast": "Reparto de la serie",
     "PartOfThe": "Parte de la",
     "VIEW THE COLLECTION": "VER LA COLECCCIÓN",

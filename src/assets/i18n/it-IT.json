@@ -2,12 +2,14 @@
     "SelectDefaultLanguage": "Seleziona la lingua predefinita",
     "Languages": {
         "English": "Inglese",
-        "Spanish": "spagnolo",
-        "Portuguese": "portoghese",
-        "French": "francese",
+        "Spanish": "Spagnolo",
+        "Portuguese": "Portoghese",
+        "French": "Francese",
         "German": "Tedesco",
         "Italian": "Italiano",
-        "Russian": "russo"
+        "Russian": "Russo",
+        "Chinese": "Cinese",
+        "Japanese": "Giapponese"
     },
     "Trending": "Tendenza",
     "Today": "Oggi",
@@ -23,10 +25,13 @@
     "UserScore": "Utente<br />Punto",
     "PlayTrailer": "Riproduci il trailer",
     "Overview": "Panoramica",
+    "Jobs": {
+        "Screenplay": "Sceneggiatura",
+        "Creator": "Creatore",
+        "Director": "Direttore",
+        "Characters": "Caratteri"
+    },
     "TopBilledCast": "Cast più fatturato",
-    "Screenplay": "Sceneggiatura",
-    "Creator": "Creatore",
-    "Characters": "Caratteri",
     "SeriesCast": "Cast della serie",
     "PartOfThe": "Parte di",
     "VIEW THE COLLECTION": "GUARDA LA COLLEZIONE",

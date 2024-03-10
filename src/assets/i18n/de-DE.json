@@ -7,7 +7,9 @@
         "French": "Französisch",
         "German": "Deutsch",
         "Italian": "Italienisch",
-        "Russian": "Russisch"
+        "Russian": "Russisch",
+        "Chinese": "Chinesisch",
+        "Japanese": "Japanisch"
     },
     "Trending": "Im Trend",
     "Today": "Heute",
@@ -23,10 +25,13 @@
     "UserScore": "Benutzer<br />Punktzahl",
     "PlayTrailer": "Trailer abspielen",
     "Overview": "Überblick",
+    "Jobs": {
+        "Screenplay": "Drehbuch",
+        "Creator": "Schöpfer",
+        "Director": "Direktor",
+        "Characters": "Figuren"
+    },
     "TopBilledCast": "Top-Besetzung",
-    "Screenplay": "Drehbuch",
-    "Creator": "Schöpfer",
-    "Characters": "Figuren",
     "SeriesCast": "Serienbesetzung",
     "PartOfThe": "Teil der",
     "VIEW THE COLLECTION": "SEHEN SIE SICH DIE KOLLEKTION AN",

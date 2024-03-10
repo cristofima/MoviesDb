@@ -6,8 +6,10 @@
         "Portuguese": "Portugais",
         "French": "Français",
         "German": "Allemand",
-        "Italian": "italien",
-        "Russian": "russe"
+        "Italian": "Italien",
+        "Russian": "Russe",
+        "Chinese": "Chinois",
+        "Japanese": "Japonais"
     },
     "Trending": "Tendance",
     "Today": "Aujourd'hui",
@@ -23,10 +25,13 @@
     "UserScore": "Utilisateur<br />Score",
     "PlayTrailer": "Jouer la bande-annonce",
     "Overview": "Aperçu",
+    "Jobs": {
+        "Screenplay": "Scénario",
+        "Creator": "Créateur",
+        "Director": "Directeur",
+        "Characters": "Personnages"
+    },
     "TopBilledCast": "Casting le plus facturé",
-    "Screenplay": "Scénario",
-    "Creator": "Créateur",
-    "Characters": "Personnages",
     "SeriesCast": "Casting de la série",
     "PartOfThe": "Partie de la",
     "VIEW THE COLLECTION": "VOIR LA COLLECTION",

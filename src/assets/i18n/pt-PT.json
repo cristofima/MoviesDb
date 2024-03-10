@@ -6,8 +6,10 @@
         "Portuguese": "Português",
         "French": "Francês",
         "German": "Alemão",
-        "Italian": "italiano",
-        "Russian": "russo"
+        "Italian": "Italiano",
+        "Russian": "Russo",
+        "Chinese": "Chinês",
+        "Japanese": "Japonês"
     },
     "Trending": "Tendendo",
     "Today": "Hoje",
@@ -23,10 +25,13 @@
     "UserScore": "Do utilizador<br />Pontuação",
     "PlayTrailer": "Reproduzir trailer",
     "Overview": "Visão geral",
+    "Jobs": {
+        "Screenplay": "Roteiro",
+        "Creator": "O Criador",
+        "Director": "Diretor",
+        "Characters": "Personagens"
+    },
     "TopBilledCast": "Elenco mais faturado",
-    "Screenplay": "Roteiro",
-    "Creator": "O Criador",
-    "Characters": "Personagens",
     "SeriesCast": "Elenco da série",
     "PartOfThe": "Parte de",
     "VIEW THE COLLECTION": "VEJA A COLEÇÃO",

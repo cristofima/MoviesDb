@@ -7,7 +7,9 @@
         "French": "French",
         "German": "German",
         "Italian": "Italian",
-        "Russian": "Russian"
+        "Russian": "Russian",
+        "Chinese": "Chinese",
+        "Japanese": "Japanese"
     },
     "Trending": "Trending",
     "Today": "Today",
@@ -23,10 +25,13 @@
     "UserScore": "User<br />Score",
     "PlayTrailer": "Play Trailer",
     "Overview": "Overview",
+    "Jobs": {
+        "Screenplay": "Screenplay",
+        "Creator": "Creator",
+        "Director": "Director",
+        "Characters": "Characters"
+    },
     "TopBilledCast": "Top Billed Cast",
-    "Screenplay": "Screenplay",
-    "Creator": "Creator",
-    "Characters": "Characters",
     "SeriesCast": "Series Cast",
     "PartOfThe": "Part of the",
     "VIEW THE COLLECTION": "VIEW THE COLLECTION",

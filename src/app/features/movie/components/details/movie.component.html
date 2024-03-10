@@ -48,7 +48,7 @@
         @for (person of movie.people; track person) {
           <div class="profile">
             <span>{{person.name}}</span>
-            <span>{{person.job | translate}}</span>
+            <span>{{ 'Jobs.'+person.job | translate }}</span>
           </div>
         }
       </div>

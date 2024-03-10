@@ -7,7 +7,9 @@
         "French": "Французский",
         "German": "Немецкий",
         "Italian": "итальянский",
-        "Russian": "Русский"
+        "Russian": "Русский",
+        "Chinese": "китайский",
+        "Japanese": "японский"
     },
     "Trending": "Тенденции",
     "Today": "Сегодня",
@@ -23,10 +25,13 @@
     "UserScore": "Пользователь<br />Счет",
     "PlayTrailer": "Воспроизвести трейлер",
     "Overview": "Обзор",
+    "Jobs": {
+        "Screenplay": "Сценарий",
+        "Creator": "Создатель",
+        "Director": "Режиссер",
+        "Characters": "Персонажи"
+    },
     "TopBilledCast": "Актеры с самым высоким рейтингом",
-    "Screenplay": "Сценарий",
-    "Creator": "Создатель",
-    "Characters": "Персонажи",
     "SeriesCast": "Актерский состав сериала",
     "PartOfThe": "Часть",
     "VIEW THE COLLECTION": "ПОСМОТРЕТЬ КОЛЛЕКЦИЮ",

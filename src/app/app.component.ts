@@ -17,7 +17,9 @@ export class AppComponent implements OnInit {
     { name: 'French', code: 'fr-FR' },
     { name: 'German', code: 'de-DE' },
     { name: 'Italian', code: 'it-IT' },
-    { name: 'Russian', code: 'ru-RU' }
+    { name: 'Russian', code: 'ru-RU' },
+    { name: 'Chinese', code: 'zh-CN' },
+    { name: 'Japanese', code: 'ja-JP' }
   ];
 
   constructor(private translate: TranslateService) {}
@@ -25,6 +27,15 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.selectedLanguage = localStorage.getItem('language') || 'en-US';
     this.translate.use(this.selectedLanguage);
+    this.translateLanguageNames();
+  }
+
+  private async translateLanguageNames() {
+    for(let i = 0; i < this.languages.length; i++) {
+      this.languages[i].name = await this.translate.get(`Languages.${this.languages[i].name}`).toPromise();
+    }
+
+    this.languages.sort((a, b) => a.name.localeCompare(b.name));
   }
 
   onLanguageChange(code: string) {

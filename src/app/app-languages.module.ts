@@ -7,6 +7,8 @@ import localeFr from '@angular/common/locales/fr';
 import localeDe from '@angular/common/locales/de';
 import localeIt from '@angular/common/locales/it';
 import localeRu from '@angular/common/locales/ru';
+import localeZh from '@angular/common/locales/zh';
+import localeJa from '@angular/common/locales/ja';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -19,6 +21,8 @@ registerLocaleData(localeFr, 'fr-FR');
 registerLocaleData(localeDe, 'de-DE');
 registerLocaleData(localeIt, 'it-IT');
 registerLocaleData(localeRu, 'ru-RU');
+registerLocaleData(localeZh, 'zh-CN');
+registerLocaleData(localeJa, 'ja-JP');
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
