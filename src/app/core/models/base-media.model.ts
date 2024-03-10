@@ -8,6 +8,7 @@ export interface MinimalMedia {
 }
 
 export interface BaseMedia extends MinimalMedia {
+    originalTitle: string;
     overview: string;
     tagline: string;
     backdropPath: string;

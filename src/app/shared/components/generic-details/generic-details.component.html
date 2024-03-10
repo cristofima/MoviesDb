@@ -5,7 +5,7 @@
       <div class="row main-info-container" [ngStyle]="{color: contrastColor, 'background-image': secondBackgroundImg}">
         <div class="col-md-3">
           @if(data.posterPath) {
-            <img class="img-fluid rounded mb-3 mb-md-0 img-principal" src="https://image.tmdb.org/t/p/w300{{data.posterPath}}">
+            <img class="img-fluid rounded mb-3 mb-md-0 img-principal" src="https://image.tmdb.org/t/p/w300{{data.posterPath}}" loading="lazy">
           }
           @else {
             <div class="image-content" style="width: 300px; height: 450px; min-width: 300px;">

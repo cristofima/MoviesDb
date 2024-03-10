@@ -7,6 +7,7 @@ export class TVUtil {
         let tv: TV = {
             id: data.id,
             title: data.name,
+            originalTitle: data.original_name,
             overview: data.overview,
             tagline: data.tagline,
             posterPath: data.poster_path,

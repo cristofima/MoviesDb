@@ -122,13 +122,16 @@
                   }
                 }
               @else {
-                <p [innerHTML]="'EmptyRecommendations' | translate: {value: tv.title}"></p>
+                <p [innerHTML]="'EmptyRecommendations' | translate: {value: tv.title, mediaType: 'TVShows' | translate}"></p>
               }
             </div>
           </div>
         </div>
 
       <div class="minor-data">
+        @if (tv.originalTitle) {
+          <div><span>{{ 'OriginalName' | translate }}</span> <span>{{ tv.originalTitle }}</span></div>
+        }
         @if (tv.status) {
           <div><span>{{ 'Status' | translate }}</span> <span>{{ 'TVStatus.'+tv.status | translate }}</span></div>
         }

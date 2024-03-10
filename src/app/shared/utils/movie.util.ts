@@ -8,6 +8,7 @@ export class MovieUtil {
         let movie: Movie = {
             id: data.id,
             title: data.title,
+            originalTitle: data.original_title,
             overview: data.overview,
             tagline: data.tagline,
             posterPath: data.poster_path,
