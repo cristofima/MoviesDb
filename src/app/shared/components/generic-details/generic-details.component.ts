@@ -21,7 +21,7 @@ export class GenericDetailsComponent implements OnInit {
   posterImgDominantColor: string;
   firstBackgroundImg: string;
   secondBackgroundImg: string;
-  contrastColor = 'white';
+  contrastColor = 'black';
 
   @Input({ required: true }) callback: Function;
 
@@ -62,7 +62,14 @@ export class GenericDetailsComponent implements OnInit {
         imgUrl = `image/t/p/w300${this.data.posterPath}`;
       }
       
-      this.posterImgDominantColor = await this.dominantColorService.getDominantColor(imgUrl);
+      try{
+        this.posterImgDominantColor = await this.dominantColorService.getDominantColor(imgUrl);
+      }catch{
+
+      }
+      
+      if(!this.posterImgDominantColor) return;
+      
       this.contrastColor = ColorUtil.getContrastColor(this.posterImgDominantColor);
       this.firstBackgroundImg = `url(https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces${this.data.backdropPath})`;
   
