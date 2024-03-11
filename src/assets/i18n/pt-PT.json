@@ -35,6 +35,8 @@
     "SeriesCast": "Elenco da série",
     "PartOfThe": "Parte de",
     "VIEW THE COLLECTION": "VEJA A COLEÇÃO",
+    "ViewAllSeasons": "Ver todas as temporadas",
+    "NumberSeasons": "<b>Número de temporadas:</b> {{value}}",
     "Recommendations": "Recomendações",
     "Status": "Status",
     "episode": "episódio",

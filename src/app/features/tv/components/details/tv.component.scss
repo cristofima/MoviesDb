@@ -1,0 +1,22 @@
+@import 'common-media';
+@import 'empty-image';
+@import 'tv-seasons';
+
+.cast-text {
+    .episode-count {
+        color: rgba(0, 0, 0, .5);
+    }
+}
+
+.season {
+    padding-bottom: 15px;
+}
+
+.btn-viewall-seasons {
+    text-decoration: none;
+    color: black;
+}
+
+.btn-viewall-seasons:hover {
+    color: grey;
+}

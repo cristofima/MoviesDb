@@ -1,4 +1,4 @@
-import { BaseMedia, Company } from "./base-media.model";
+import { BaseMedia, Company, MinimalMedia } from "./base-media.model";
 
 export interface TV extends BaseMedia {
     firstAirDate: Date;
@@ -13,14 +13,20 @@ export interface TV extends BaseMedia {
         episodeType: string;
         seasonNumber: number;
     };
-    lastSeason?: {
-        id: number;
-        name: string;
-        overview: string;
-        airDate: Date;
-        episodeCount: number;
-        seasonNumber: number;
-        posterPath: string;
-        voteAverage: number;
-    }
+    lastSeason?: TVSeason;
+}
+
+export interface TVSeason {
+    id: number;
+    name: string;
+    overview: string;
+    airDate: Date;
+    episodeCount: number;
+    seasonNumber: number;
+    posterPath: string;
+    voteAverage: number;
+}
+
+export interface TVMinimalWithSeasons extends MinimalMedia {
+    seasons: TVSeason[];
 }

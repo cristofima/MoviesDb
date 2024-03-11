@@ -1,0 +1,27 @@
+@import 'empty-image';
+@import 'tv-seasons';
+
+.container {
+    padding: 20px 0px 20px 0px;
+
+    .tv-details-container {
+        display: flex;
+        gap: 20px;
+        padding: 10px;
+
+        h2>span {
+            font-weight: normal;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+    }
+
+    .seasons-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+}

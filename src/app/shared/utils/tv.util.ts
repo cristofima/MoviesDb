@@ -1,4 +1,4 @@
-import { TV } from '@/core/models/tv.model';
+import { TV, TVMinimalWithSeasons } from '@/core/models/tv.model';
 import { BaseMediaUtil } from './base-media.util';
 
 export class TVUtil {
@@ -77,6 +77,35 @@ export class TVUtil {
         }
 
         return {...BaseMediaUtil.getCommonExtraData(data, 'TV'), certification };
+    }
+
+    public static getTVMinimalDetailsWithSeasons(data: any) {
+        let tvMinimal: TVMinimalWithSeasons = {
+            id: data.id,
+            title: data.name,
+            posterPath: data.poster_path,
+            voteAverage: data.vote_average,
+            releaseDate: data.first_air_date ? new Date(data.first_air_date) : null,
+            mediaType: 'tv',
+            seasons: []
+        };
+
+        if(data.seasons){
+            tvMinimal.seasons = data.seasons.map((season: any) => {
+                return {
+                    id: season.id,
+                    name: season.name,
+                    overview: season.overview,
+                    seasonNumber: season.season_number,
+                    episodeCount: season.episode_count,
+                    airDate: season.air_date ? new Date(season.air_date) : null,
+                    posterPath: season.poster_path,
+                    voteAverage: season.vote_average
+                }
+            });
+        }
+
+        return tvMinimal;
     }
 
     private static getTVCertification(results: any[], countryCode: string) {

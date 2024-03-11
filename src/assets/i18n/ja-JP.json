@@ -35,6 +35,8 @@
     "SeriesCast": "シリーズキャスト",
     "PartOfThe": "の一部",
     "VIEW THE COLLECTION": "コレクションを見る",
+    "ViewAllSeasons": "すべてのシーズンを見る",
+    "NumberSeasons": "<b>シーズンの数:</b> {{value}}",
     "Recommendations": "推奨事項",
     "Status": "状態",
     "episode": "エピソード",

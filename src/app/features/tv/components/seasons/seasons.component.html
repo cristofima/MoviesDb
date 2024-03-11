@@ -1,0 +1,55 @@
+@if(tv){
+    <div class="container">
+        <div class="tv-details-container" [ngStyle]="{color: contrastColor, 'background-color': posterImgDominantColor}">
+            <div class="img-container">
+                <a [routerLink]="['/tv', tv.id]">
+                    @if(tv.posterPath){
+                        <img src="https://image.tmdb.org/t/p/w58_and_h87_face{{tv.posterPath}}" loading="lazy">
+                    }
+                    @else{
+                        <div class="image-content" style="width: 58px; height: 87px; min-width: 58px">
+                            <div class="glyphicons_v2 poster no-image-holder"></div>
+                        </div>
+                    }
+                </a>
+            </div>
+            <div>
+                <a [routerLink]="['/tv', tv.id]">
+                    <h2>{{tv.title}} <span *ngIf="tv.releaseDate">({{tv.releaseDate | date:'yyyy'}})</span></h2>
+                </a>
+                
+                <p [innerHTML]="'NumberSeasons'| translate:{value: tv.seasons.length}"></p>
+            </div>
+        </div>
+        
+        <br />
+        <div class="seasons-container">
+            @for(season of tv.seasons; track season){
+                <div class="season">
+                    @if(season.posterPath){
+                        <div class="img-container">
+                            <img src="https://image.tmdb.org/t/p/w130_and_h195_bestv2{{season.posterPath}}" loading="lazy">
+                        </div>
+                    }
+                    @else{
+                        <div class="image-content" style="width: 136px; height: 205px; min-width: 136px">
+                            <div class="glyphicons_v2 poster no-image-holder"></div>
+                        </div>
+                    }
+                    <div>
+                        <h5>{{season.name}}</h5>
+                        <p class="rating"><span *ngIf="season.voteAverage" class="badge bg-dark">{{season.voteAverage}}</span> {{season.airDate | date:'yyyy'}} - {{season.episodeCount}} {{season.episodeCount > 1 ? ('episodes' | translate) : ('episode' | translate)}}</p>
+                        @if(season.overview) {
+                          <p class="overview">{{season.overview}}</p>
+                        }
+                        @else {
+                          <p class="overview">
+                            {{ 'SeasonOverview' | translate: {seasonName: season.name, title: tv.title, airDate: season.airDate | date: 'longDate'} }}
+                          </p>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

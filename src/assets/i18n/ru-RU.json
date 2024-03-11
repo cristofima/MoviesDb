@@ -35,6 +35,8 @@
     "SeriesCast": "Актерский состав сериала",
     "PartOfThe": "Часть",
     "VIEW THE COLLECTION": "ПОСМОТРЕТЬ КОЛЛЕКЦИЮ",
+    "ViewAllSeasons": "Посмотреть все сезоны",
+    "NumberSeasons": "<b>Количество сезонов:</b> {{value}}",
     "Recommendations": "Рекомендации",
     "Status": "Положение дел",
     "episode": "эпизод",

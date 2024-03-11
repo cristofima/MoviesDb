@@ -35,6 +35,8 @@
     "SeriesCast": "系列演员表",
     "PartOfThe": "的一部分",
     "VIEW THE COLLECTION": "查看系列",
+    "ViewAllSeasons": "查看所有季节",
+    "NumberSeasons": "<b>季节数：</b> {{value}}",
     "Recommendations": "建议",
     "Status": "地位",
     "episode": "插曲",

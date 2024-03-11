@@ -1,13 +1,4 @@
-@import 'common-media';
-@import 'empty-image';
-
-.cast-text {
-    .episode-count {
-        color: rgba(0, 0, 0, .5);
-    }
-}
-
-.last-season {
+.season {
     display: flex;
     flex-direction: row;
     align-items: center;
