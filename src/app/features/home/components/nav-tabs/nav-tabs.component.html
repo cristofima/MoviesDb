@@ -1,0 +1,20 @@
+<ul ngbNav #navTabs="ngbNav" [(activeId)]="activeTab" class="nav-tabs">
+  @for(tab of tabsContent; track tab; let index = $index){
+  <li [ngbNavItem]="index + 1">
+    <button ngbNavLink>{{ tab.buttonName | translate }}</button>
+    <ng-template ngbNavContent>
+      <div class="row">
+        <div class="media-container">
+          @for (media of tab.mediaList; track media) {
+          <div class="card">
+            <app-media-poster [media]="media" sizeformat="small"></app-media-poster>
+          </div>
+          }
+        </div>
+      </div>
+    </ng-template>
+  </li>
+  }
+</ul>
+
+<div [ngbNavOutlet]="navTabs" class="mt-2"></div>

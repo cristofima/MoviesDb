@@ -1,0 +1,38 @@
+<div class="container">
+  <h3>{{ 'Trending' | translate }}</h3>
+  @defer (on viewport) {
+    <app-nav-tabs [tabsActions]="tabsActionTrending"></app-nav-tabs>
+  }
+  @loading (after 150ms) {
+    <div>Loading...</div>
+  }
+  @placeholder (minimum 150ms) {
+    <div class="placeholder-container"></div>
+  }
+  
+  <br />
+  
+  <h3>{{ 'Upcoming' | translate }}</h3>
+  @defer (on viewport) {
+    <app-nav-tabs [tabsActions]="tabsActionUpcoming"></app-nav-tabs>
+  }
+  @loading (after 150ms) {
+    <div>Loading...</div>
+  }
+  @placeholder (minimum 150ms) {
+    <div class="placeholder-container"></div>
+  }
+  
+  <br />
+  
+  <h3>{{ 'WhatsPopular' | translate }}</h3>
+  @defer (on viewport) {
+    <app-nav-tabs [tabsActions]="tabsActionPopular"></app-nav-tabs>
+  }
+  @loading (after 150ms) {
+    <div>Loading...</div>
+  }
+  @placeholder (minimum 150ms) {
+    <div class="placeholder-container"></div>
+  }
+</div>
