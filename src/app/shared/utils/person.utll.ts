@@ -5,23 +5,27 @@ export class PersonUtil {
 
     public static getKnownForMedia(data: any): MinimalMedia[] {
         return ([...data.combined_credits.cast] as any[])
-            .filter((c: any) => c.character !== 'Self' && !c.character.includes('(voice)'))
+            .filter((c: any) => c.character !== 'Self')
             .sort((a: any, b: any) => {
-                let episodeCountA = a.episode_count || 1;
-                let episodeCountB = b.episode_count || 1;
-
-                if (b.vote_average !== a.vote_average) {
-                    const weightedScoreA = a.vote_average * a.vote_count * episodeCountA;
-                    const weightedScoreB = b.vote_average * b.vote_count * episodeCountB;
-
-                    return weightedScoreB - weightedScoreA;
+                const getScore = (c: any, voteAvgPer = 0.7, popularityPer = 0.3) => {
+                    let episodeCount = c.episode_count || 1;
+                    let weightedScore = c.vote_average * c.vote_count * episodeCount;
+                    
+                    return weightedScore * voteAvgPer + c.popularity * popularityPer;
                 }
 
-                if (b.popularity !== a.popularity) {
-                    return b.popularity * episodeCountB - a.popularity * episodeCountA;
+                let scoreA = 0;
+                let scoreB = 0;
+
+                if(a.vote_count > b.vote_count && a.popularity < b.popularity) {
+                    scoreA = getScore(a);
+                    scoreB = getScore(b, 0.3, 0.7);
+                }else{
+                    scoreA = getScore(a, 0.3, 0.7);
+                    scoreB = getScore(b);
                 }
 
-                return new Date(b.release_date).getTime() - new Date(a.release_date).getTime();
+                return scoreB - scoreA;
             })
             .slice(0, 8)
             .map((c: any) => {
