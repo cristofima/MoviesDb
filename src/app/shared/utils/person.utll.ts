@@ -4,7 +4,7 @@ import { PersonCredit } from '@/core/models/person.model';
 export class PersonUtil {
 
     public static getKnownForMedia(data: any): MinimalMedia[] {
-        return ([...data.combined_credits.cast] as any[])
+        let tempMediaList = ([...data.combined_credits.cast] as any[])
             .filter((c: any) => c.character !== 'Self')
             .sort((a: any, b: any) => {
                 const getScore = (c: any, voteAvgPer = 0.7, popularityPer = 0.3) => {
@@ -27,7 +27,7 @@ export class PersonUtil {
 
                 return scoreB - scoreA;
             })
-            .slice(0, 8)
+            .slice(0, 20)
             .map((c: any) => {
                 return {
                     id: c.id,
@@ -36,6 +36,24 @@ export class PersonUtil {
                     mediaType: c.media_type
                 };
             });
+        
+        let selectedItems: MinimalMedia[] = [];
+        let mediaIds: string[] = [];
+        const maxResults = 8;
+
+        for (let i = 0; i < tempMediaList.length; i++) {
+            if (selectedItems.length === maxResults) {
+                break;
+            }
+
+            let mediaId = tempMediaList[i].mediaType + "-" + tempMediaList[i].id;
+            if (!mediaIds.includes(mediaId)) {
+                selectedItems.push(tempMediaList[i]);
+                mediaIds.push(mediaId);
+            }
+        }
+
+        return selectedItems;
     }
 
     public static getCreditsList(data: any) {
