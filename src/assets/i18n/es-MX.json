@@ -59,6 +59,7 @@
     "YearsOld": "{{age}} años",
     "PlaceOfBirth": "Lugar de Nacimiento",
     "DayOfDeath": "Día de la muerte",
+    "AlsoKnownAs": "También conocido como",
     "Acting": "Actuando",
     "as": "como",
     "NumberOfMovies": "Número de películas",
@@ -81,9 +82,18 @@
         "Returning Series": "Serie de regreso",
         "Planned": "Planificado",
         "In Production": "En producción",
-        "Ended": "Terminado",
+        "Ended": "Finalizado",
         "Canceled": "Cancelado",
         "Pilot": "Piloto"
+    },
+    "TVShowTypes": {
+        "Scripted": "Con guión",
+        "Documentary": "Documental",
+        "News": "Noticias",
+        "Reality": "Realidad",
+        "Talk Show": "Programa de entrevistas",
+        "Miniseries": "Miniserie",
+        "Video": "Video"
     },
     "Male": "Masculino",
     "Female": "Femenino",

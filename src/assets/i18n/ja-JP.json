@@ -59,6 +59,7 @@
     "YearsOld": "{{age}} 歳",
     "PlaceOfBirth": "出生地",
     "DayOfDeath": "死の日",
+    "AlsoKnownAs": "としても知られている",
     "Acting": "演技",
     "as": "として",
     "NumberOfMovies": "映画の数",
@@ -84,6 +85,15 @@
         "Ended": "終了しました",
         "Canceled": "キャンセル",
         "Pilot": "パイロット"
+    },
+    "TVShowTypes": {
+        "Scripted": "スクリプト化された",
+        "Documentary": "ドキュメンタリー",
+        "News": "ニュース",
+        "Reality": "現実",
+        "Talk Show": "トークショー",
+        "Miniseries": "ミニシリーズ",
+        "Video": "ビデオ"
     },
     "Male": "男",
     "Female": "女性",

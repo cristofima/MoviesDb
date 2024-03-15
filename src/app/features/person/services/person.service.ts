@@ -26,6 +26,7 @@ export class PersonService extends TMDbService {
             knownForDepartment: data.known_for_department,
             placeOfBirth: data.place_of_birth,
             profilePath: data.profile_path,
+            alsoKnownAs: data.also_known_as,
             knownCredits: data.combined_credits.cast.length,
             knownFor: PersonUtil.getKnownForMedia(data),
             creditsList: PersonUtil.getCreditsList(data),

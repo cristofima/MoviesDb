@@ -44,8 +44,19 @@
           <span>{{ 'PlaceOfBirth' | translate }}</span>
           <span>{{person.placeOfBirth || '-'}}</span>
         </div>
+        @if(person.alsoKnownAs.length) {
+          <div>
+            <span>{{ 'AlsoKnownAs' | translate }}</span>
+            <ul class="alsoKnownAs">
+              @for(name of person.alsoKnownAs; track name) {
+                <li>{{name}}</li>
+              }
+            </ul>
+          </div>
+        }
       </div>
     </div>
+
     <div class="second-column">
       <h2>{{person.name}}</h2>
       <h5>{{ 'Biography' | translate }}</h5>
@@ -67,8 +78,15 @@
           @for (media of person.knownFor; track media) {
             <div class="card">
               <a [routerLink]="['/', media.mediaType, media.id]">
-                <img src="https://image.tmdb.org/t/p/w185{{media.posterPath}}" class="card-img-top"
-                  [title]="media.title" loading="lazy">
+                @if(media.posterPath) {
+                  <img src="https://image.tmdb.org/t/p/w185{{media.posterPath}}" class="card-img-top"
+                    [title]="media.title" loading="lazy">
+                }
+                @else {
+                  <div class="image-content" style="width: 136px; height: 205px; min-width: 136px;" [title]="media.title">
+                    <div class="glyphicons_v2 recomendation no-image-holder"></div>
+                  </div>
+                }
               </a>
               <div class="media-text">
                 <a [routerLink]="['/', media.mediaType, media.id]">

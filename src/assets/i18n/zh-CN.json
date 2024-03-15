@@ -59,6 +59,7 @@
     "YearsOld": "{{age}} 岁",
     "PlaceOfBirth": "出生地",
     "DayOfDeath": "死亡日",
+    "AlsoKnownAs": "也称为",
     "Acting": "演戏",
     "as": "作为",
     "NumberOfMovies": "电影数量",
@@ -84,6 +85,15 @@
         "Ended": "结束",
         "Canceled": "取消",
         "Pilot": "飞行员"
+    },
+    "TVShowTypes": {
+        "Scripted": "脚本化",
+        "Documentary": "记录",
+        "News": "消息",
+        "Reality": "现实",
+        "Talk Show": "脱口秀",
+        "Miniseries": "迷你剧",
+        "Video": "视频"
     },
     "Male": "男性",
     "Female": "女性",

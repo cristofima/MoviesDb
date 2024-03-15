@@ -156,7 +156,7 @@
           }
       </div>
       @if (tv.type) {
-        <div><span>{{ 'Type' | translate }}</span> <span>{{tv.type}}</span></div>
+        <div><span>{{ 'Type' | translate }}</span> <span>{{ 'TVShowTypes.'+tv.type | translate }}</span></div>
       }
       @if (tv.originalLanguage) {
         <div><span>{{ 'OriginalLanguage' | translate }}</span> <span>{{ 'Languages.'+tv.originalLanguage | translate }}</span></div>

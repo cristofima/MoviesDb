@@ -59,6 +59,7 @@
     "YearsOld": "{{age}} years old",
     "PlaceOfBirth": "Place of Birth",
     "DayOfDeath": "Day of Death",
+    "AlsoKnownAs": "Also Known As",
     "Acting": "Acting",
     "as": "as",
     "NumberOfMovies": "Number of Movies",
@@ -84,6 +85,15 @@
         "Ended": "Ended",
         "Canceled": "Canceled",
         "Pilot": "Pilot"
+    },
+    "TVShowTypes": {
+        "Scripted": "Scripted",
+        "Documentary": "Documentary",
+        "News": "News",
+        "Reality": "Reality",
+        "Talk Show": "Talk Show",
+        "Miniseries": "Miniseries",
+        "Video": "Video"
     },
     "Male": "Male",
     "Female": "Female",

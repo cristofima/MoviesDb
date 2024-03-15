@@ -59,6 +59,7 @@
     "YearsOld": "{{age}} лет",
     "PlaceOfBirth": "Место рождения",
     "DayOfDeath": "День смерти",
+    "AlsoKnownAs": "Также известен как",
     "Acting": "Действующий",
     "as": "как",
     "NumberOfMovies": "Количество фильмов",
@@ -84,6 +85,15 @@
         "Ended": "Закончено",
         "Canceled": "Отменено",
         "Pilot": "Пилот"
+    },
+    "TVShowTypes": {
+        "Scripted": "Сценарий",
+        "Documentary": "Документальный",
+        "News": "Новости",
+        "Reality": "Реальность",
+        "Talk Show": "Ток-шоу",
+        "Miniseries": "Минисериал",
+        "Video": "видео"
     },
     "Male": "Мужской",
     "Female": "Женский",

@@ -11,6 +11,7 @@ export interface Person {
     knownForDepartment: string;
     placeOfBirth: string;
     profilePath: string;
+    alsoKnownAs: string[];
     knownCredits: number;
     knownFor: MinimalMedia[];
     externalIds?: {

@@ -59,6 +59,7 @@
     "YearsOld": "{{age}} anos",
     "PlaceOfBirth": "Local de nascimento",
     "DayOfDeath": "Dia da Morte",
+    "AlsoKnownAs": "Também conhecido como",
     "Acting": "Atuando",
     "as": "como",
     "NumberOfMovies": "Número de filmes",
@@ -84,6 +85,15 @@
         "Ended": "Terminou",
         "Canceled": "Cancelado",
         "Pilot": "Piloto"
+    },
+    "TVShowTypes": {
+        "Scripted": "Com script",
+        "Documentary": "Documentário",
+        "News": "Notícias",
+        "Reality": "Realidade",
+        "Talk Show": "Programa de entrevista",
+        "Miniseries": "Minissérie",
+        "Video": "Vídeo"
     },
     "Male": "Macho",
     "Female": "Fêmea",

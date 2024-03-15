@@ -20,6 +20,11 @@
             flex-direction: column;
             gap: 12px;
 
+            .alsoKnownAs {
+                list-style-type: none;
+                padding-left: 0px;
+            }
+
             div {
                 display: flex;
                 flex-direction: column;
