@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { SeasonsService } from '../../services/seasons.service';
-import { TVMinimalWithSeasons } from '@/core/models/tv.model';
 import { Title } from '@angular/platform-browser';
+import { TVMinimalWithSeasons } from '@/core/models/tv.model';
 import { DominantColorService } from '@/core/services/dominant-color.service';
-import { environment } from 'src/environments/environment';
+import { SeasonsService } from '@/features/tv/services/seasons.service';
 import { ColorUtil } from '@/shared/utils/color.util';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-seasons',

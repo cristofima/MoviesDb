@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { NgbAccordionDirective } from '@ng-bootstrap/ng-bootstrap';
 import { Person } from '@/core/models/person.model';
-import { PersonService } from '../services/person.service';
+import { PersonService } from '@/features/person/services/person.service';
 
 @Component({
   selector: 'app-person',

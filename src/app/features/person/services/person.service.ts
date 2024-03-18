@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Person } from '@/core/models/person.model';
 import { TMDbService } from '@/core/services/tmdb.service';
-import { PersonUtil } from '../utils/person.utll';
+import { PersonUtil } from '@/features/person/utils/person.utll';
 
 @Injectable()
 export class PersonService extends TMDbService {

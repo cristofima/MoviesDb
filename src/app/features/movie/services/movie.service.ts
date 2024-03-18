@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { Collection } from '@/core/models/collection.model';
 import { Movie } from '@/core/models/movie.model';
 import { TMDbService } from '@/core/services/tmdb.service';
-import { MovieUtil } from '../utils/movie.util';
+import { MovieUtil } from '@/features/movie/utils/movie.util';
 
 @Injectable()
 export class MovieService extends TMDbService {

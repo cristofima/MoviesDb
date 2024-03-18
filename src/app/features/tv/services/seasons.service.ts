@@ -1,9 +1,9 @@
 import { TVMinimalWithSeasons } from '@/core/models/tv.model';
-import { TMDbService } from '@/core/services/tmdb.service';
-import { TVUtil } from '../utils/tv.util';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { TMDbService } from '@/core/services/tmdb.service';
+import { TVUtil } from '@/features/tv/utils/tv.util';
 
 @Injectable()
 export class SeasonsService extends TMDbService {

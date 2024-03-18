@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { MediaFilter } from '@/core/models/media-filter';
 import { PaginationModel } from '@/core/models/pagination.model';
 import { TMDbService } from '@/core/services/tmdb.service';
-import { MediaUtil } from '../utils/media.util';
+import { MediaUtil } from '@/shared/utils/media.util';
 
 @Injectable()
 export class MediaService extends TMDbService {

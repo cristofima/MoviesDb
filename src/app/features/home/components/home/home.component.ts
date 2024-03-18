@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { HomeService } from '../../services/home.service';
+import { HomeService } from '@/features/home/services/home.service';
 
 interface TabsAction {
   buttonName: string;
