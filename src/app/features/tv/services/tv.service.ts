@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { TV } from '@/core/models/tv.model';
 import { TMDbService } from '@/core/services/tmdb.service';
-import { TVUtil } from '@/shared/utils/tv.util';
+import { TVUtil } from '../utils/tv.util';
 
 @Injectable()
 export class TvService extends TMDbService {

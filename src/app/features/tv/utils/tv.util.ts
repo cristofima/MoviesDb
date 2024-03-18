@@ -1,5 +1,5 @@
 import { TV, TVMinimalWithSeasons } from '@/core/models/tv.model';
-import { BaseMediaUtil } from './base-media.util';
+import { BaseMediaUtil } from '../../../shared/utils/base-media.util';
 
 export class TVUtil {
 

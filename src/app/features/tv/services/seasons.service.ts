@@ -1,6 +1,6 @@
-import { TV, TVMinimalWithSeasons } from '@/core/models/tv.model';
+import { TVMinimalWithSeasons } from '@/core/models/tv.model';
 import { TMDbService } from '@/core/services/tmdb.service';
-import { TVUtil } from '@/shared/utils/tv.util';
+import { TVUtil } from '../utils/tv.util';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
