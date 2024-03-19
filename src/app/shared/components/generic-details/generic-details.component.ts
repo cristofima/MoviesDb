@@ -1,4 +1,5 @@
 import { Component, ContentChild, Input, OnInit, TemplateRef } from '@angular/core';
+import { CommonModule, IMAGE_CONFIG, IMAGE_LOADER, ImageLoaderConfig, NgOptimizedImage } from '@angular/common'
 import { Collection } from '@/core/models/collection.model';
 import { Movie } from '@/core/models/movie.model';
 import { DominantColorService } from '@/core/services/dominant-color.service';
@@ -9,9 +10,25 @@ import { TV } from '@/core/models/tv.model';
 import { environment } from 'src/environments/environment';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, NgOptimizedImage],
   selector: 'app-generic-details',
   templateUrl: './generic-details.component.html',
-  styleUrls: ['./generic-details.component.scss']
+  styleUrls: ['./generic-details.component.scss'],
+  providers: [
+    {
+      provide: IMAGE_LOADER, 
+      useValue: (config: ImageLoaderConfig) => { 
+        return `https://image.tmdb.org/t/p/w${config.width}${config.src}`;
+      } 
+    },
+    {
+      provide: IMAGE_CONFIG,
+      useValue: {
+        placeholderResolution: 92
+      }
+    }
+  ]
 })
 export class GenericDetailsComponent implements OnInit {
 
