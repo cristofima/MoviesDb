@@ -2,7 +2,7 @@
   <div class="container">
     <div class="first-column">
       @if(person.profilePath) {
-        <img src="https://media.themoviedb.org/t/p/w300_and_h450_bestv2{{person.profilePath}}">
+        <img [ngSrc]="person.profilePath" width="300" height="450" priority placeholder>
       }
       @else {
         <div class="image-content" style="width: 300px; height: 450px; min-width: 300px;">

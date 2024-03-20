@@ -1,13 +1,14 @@
 import { Component, ContentChild, Input, OnInit, TemplateRef } from '@angular/core';
-import { CommonModule, IMAGE_CONFIG, IMAGE_LOADER, ImageLoaderConfig, NgOptimizedImage } from '@angular/common'
+import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 import { Collection } from '@/core/models/collection.model';
 import { Movie } from '@/core/models/movie.model';
 import { DominantColorService } from '@/core/services/dominant-color.service';
-import { ActivatedRoute } from '@angular/router';
-import { Title } from '@angular/platform-browser';
 import { ColorUtil } from '@/shared/utils/color.util';
 import { TV } from '@/core/models/tv.model';
 import { environment } from 'src/environments/environment';
+import { TmdbImgConfig } from '@/shared/config/tmdb-img.config';
 
 @Component({
   standalone: true,
@@ -15,20 +16,7 @@ import { environment } from 'src/environments/environment';
   selector: 'app-generic-details',
   templateUrl: './generic-details.component.html',
   styleUrls: ['./generic-details.component.scss'],
-  providers: [
-    {
-      provide: IMAGE_LOADER, 
-      useValue: (config: ImageLoaderConfig) => { 
-        return `https://image.tmdb.org/t/p/w${config.width}${config.src}`;
-      } 
-    },
-    {
-      provide: IMAGE_CONFIG,
-      useValue: {
-        placeholderResolution: 92
-      }
-    }
-  ]
+  providers: TmdbImgConfig.getImgProviders()
 })
 export class GenericDetailsComponent implements OnInit {
 
