@@ -1,11 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { Movie } from '@/core/models/movie.model';
 import { TV } from '@/core/models/tv.model';
 
 @Component({
   selector: 'app-media-poster',
   templateUrl: './media-poster.component.html',
-  styleUrls: ['./media-poster.component.scss']
+  styleUrls: ['./media-poster.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MediaPosterComponent implements OnInit {
 
@@ -20,20 +21,20 @@ export class MediaPosterComponent implements OnInit {
   minImgHeight = '223px';
 
   ngOnInit(): void {
-    if(this.sizeformat === 'small'){
+    if (this.sizeformat === 'small') {
       this.posterSize = 'w154';
       this.fontSize = '0.9em';
       this.titleFontSize = 13;
       this.bottomPosition = '-20px';
-    }else if(this.sizeformat === 'medium'){
+    } else if (this.sizeformat === 'medium') {
       this.posterSize = 'w185';
       this.fontSize = '0.93em';
       this.bottomPosition = '-20px';
-    }else if(this.sizeformat === 'large'){
+    } else if (this.sizeformat === 'large') {
       this.minImgHeight = '457px';
     }
 
-    if('firstAirDate' in this.media){
+    if ('firstAirDate' in this.media) {
       this.dateKey = 'firstAirDate';
     }
   }
