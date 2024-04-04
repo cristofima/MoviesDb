@@ -22,11 +22,17 @@ export class NavTabsComponent implements OnInit {
 
   ngOnInit(): void {
     this.tabsContent = [];
-    this.tabsActions.forEach(async(tab) => {
+    this.loadMediaAsync();
+  }
+
+  private async loadMediaAsync() {
+    this.tabsContent = [];
+    for (let i = 0; i < this.tabsActions.length; i++) {
+      let mediaList = await this.tabsActions[i].callback();
       this.tabsContent.push({
-        buttonName: tab.buttonName,
-        mediaList: await tab.callback()
+        buttonName: this.tabsActions[i].buttonName,
+        mediaList: mediaList
       });
-    });
+    }
   }
 }
